@@ -1,0 +1,71 @@
+\_______
+	|az asztali procedures
+
+velemenyek láthato / láthatatlan
+	   lekérése
+----------------------------
+kedvezmenyek    hozzadása
+		átirása
+		inaktivá tétele
+		lekérése
+----------------------------
+fizetési opciok     
+		    hozzáadás
+		    lekeres
+		    átiras
+----------------------------
+szalitok	   hozzáad
+		   lekeres
+		   átirás
+----------------------------
+tömeg tul 	hozzáad
+		lekeres
+		átir
+----------------------------
+gyarto 		hozzad
+		leker
+		átir
+---------------------------
+ár valtozas	hozzaad
+		leker
+		átir
+		töröl
+--------------------------
+termek kep
+		hozaad
+		leker
+		töröl
+--------------------------
+kosarazot termekek
+		hozzaad
+		átir
+--------------------------
+rendelt termekek
+		hozzáad
+		átir
+---------------------------
+termekek	hozzáad
+		leker
+		átir
+---------------------------
+rendelesek	hozzáad
+		leker
+---------------------------
+felhasznalok
+		hozzáad
+		leker
+		átir
+---------------------------
+
+
+
+
+
+
+
+DELIMITER $$
+CREATE PROCEDURE _procedure(IN)
+   BEGIN
+      
+   END $$
+DELIMITER ;
