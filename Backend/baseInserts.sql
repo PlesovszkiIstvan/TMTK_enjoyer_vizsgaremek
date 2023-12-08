@@ -4,7 +4,7 @@ INSERT INTO Felhasznalok (felhasznalo_nev, vezetek_nev, kereszt_nev, email, jels
 VALUES ('nagyJ69','Nagy','János','nagyj69@gmail.com','Almafa12;','1',true,true);
 
 INSERT INTO Tokenek (felhasznalo_id,token)
-VALUES ('4','EZEGYTOKEN123');
+VALUES ('1','EZEGYTOKEN123');
 
 INSERT INTO ertekelesek (ertekeles_id,ertekeles)
 VALUES ('1','Szuper volt');
