@@ -24,7 +24,7 @@ END $$
 DELIMITER ;
 
 DElIMITER $$
-create procedure _procedure(IN velemeny_id_p smallint)
+create procedure change_lathato_procedure(IN velemeny_id_p smallint)
 BEGIN
 	DECLARE lathato_var boolean;
     
