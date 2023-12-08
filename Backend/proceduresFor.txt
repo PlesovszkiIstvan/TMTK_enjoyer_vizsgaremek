@@ -3,6 +3,9 @@
 
 velemenyek láthato / láthatatlan
 	   lekérése
+
+VELEMENYEK KESZ *************************************
+
 ----------------------------
 kedvezmenyek    hozzadása
 		átirása
