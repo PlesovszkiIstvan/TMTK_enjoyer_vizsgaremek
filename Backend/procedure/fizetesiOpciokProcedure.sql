@@ -14,7 +14,7 @@ END $$
 DELIMITER ;
 
 DElIMITER $$
-create procedure _procedure(IN fizetes_opcio_id_p tinyint, IN fizetes_modja_p varchar(50))
+create procedure update_fizetesi_opciok_procedure(IN fizetes_opcio_id_p tinyint, IN fizetes_modja_p varchar(50))
 BEGIN
 	UPDATE Fizetes_opciok
 	SET fizetes_modja = fizetes_modja_p
