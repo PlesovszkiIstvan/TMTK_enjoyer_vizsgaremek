@@ -54,6 +54,9 @@ termek kep
 		hozaad
 		leker
 		töröl
+
+kesz  **********************************************************
+
 --------------------------
 kosarazot termekek
 		hozzaad
