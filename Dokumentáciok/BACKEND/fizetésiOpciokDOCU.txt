@@ -1,0 +1,18 @@
+add_fizetes_opcio_procedure()
+	paraméterek:
+		fizetés_modja: text
+	funkció:
+		hozzáad egy fizetési opciot
+
+update_fizetesi_opciok_procedure()
+	paraméterek:
+		fizetési_opció: id
+		fizetési_mod: text
+	funkció:
+		megváltoztat id alapján egy fizetési opciot
+
+get_fizetes_opciok_procedure()
+	paraméterek:
+		*nincs*
+	funkció:
+		kilistázza az összes fizetési opciót
