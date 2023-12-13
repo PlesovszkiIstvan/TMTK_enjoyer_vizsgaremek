@@ -23,7 +23,7 @@ END $$
 DELIMITER ;
 
 DElIMITER $$
-create procedure change_aktiv_procedure(IN kedvezmeny_id_p tinyint)
+create procedure change_kedvezmenyek_aktiv_procedure(IN kedvezmeny_id_p tinyint)
 BEGIN
 	DECLARE kedvezmeny_aktiv_var boolean;
     
