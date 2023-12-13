@@ -69,6 +69,10 @@ rendelt termekek
 termekek	hozzáad
 		leker
 		átir
+
+
+
+
 ---------------------------
 rendelesek	hozzáad
 		leker
