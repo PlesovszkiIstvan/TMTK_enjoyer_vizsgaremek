@@ -1,7 +1,7 @@
 USE isabike;
 
 DELIMITER $$
-CREATE PROCEDURE Velemenyek_add_procedure(IN Token_p mediumint, IN ertekeles_id_p tinyint, IN velemeny varchar(500))
+CREATE PROCEDURE Velemenyek_add_procedure(IN Token_p varchar(100), IN ertekeles_id_p tinyint, IN velemeny varchar(500))
    BEGIN
       DECLARE felhasznalo_id_var mediumint;
       

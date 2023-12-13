@@ -28,7 +28,7 @@ create table Viszaigazolo_kod(
 create table Tokenek(
 	token_id mediumint primary key auto_increment,
     felhasznalo_id mediumint,
-    token TINYTEXT,
+    token varchar(100),
 	generalas_ideje DATETIME default NOW(),
     constraint fk_in_token_felhasznalo_id foreign key(felhasznalo_id) REFERENCES Felhasznalok(felhasznalo_id) ON delete restrict
 );
