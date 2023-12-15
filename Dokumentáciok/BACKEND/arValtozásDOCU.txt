@@ -1,0 +1,30 @@
+add_ar_valtozasok_procedure()
+	paraméterek:
+		termek_id: int
+		regi_egyseg_ar: int
+		valtozas_ideje: DATETIME (YYYY-MM-DD HH:MI:SS)
+	funkció:
+		hozzáad egy uj árváltozást
+
+update_ar_valtozasok_procedure()
+	paraméterek:
+		ar_valtozas_id:int
+		termek_id: int
+		regi_egyseg_ar: int
+	funkció:
+		megváltoztat egy meglévö árváltozást id alapján
+
+get_ar_valtozasok_procedure()
+	paraméterek:
+		*nincs*
+	funkció:
+		kilistázza az összes árváltozást
+
+delete_ar_valtozasok_procedure()
+	paraméterek:
+		ar_valtozas_id: int
+	funkció:
+		töröl egy már meglévö árváltozást
+			
+	
+		

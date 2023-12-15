@@ -24,8 +24,8 @@ END $$
 DELIMITER ;
 
 DElIMITER $$
-create procedure delete_ar_valtozasok_procedure(IN ar_valtozas_id mediumint)
+create procedure delete_ar_valtozasok_procedure(IN ar_valtozas_id_p mediumint)
 BEGIN
-	DELETE FROM Ar_valtozasok WHERE ar_valtozas = ar_valtozas_id;
+	DELETE FROM Ar_valtozasok WHERE ar_valtozas_id = ar_valtozas_id_p;
 END $$
 DELIMITER ;
