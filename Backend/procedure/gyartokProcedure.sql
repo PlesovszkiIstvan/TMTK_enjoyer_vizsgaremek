@@ -1,3 +1,5 @@
+use isabike;
+
 DElIMITER $$
 create procedure add_gyartok_procedure(IN gyarto_neve_p varchar(20), IN telefonszama_p varchar(25), IN webhely_p varchar(50))
 BEGIN

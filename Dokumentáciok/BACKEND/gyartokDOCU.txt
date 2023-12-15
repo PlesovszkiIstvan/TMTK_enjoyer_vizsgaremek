@@ -1,0 +1,22 @@
+add_gyartok_procedure()
+	paraméterek:
+		gyarto_neve: text
+		telefonszama: text
+		webhely: text
+	funkció:
+		hozzá ad egy uj gyártót
+
+update_gyartok_procedure()
+	paraméterek:
+		gyarto_id: int
+		gyarto_neve: text
+		telefonszama: text
+		webhely: text
+	funkció:
+		id alapján megváltoztat egy gyártot
+
+get_gyartok_procedure()
+	paraméterek:
+		*nincs*
+	funkció:
+		kilistázza az összes gyártót
