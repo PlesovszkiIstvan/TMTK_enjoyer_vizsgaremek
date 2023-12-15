@@ -1,5 +1,5 @@
 DElIMITER $$
-create procedure add_kosarazot_termek_procedure(IN Token_p mediumint, IN termekek_id_p mediumint, IN darabszam tinyint)
+create procedure add_kosarazot_termek_procedure(IN Token_p varchar(100), IN termekek_id_p mediumint, IN darabszam tinyint)
 BEGIN
 	  DECLARE felhasznalo_id_var mediumint;
       

@@ -1,0 +1,27 @@
+add_kosarazot_termek_procedure()
+	paraméterek:
+		token: varchar(100)
+		termekek_id: int
+		darabszam: int
+	funkciók:
+		hozzáad egy kosaraztot terméket felhasználo token alapján
+
+update_kosarazot_termeke_darabszam_procedure()
+	paraméterek:
+		token: varchar(100)
+		termekek_id: int
+		darabszam: int
+	funkciók:
+		átir már egy meglévö kosarazot termékek recordot felhasználo token alapján
+
+get_one_user_kosarazot_termekek_procedure()
+	paraméterek:
+		token: varchar(100)
+	funkciók:
+		kilistáza felhasználo teken alapján egy felhasználo kosarazot termékeit
+
+get_all_kosarazot_termekek_procedure()
+	paraméterek:
+		*nincs*
+	funkciók:
+		kilistázza az összes kosarazott termékeket
