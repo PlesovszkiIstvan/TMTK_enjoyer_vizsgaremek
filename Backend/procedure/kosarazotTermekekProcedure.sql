@@ -14,7 +14,7 @@ END $$
 DELIMITER ;
 
 DElIMITER $$
-create procedure update_kosarazot_termeke_darabszam_procedure(IN Token_p mediumint, IN termekek_id_p mediumint, IN darabszam_p tinyint)
+create procedure update_kosarazot_termeke_darabszam_procedure(IN Token_p varchar(100), IN termekek_id_p mediumint, IN darabszam_p tinyint)
 BEGIN
 	DECLARE felhasznalo_id_var mediumint;
     
@@ -38,7 +38,7 @@ END $$
 DELIMITER ;
 
 DElIMITER $$
-create procedure get_one_user_kosarazot_termekek_procedure(IN Token_p mediumint)
+create procedure get_one_user_kosarazot_termekek_procedure(IN Token_p varchar(100))
 BEGIN
 	DECLARE felhasznalo_id_var mediumint;
     
