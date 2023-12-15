@@ -69,3 +69,18 @@ VALUES('Merida','06-23-400-5005','Meridaexample.com');
 
 INSERT INTO Gyartok(gyarto_neve, telefonszama, webhely)
 VALUES('Kellys','06-23-400-5006','Kellysexample.com');
+
+INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
+VALUES ('01', 'PirosBicigli0', 5, 1, 1, 20, 'piros', 'lopott', 1500);
+
+INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
+VALUES ('01', 'PirosBicigli1', 5, 1, 1, 20, 'piros', 'lopott', 1500);
+
+INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
+VALUES ('01', 'PirosBicigli2', 5, 1, 1, 20, 'piros', 'lopott', 1500);
+
+INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
+VALUES ('01', 'PirosBicigli3', 5, 1, 1, 20, 'piros', 'lopott', 1500);
+
+INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
+VALUES ('01', 'PirosBicigli4', 5, 1, 1, 20, 'piros', 'lopott', 1500);
