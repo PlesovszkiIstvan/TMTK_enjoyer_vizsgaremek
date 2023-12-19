@@ -51,5 +51,9 @@ A kliensek pedig képes lesz külön felhasználoi profilokon keresztül elérni
 **Terverk**
 
 > Desktop
-    > UML
-        ![Imgur](https://i.imgur.com/ndPYrlL.png)
+    UML: ![Imgur](https://i.imgur.com/ndPYrlL.png)
+    Admin: ![Imgur](https://i.imgur.com/6FndH1D.png)
+            ![Imgur](https://i.imgur.com/L1Jzyey.png)
+            ![Imgur](https://i.imgur.com/IlyZ8Dq.png)
+> Adatbazis
+    ![Imgur](https://i.imgur.com/VVDEX4k.png)
