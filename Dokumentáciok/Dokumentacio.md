@@ -52,4 +52,4 @@ A kliensek pedig képes lesz külön felhasználoi profilokon keresztül elérni
 
 > Desktop
     > UML
-        <blockquote class="imgur-embed-pub" lang="en" data-id="a/PcWhQBn" data-context="false" ><a href="//imgur.com/a/PcWhQBn"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+        [Imgur](https://i.imgur.com/ndPYrlL.png)
