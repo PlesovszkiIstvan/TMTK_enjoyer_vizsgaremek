@@ -62,5 +62,16 @@ A kliensek pedig képes lesz külön felhasználoi profilokon keresztül elérni
 >Edit:
     ![Imgur](https://i.imgur.com/IlyZ8Dq.png)
 
+------------------------------------------------
+
 > Adatbazis:
     ![Imgur](https://i.imgur.com/VVDEX4k.png)
+
+-----------------------------------------------
+
+> Web:
+    ![Imgur](https://i.imgur.com/tCs9xbK.jpg)
+    ![Imgur](https://i.imgur.com/4az72dp.jpg)
+    ![Imgur](https://i.imgur.com/aFmGGTB.jpg)
+    ![Imgur](https://i.imgur.com/NFBX5Yr.jpg)
+    ![Imgur](https://i.imgur.com/86oYnem.jpg)
