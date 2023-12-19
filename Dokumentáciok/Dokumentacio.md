@@ -52,19 +52,16 @@ A kliensek pedig képes lesz külön felhasználoi profilokon keresztül elérni
 
 > Desktop:
     UML: 
-    ![Imgur](https://i.imgur.com/ndPYrlL.png)
+        ![Imgur](https://i.imgur.com/ndPYrlL.png)
 
     login:
-
-    ![Imgur](https://i.imgur.com/6FndH1D.png)
+        ![Imgur](https://i.imgur.com/6FndH1D.png)
 
     Main:
-
-    ![Imgur](https://i.imgur.com/L1Jzyey.png)
+        ![Imgur](https://i.imgur.com/L1Jzyey.png)
 
     Edit:
-
-    ![Imgur](https://i.imgur.com/IlyZ8Dq.png)
+        ![Imgur](https://i.imgur.com/IlyZ8Dq.png)
 
 > Adatbazis:
 
