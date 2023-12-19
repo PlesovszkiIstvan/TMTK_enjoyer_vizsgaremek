@@ -52,4 +52,4 @@ A kliensek pedig képes lesz külön felhasználoi profilokon keresztül elérni
 
 > Desktop
     > UML
-        [Imgur](https://i.imgur.com/ndPYrlL.png)
+        ![Imgur](https://i.imgur.com/ndPYrlL.png)
