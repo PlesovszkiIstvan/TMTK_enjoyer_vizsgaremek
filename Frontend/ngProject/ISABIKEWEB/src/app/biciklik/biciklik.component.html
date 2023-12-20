@@ -1,0 +1,17 @@
+<p>biciklik works!</p>
+<div>
+    <div id="product-1" class="single-product">
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4" *ngFor="let product of products; let i = index">
+                    <div class="card">
+                      <img src="assets/{{ product.image }}" class="card-img-top img-fluid product-image-home nav-item nav-link" routerLink="/home" alt="Product Image">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p class="card-text">Price: {{ product.price | currency }}</p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+    </div>
+</div>

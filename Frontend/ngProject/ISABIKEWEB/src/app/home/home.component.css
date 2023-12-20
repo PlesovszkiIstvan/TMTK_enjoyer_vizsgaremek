@@ -1,0 +1,12 @@
+.product-image-home {
+    height: 200px; 
+    object-fit: cover;
+  }
+.brand-logo {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 5px;
+}
+.bg-grey{
+  background-color: #c5c5db;
+}
