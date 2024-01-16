@@ -1,0 +1,56 @@
+{
+    "termekek": [
+        {
+            "termek_id":1,
+            "termek_kateg":10000000,
+            "termek_nev":"Piros bicigli",
+            "gyarto_id":1,
+            "raktarondb":1,
+            "tomeg_tulajdonsaga_id":1,
+            "tomeg_erteke":2.0,
+            "szine":"Piros",
+            "leiras":"lopot",
+            "egyseg_ar":500,
+            "elerheto":true
+        },
+        {
+            "termek_id":2,
+            "termek_kateg":10000000,
+            "termek_nev":"Kék bicigli",
+            "gyarto_id":1,
+            "raktarondb":1,
+            "tomeg_tulajdonsaga_id":1,
+            "tomeg_erteke":2.0,
+            "szine":"Kék",
+            "leiras":"lopot",
+            "egyseg_ar":500,
+            "elerheto":true
+        },
+        {
+            "termek_id":3,
+            "termek_kateg":10000000,
+            "termek_nev":"Zöld bicigli",
+            "gyarto_id":1,
+            "raktarondb":1,
+            "tomeg_tulajdonsaga_id":1,
+            "tomeg_erteke":2.0,
+            "szine":"Zöld",
+            "leiras":"lopot",
+            "egyseg_ar":500,
+            "elerheto":true
+        },
+        {
+            "termek_id":1,
+            "termek_kateg":10000000,
+            "termek_nev":"Lila bicigli",
+            "gyarto_id":1,
+            "raktarondb":1,
+            "tomeg_tulajdonsaga_id":1,
+            "tomeg_erteke":2.0,
+            "szine":"lila",
+            "leiras":"lopot",
+            "egyseg_ar":500,
+            "elerheto":true
+        }
+    ]
+}
