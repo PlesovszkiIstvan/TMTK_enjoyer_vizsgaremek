@@ -1,0 +1,15 @@
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\bin\Debug\Isabike.exe.config
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\bin\Debug\Isabike.exe
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\bin\Debug\Isabike.pdb
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.csproj.AssemblyReference.cache
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.Properties.Resources.resources
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.csproj.GenerateResource.cache
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.csproj.CoreCompileInputs.cache
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.exe
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.pdb
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.Login.resources
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.MainForm.resources
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.ProductOperationsForm.resources
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\bin\Debug\Newtonsoft.Json.dll
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\bin\Debug\Newtonsoft.Json.xml
+C:\Users\diak\Documents\Plesovszki Iszvan\soft_dev\Isabike\Isabike\obj\Debug\Isabike.csproj.CopyComplete
