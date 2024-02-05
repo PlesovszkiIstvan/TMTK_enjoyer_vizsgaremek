@@ -18,6 +18,10 @@ namespace Isabike
 {
     public partial class MainForm : Form
     {
+
+        private bool gridState = false;
+        // false = termekek | true = velemenyek
+
         public MainForm()
         {
             InitializeComponent();
@@ -33,8 +37,7 @@ namespace Isabike
 
         private void Main_Load(object sender, EventArgs e)
         {
-            //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-            GetRESTData("http://192.168.1.103:8000/api/termekek");
+            connectToDB(gridState);
         }
 
 
@@ -137,9 +140,54 @@ namespace Isabike
 
         private void refreshBtn_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Clear();
-            dataGridView1.Columns.Clear();
-            GetRESTData("http://192.168.1.103:8000/api/termekek");
+
+            if (SalesBtn.BackColor.Equals(Color.Green))
+            {
+                gridState = false;
+            }
+            else
+            {
+                gridState = true;
+            }
+            connectToDB(gridState);
+        }
+
+        private void SalesBtn_Click(object sender, EventArgs e)
+        {
+            connectToDB(true);
+            if (SalesBtn.BackColor.Equals(Color.Green))
+            {
+                SalesBtn.BackColor = Color.Red;
+                gridState = false;
+                connectToDB(gridState);
+            }
+            else
+            {
+                SalesBtn.BackColor = Color.Green;
+                gridState = true;
+                connectToDB(gridState);
+            }
+            
+        }
+
+        private void connectToDB(bool isSales)
+        {
+            
+            if (dataGridView1.Rows.Count > 0) {
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
+            }
+            if (!isSales) {
+                //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
+                GetRESTData("http://192.168.1.103:8000/api/termekek");
+            }
+            else
+            {
+                //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
+                GetRESTData("http://192.168.1.103:8000/api/velemenyek");
+            }
+
+            
         }
     }
 }
