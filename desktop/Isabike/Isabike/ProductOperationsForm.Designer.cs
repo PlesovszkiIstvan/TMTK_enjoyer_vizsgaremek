@@ -35,10 +35,10 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.manufactererBox = new System.Windows.Forms.ComboBox();
+            this.categoryBox = new System.Windows.Forms.ComboBox();
             this.suly_textbox = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.productName = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,32 +99,33 @@
             this.button2.TabIndex = 2;
             this.button2.Text = "OK";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // comboBox2
+            // manufactererBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.manufactererBox.FormattingEnabled = true;
+            this.manufactererBox.Items.AddRange(new object[] {
             "Gyarto1",
             "Gyarto2",
             "Gyarto3"});
-            this.comboBox2.Location = new System.Drawing.Point(12, 153);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(183, 21);
-            this.comboBox2.TabIndex = 11;
-            this.comboBox2.Text = "Gyarto1";
+            this.manufactererBox.Location = new System.Drawing.Point(12, 153);
+            this.manufactererBox.Name = "manufactererBox";
+            this.manufactererBox.Size = new System.Drawing.Size(183, 21);
+            this.manufactererBox.TabIndex = 11;
+            this.manufactererBox.Text = "Gyarto1";
             // 
-            // comboBox1
+            // categoryBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.categoryBox.FormattingEnabled = true;
+            this.categoryBox.Items.AddRange(new object[] {
             "Kategoria1",
             "Kategoria2",
             "Kategoria3"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 114);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(183, 21);
-            this.comboBox1.TabIndex = 10;
-            this.comboBox1.Text = "Kategoria1";
+            this.categoryBox.Location = new System.Drawing.Point(12, 114);
+            this.categoryBox.Name = "categoryBox";
+            this.categoryBox.Size = new System.Drawing.Size(183, 21);
+            this.categoryBox.TabIndex = 10;
+            this.categoryBox.Text = "Kategoria1";
             // 
             // suly_textbox
             // 
@@ -134,23 +135,23 @@
             this.suly_textbox.TabIndex = 9;
             this.suly_textbox.Text = "Suly";
             // 
-            // textBox1
+            // productName
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 40);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 20);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.Text = "Termek neve";
+            this.productName.Location = new System.Drawing.Point(12, 40);
+            this.productName.Name = "productName";
+            this.productName.Size = new System.Drawing.Size(160, 20);
+            this.productName.TabIndex = 8;
+            this.productName.Text = "Termek neve";
             // 
             // ProductOperationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(338, 488);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.manufactererBox);
+            this.Controls.Add(this.categoryBox);
             this.Controls.Add(this.suly_textbox);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.productName);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.toolStrip1);
@@ -171,9 +172,9 @@
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox manufactererBox;
+        private System.Windows.Forms.ComboBox categoryBox;
         private System.Windows.Forms.TextBox suly_textbox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox productName;
     }
 }
