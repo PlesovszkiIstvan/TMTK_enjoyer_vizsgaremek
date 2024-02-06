@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TermekContoller;
 use App\Http\Controllers\GyartokController;
+use App\Http\Controllers\FelhasznaloController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,6 @@ Route::patch("/updatetermek/{id}", [ TermekContoller::class, "updateTermek"]);
 Route::delete("/deletetermek/{id}", [ TermekContoller::class, "deleteTermek"]);
 
 Route::post("/addgyarto", [ GyartokController::class, "addGyarto"]);
+Route::get("/gyartok", [ GyartokController::class, "getGyartok"]);
 
+Route::post("/login", [ FelhasznaloController::class, "logIn"]);

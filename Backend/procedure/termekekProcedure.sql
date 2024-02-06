@@ -70,6 +70,29 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE get_termekek_procedure()
 BEGIN
-      SELECT * FROM Termekek;
+      select 
+        termekek.termek_id,
+        termek_kateg,
+        termek_nev,
+        termekek.gyarto_id,
+        gyarto_neve,
+        telefonszama,
+        webhely,
+        raktarondb,
+        termekek.tomeg_tulajdonsaga_id,
+        mertek_egysege, 
+        tomeg_erteke, 
+        szine, 
+        leiras, 
+        egyseg_ar, 
+        elerheto, 
+        kep_helye
+        from termekek
+        left join gyartok
+        on termekek.gyarto_id = gyartok.gyarto_id
+        left join tomeg_tulajdonsagai
+        on termekek.tomeg_tulajdonsaga_id = tomeg_tulajdonsagai.tomeg_tulajdonsaga_id
+        left join termek_kepek
+        on termekek.termek_id = termek_kepek.termek_id;
    END$$
 DELIMITER ;

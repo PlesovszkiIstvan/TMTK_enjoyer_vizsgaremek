@@ -21,4 +21,11 @@ class GyartokController extends Controller
         '");';
         return $asdasd;
     }
+
+    public function getGyartok(){
+        $gyartok = DB::select("call get_gyartok_procedure();");
+
+        return $gyartok;
+    }
+
 }
