@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TermekContoller;
+use App\Http\Controllers\GyartokController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,3 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get("/termekek", [ TermekContoller::class, "getTermekek"]);
+Route::post("/addtermek", [ TermekContoller::class, "addTermek"]);
+Route::patch("/updatetermek/{id}", [ TermekContoller::class, "updateTermek"]);
+Route::delete("/deletetermek/{id}", [ TermekContoller::class, "deleteTermek"]);
+
+Route::post("/addgyarto", [ GyartokController::class, "addGyarto"]);
+

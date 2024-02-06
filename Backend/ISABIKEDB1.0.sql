@@ -97,7 +97,7 @@ create table Tomeg_tulajdonsagai(
 create table Termekek(
 	termek_id mediumint primary key auto_increment,
     termek_kateg varchar(8) default '00000000',
-    termek_nev varchar(20) not null unique,
+    termek_nev varchar(20) not null,
     gyarto_id tinyint not null,
     raktarondb smallint default 0,
     tomeg_tulajdonsaga_id tinyint not null,
