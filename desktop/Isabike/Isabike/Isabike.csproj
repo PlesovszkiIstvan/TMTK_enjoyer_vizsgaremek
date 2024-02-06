@@ -103,7 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Gyarto.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>

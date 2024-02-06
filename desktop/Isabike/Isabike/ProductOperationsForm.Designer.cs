@@ -104,10 +104,6 @@
             // manufactererBox
             // 
             this.manufactererBox.FormattingEnabled = true;
-            this.manufactererBox.Items.AddRange(new object[] {
-            "Gyarto1",
-            "Gyarto2",
-            "Gyarto3"});
             this.manufactererBox.Location = new System.Drawing.Point(12, 153);
             this.manufactererBox.Name = "manufactererBox";
             this.manufactererBox.Size = new System.Drawing.Size(183, 21);
@@ -157,6 +153,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "ProductOperationsForm";
             this.Text = "ProductOperationsForm";
+            this.Load += new System.EventHandler(this.ProductOperationsForm_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);

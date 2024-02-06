@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +17,32 @@ namespace Isabike
 {
     public partial class ProductOperationsForm : Form
     {
+
+        public void pupulateGyarto(string uri)
+        {
+            try
+            {
+                var webRequest = (HttpWebRequest)WebRequest.Create(uri);
+                var webResponse = (HttpWebResponse)webRequest.GetResponse();
+                var reader = new StreamReader(webResponse.GetResponseStream());
+                string s = reader.ReadToEnd();
+                
+                if ((webResponse.StatusCode == HttpStatusCode.OK) && (s.Length > 0))
+                {
+
+                    var arr = JsonConvert.DeserializeObject<gyartoList>(s);
+                    manufactererBox.DataSource = arr.gyartok.OrderBy(gyarto => gyarto.name).ToList();
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("Status code == {0}", webResponse.StatusCode));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         public ProductOperationsForm()
         {
             InitializeComponent();
@@ -72,6 +102,11 @@ namespace Isabike
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void ProductOperationsForm_Load(object sender, EventArgs e)
+        {
+            pupulateGyarto("http://172.16.16.157:8000/api/gyartok");
         }
     }
 }

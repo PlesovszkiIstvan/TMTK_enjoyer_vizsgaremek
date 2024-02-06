@@ -70,7 +70,7 @@ namespace Isabike
                 {
                     
                     var arr = JsonConvert.DeserializeObject<JArray>(s);
-                    dataGridView1.DataSource = arr;
+                    viewGrid.DataSource = arr;
                 }
                 else
                 {
@@ -135,7 +135,7 @@ namespace Isabike
             bSource.DataSource = table;
 
 
-            dataGridView1.DataSource = bSource;
+            viewGrid.DataSource = bSource;
         }
 
         private void refreshBtn_Click(object sender, EventArgs e)
@@ -143,11 +143,11 @@ namespace Isabike
 
             if (SalesBtn.BackColor.Equals(Color.Green))
             {
-                gridState = false;
+                gridState = true;
             }
             else
             {
-                gridState = true;
+                gridState = false;
             }
             connectToDB(gridState);
         }
@@ -173,18 +173,18 @@ namespace Isabike
         private void connectToDB(bool isSales)
         {
             
-            if (dataGridView1.Rows.Count > 0) {
-                dataGridView1.Rows.Clear();
-                dataGridView1.Columns.Clear();
+            if (viewGrid.Rows.Count > 0) {
+                viewGrid.Rows.Clear();
+                viewGrid.Columns.Clear();
             }
             if (!isSales) {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://192.168.1.103:8000/api/termekek");
+                GetRESTData("http://172.16.16.157:8000/api/termekek");
             }
             else
             {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://192.168.1.103:8000/api/velemenyek");
+                GetRESTData("http://172.16.16.157:8000/api/velemenyek");
             }
 
             

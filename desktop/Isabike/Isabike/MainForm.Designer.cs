@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.viewGrid = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
@@ -37,19 +37,19 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.SalesBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.productBtn = new System.Windows.Forms.Button();
             this.refreshBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.viewGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // viewGrid
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 58);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(546, 380);
-            this.dataGridView1.TabIndex = 3;
+            this.viewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.viewGrid.Location = new System.Drawing.Point(13, 58);
+            this.viewGrid.Name = "viewGrid";
+            this.viewGrid.Size = new System.Drawing.Size(546, 380);
+            this.viewGrid.TabIndex = 3;
             // 
             // panel1
             // 
@@ -138,16 +138,16 @@
             this.SalesBtn.UseVisualStyleBackColor = false;
             this.SalesBtn.Click += new System.EventHandler(this.SalesBtn_Click);
             // 
-            // button1
+            // productBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.Lime;
-            this.button1.Location = new System.Drawing.Point(13, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 39);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Product Operations";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.productBtn.BackColor = System.Drawing.Color.Lime;
+            this.productBtn.Location = new System.Drawing.Point(13, 13);
+            this.productBtn.Name = "productBtn";
+            this.productBtn.Size = new System.Drawing.Size(96, 39);
+            this.productBtn.TabIndex = 7;
+            this.productBtn.Text = "Product Operations";
+            this.productBtn.UseVisualStyleBackColor = false;
+            this.productBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // refreshBtn
             // 
@@ -165,16 +165,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.refreshBtn);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.productBtn);
             this.Controls.Add(this.SalesBtn);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.viewGrid);
             this.Name = "MainForm";
             this.Text = "Isabike";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.Main_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.viewGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -182,7 +182,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView viewGrid;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox suly_textbox;
         private System.Windows.Forms.TextBox textBox1;
@@ -191,7 +191,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button SalesBtn;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button productBtn;
         private System.Windows.Forms.Button refreshBtn;
     }
 }
