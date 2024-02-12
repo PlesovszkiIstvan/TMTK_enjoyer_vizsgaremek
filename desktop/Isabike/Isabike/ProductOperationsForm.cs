@@ -18,6 +18,12 @@ namespace Isabike
     public partial class ProductOperationsForm : Form
     {
 
+        public class JsonOperation
+        {
+            public static GyartoList Read(string s) =>
+                JsonConvert.DeserializeObject<GyartoList>(s);
+        }
+
         public void pupulateGyarto(string uri)
         {
             try
@@ -30,8 +36,7 @@ namespace Isabike
                 if ((webResponse.StatusCode == HttpStatusCode.OK) && (s.Length > 0))
                 {
 
-                    var arr = JsonConvert.DeserializeObject<gyartoList>(s);
-                    manufactererBox.DataSource = arr.gyartok.OrderBy(gyarto => gyarto.name).ToList();
+                    manufactererBox.DataSource = JsonOperation.Read(s).gyartok.OrderBy(gyarto => gyarto.name).ToList();
                 }
                 else
                 {
@@ -48,12 +53,12 @@ namespace Isabike
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void okBtn_Click(object sender, EventArgs e)
         {
             string url = "http://localhost:8000/termekek";
             string jsonData = "{ " +

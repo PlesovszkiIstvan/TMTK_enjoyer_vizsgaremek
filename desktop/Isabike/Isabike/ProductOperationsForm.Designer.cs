@@ -30,11 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductOperationsForm));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.addToolstripBtn = new System.Windows.Forms.ToolStripButton();
+            this.modifyToolstripBtn = new System.Windows.Forms.ToolStripButton();
+            this.deleteToolstripBtn = new System.Windows.Forms.ToolStripButton();
+            this.closeBtn = new System.Windows.Forms.Button();
+            this.okBtn = new System.Windows.Forms.Button();
             this.manufactererBox = new System.Windows.Forms.ComboBox();
             this.categoryBox = new System.Windows.Forms.ComboBox();
             this.suly_textbox = new System.Windows.Forms.TextBox();
@@ -45,61 +45,61 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3});
+            this.addToolstripBtn,
+            this.modifyToolstripBtn,
+            this.deleteToolstripBtn});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(338, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // addToolstripBtn
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "Add";
+            this.addToolstripBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.addToolstripBtn.Image = ((System.Drawing.Image)(resources.GetObject("addToolstripBtn.Image")));
+            this.addToolstripBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.addToolstripBtn.Name = "addToolstripBtn";
+            this.addToolstripBtn.Size = new System.Drawing.Size(23, 22);
+            this.addToolstripBtn.Text = "Add";
             // 
-            // toolStripButton2
+            // modifyToolstripBtn
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "Modify Product";
+            this.modifyToolstripBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.modifyToolstripBtn.Image = ((System.Drawing.Image)(resources.GetObject("modifyToolstripBtn.Image")));
+            this.modifyToolstripBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.modifyToolstripBtn.Name = "modifyToolstripBtn";
+            this.modifyToolstripBtn.Size = new System.Drawing.Size(23, 22);
+            this.modifyToolstripBtn.Text = "Modify Product";
             // 
-            // toolStripButton3
+            // deleteToolstripBtn
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "Delete Product";
+            this.deleteToolstripBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.deleteToolstripBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolstripBtn.Image")));
+            this.deleteToolstripBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.deleteToolstripBtn.Name = "deleteToolstripBtn";
+            this.deleteToolstripBtn.Size = new System.Drawing.Size(23, 22);
+            this.deleteToolstripBtn.Text = "Delete Product";
             // 
-            // button1
+            // closeBtn
             // 
-            this.button1.Location = new System.Drawing.Point(12, 429);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(95, 47);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.closeBtn.Location = new System.Drawing.Point(12, 429);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(95, 47);
+            this.closeBtn.TabIndex = 1;
+            this.closeBtn.Text = "Cancel";
+            this.closeBtn.UseVisualStyleBackColor = true;
+            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
-            // button2
+            // okBtn
             // 
-            this.button2.Location = new System.Drawing.Point(231, 429);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(95, 47);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "OK";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.okBtn.Location = new System.Drawing.Point(231, 429);
+            this.okBtn.Name = "okBtn";
+            this.okBtn.Size = new System.Drawing.Size(95, 47);
+            this.okBtn.TabIndex = 2;
+            this.okBtn.Text = "OK";
+            this.okBtn.UseVisualStyleBackColor = true;
+            this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
             // 
             // manufactererBox
             // 
@@ -148,8 +148,8 @@
             this.Controls.Add(this.categoryBox);
             this.Controls.Add(this.suly_textbox);
             this.Controls.Add(this.productName);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.okBtn);
+            this.Controls.Add(this.closeBtn);
             this.Controls.Add(this.toolStrip1);
             this.Name = "ProductOperationsForm";
             this.Text = "ProductOperationsForm";
@@ -164,11 +164,11 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripButton addToolstripBtn;
+        private System.Windows.Forms.ToolStripButton modifyToolstripBtn;
+        private System.Windows.Forms.ToolStripButton deleteToolstripBtn;
+        private System.Windows.Forms.Button closeBtn;
+        private System.Windows.Forms.Button okBtn;
         private System.Windows.Forms.ComboBox manufactererBox;
         private System.Windows.Forms.ComboBox categoryBox;
         private System.Windows.Forms.TextBox suly_textbox;

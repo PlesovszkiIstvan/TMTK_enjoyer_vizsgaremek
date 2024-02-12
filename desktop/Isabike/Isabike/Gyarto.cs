@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Isabike
 {
-    public class gyarto
+    public class Gyarto
     {
         public int id { get; set;}
         public string name { get; set;}
@@ -17,7 +17,7 @@ namespace Isabike
 
     }
 
-    public class gyartoList {
-        public gyarto[] gyartok { get; set;}   
+    public class GyartoList {
+        public Gyarto[] gyartok { get; set;}   
     }
 }
