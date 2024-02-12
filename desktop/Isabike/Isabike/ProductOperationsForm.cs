@@ -18,35 +18,20 @@ namespace Isabike
     public partial class ProductOperationsForm : Form
     {
 
-        public class JsonOperation
+
+
+        public void populateGyarto(string uri)
         {
-            public static GyartoList Read(string s) =>
-                JsonConvert.DeserializeObject<GyartoList>(s);
+            manufactererBox.DataSource = DbConnect.getData(uri);
+            manufactererBox.ValueMember = "gyarto_id";
+            manufactererBox.DisplayMember = "gyarto_neve";
         }
 
-        public void pupulateGyarto(string uri)
+        public void pupulateKategoria(string uri)
         {
-            try
-            {
-                var webRequest = (HttpWebRequest)WebRequest.Create(uri);
-                var webResponse = (HttpWebResponse)webRequest.GetResponse();
-                var reader = new StreamReader(webResponse.GetResponseStream());
-                string s = reader.ReadToEnd();
-                
-                if ((webResponse.StatusCode == HttpStatusCode.OK) && (s.Length > 0))
-                {
-
-                    manufactererBox.DataSource = JsonOperation.Read(s).gyartok.OrderBy(gyarto => gyarto.name).ToList();
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("Status code == {0}", webResponse.StatusCode));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            categoryBox.DataSource = DbConnect.getData(uri);
+            categoryBox.ValueMember = "gyarto_id";
+            categoryBox.DisplayMember = "gyarto_neve";
         }
         public ProductOperationsForm()
         {
@@ -111,7 +96,7 @@ namespace Isabike
 
         private void ProductOperationsForm_Load(object sender, EventArgs e)
         {
-            pupulateGyarto("http://172.16.16.157:8000/api/gyartok");
+            populateGyarto("http://172.16.16.157:8000/api/gyartok");
         }
     }
 }
