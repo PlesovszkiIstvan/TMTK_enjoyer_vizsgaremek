@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -38,6 +39,7 @@ namespace Isabike
         private void Main_Load(object sender, EventArgs e)
         {
             connectToDB(gridState);
+
         }
 
 
@@ -172,7 +174,10 @@ namespace Isabike
 
         private void connectToDB(bool isSales)
         {
-            
+            manufactererBox.DataSource = DbConnect.getData("http://172.16.16.157:8000/api/gyartok");
+            manufactererBox.ValueMember = "gyarto_id";
+            manufactererBox.DisplayMember = "gyarto_neve";
+
             if (viewGrid.Rows.Count > 0) {
                 viewGrid.Rows.Clear();
                 viewGrid.Columns.Clear();
@@ -188,6 +193,12 @@ namespace Isabike
             }
 
             
+        }
+
+        private void filterBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(manufactererBox.Text);
+            (viewGrid.DataSource as DataTable).DefaultView.RowFilter = string.Format("gyarto_neve = '{0}'",manufactererBox.Text);
         }
     }
 }
