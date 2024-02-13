@@ -32,13 +32,13 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.addToolstripBtn = new System.Windows.Forms.ToolStripButton();
             this.modifyToolstripBtn = new System.Windows.Forms.ToolStripButton();
-            this.deleteToolstripBtn = new System.Windows.Forms.ToolStripButton();
+            this.deactivateToolstripBtn = new System.Windows.Forms.ToolStripButton();
             this.closeBtn = new System.Windows.Forms.Button();
             this.okBtn = new System.Windows.Forms.Button();
-            this.manufactererBox = new System.Windows.Forms.ComboBox();
-            this.categoryBox = new System.Windows.Forms.ComboBox();
-            this.suly_textbox = new System.Windows.Forms.TextBox();
-            this.productName = new System.Windows.Forms.TextBox();
+            this.productManufactererBox = new System.Windows.Forms.ComboBox();
+            this.productCategoryBox = new System.Windows.Forms.ComboBox();
+            this.productWeightText = new System.Windows.Forms.TextBox();
+            this.productNameText = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,7 +47,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolstripBtn,
             this.modifyToolstripBtn,
-            this.deleteToolstripBtn});
+            this.deactivateToolstripBtn});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(338, 25);
@@ -72,14 +72,14 @@
             this.modifyToolstripBtn.Size = new System.Drawing.Size(23, 22);
             this.modifyToolstripBtn.Text = "Modify Product";
             // 
-            // deleteToolstripBtn
+            // deactivateToolstripBtn
             // 
-            this.deleteToolstripBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.deleteToolstripBtn.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolstripBtn.Image")));
-            this.deleteToolstripBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.deleteToolstripBtn.Name = "deleteToolstripBtn";
-            this.deleteToolstripBtn.Size = new System.Drawing.Size(23, 22);
-            this.deleteToolstripBtn.Text = "Delete Product";
+            this.deactivateToolstripBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.deactivateToolstripBtn.Image = ((System.Drawing.Image)(resources.GetObject("deactivateToolstripBtn.Image")));
+            this.deactivateToolstripBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.deactivateToolstripBtn.Name = "deactivateToolstripBtn";
+            this.deactivateToolstripBtn.Size = new System.Drawing.Size(23, 22);
+            this.deactivateToolstripBtn.Text = "Delete Product";
             // 
             // closeBtn
             // 
@@ -101,53 +101,53 @@
             this.okBtn.UseVisualStyleBackColor = true;
             this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
             // 
-            // manufactererBox
+            // productManufactererBox
             // 
-            this.manufactererBox.FormattingEnabled = true;
-            this.manufactererBox.Location = new System.Drawing.Point(12, 153);
-            this.manufactererBox.Name = "manufactererBox";
-            this.manufactererBox.Size = new System.Drawing.Size(183, 21);
-            this.manufactererBox.TabIndex = 11;
-            this.manufactererBox.Text = "Gyarto1";
+            this.productManufactererBox.FormattingEnabled = true;
+            this.productManufactererBox.Location = new System.Drawing.Point(12, 153);
+            this.productManufactererBox.Name = "productManufactererBox";
+            this.productManufactererBox.Size = new System.Drawing.Size(183, 21);
+            this.productManufactererBox.TabIndex = 11;
+            this.productManufactererBox.Text = "Gyarto1";
             // 
-            // categoryBox
+            // productCategoryBox
             // 
-            this.categoryBox.FormattingEnabled = true;
-            this.categoryBox.Items.AddRange(new object[] {
+            this.productCategoryBox.FormattingEnabled = true;
+            this.productCategoryBox.Items.AddRange(new object[] {
             "Kategoria1",
             "Kategoria2",
             "Kategoria3"});
-            this.categoryBox.Location = new System.Drawing.Point(12, 114);
-            this.categoryBox.Name = "categoryBox";
-            this.categoryBox.Size = new System.Drawing.Size(183, 21);
-            this.categoryBox.TabIndex = 10;
-            this.categoryBox.Text = "Kategoria1";
+            this.productCategoryBox.Location = new System.Drawing.Point(12, 114);
+            this.productCategoryBox.Name = "productCategoryBox";
+            this.productCategoryBox.Size = new System.Drawing.Size(183, 21);
+            this.productCategoryBox.TabIndex = 10;
+            this.productCategoryBox.Text = "Kategoria1";
             // 
-            // suly_textbox
+            // productWeightText
             // 
-            this.suly_textbox.Location = new System.Drawing.Point(12, 78);
-            this.suly_textbox.Name = "suly_textbox";
-            this.suly_textbox.Size = new System.Drawing.Size(160, 20);
-            this.suly_textbox.TabIndex = 9;
-            this.suly_textbox.Text = "Suly";
+            this.productWeightText.Location = new System.Drawing.Point(12, 78);
+            this.productWeightText.Name = "productWeightText";
+            this.productWeightText.Size = new System.Drawing.Size(160, 20);
+            this.productWeightText.TabIndex = 9;
+            this.productWeightText.Text = "Suly";
             // 
-            // productName
+            // productNameText
             // 
-            this.productName.Location = new System.Drawing.Point(12, 40);
-            this.productName.Name = "productName";
-            this.productName.Size = new System.Drawing.Size(160, 20);
-            this.productName.TabIndex = 8;
-            this.productName.Text = "Termek neve";
+            this.productNameText.Location = new System.Drawing.Point(12, 40);
+            this.productNameText.Name = "productNameText";
+            this.productNameText.Size = new System.Drawing.Size(160, 20);
+            this.productNameText.TabIndex = 8;
+            this.productNameText.Text = "Termek neve";
             // 
             // ProductOperationsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(338, 488);
-            this.Controls.Add(this.manufactererBox);
-            this.Controls.Add(this.categoryBox);
-            this.Controls.Add(this.suly_textbox);
-            this.Controls.Add(this.productName);
+            this.Controls.Add(this.productManufactererBox);
+            this.Controls.Add(this.productCategoryBox);
+            this.Controls.Add(this.productWeightText);
+            this.Controls.Add(this.productNameText);
             this.Controls.Add(this.okBtn);
             this.Controls.Add(this.closeBtn);
             this.Controls.Add(this.toolStrip1);
@@ -166,12 +166,12 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton addToolstripBtn;
         private System.Windows.Forms.ToolStripButton modifyToolstripBtn;
-        private System.Windows.Forms.ToolStripButton deleteToolstripBtn;
+        private System.Windows.Forms.ToolStripButton deactivateToolstripBtn;
         private System.Windows.Forms.Button closeBtn;
         private System.Windows.Forms.Button okBtn;
-        private System.Windows.Forms.ComboBox manufactererBox;
-        private System.Windows.Forms.ComboBox categoryBox;
-        private System.Windows.Forms.TextBox suly_textbox;
-        private System.Windows.Forms.TextBox productName;
+        private System.Windows.Forms.ComboBox productManufactererBox;
+        private System.Windows.Forms.ComboBox productCategoryBox;
+        private System.Windows.Forms.TextBox productWeightText;
+        private System.Windows.Forms.TextBox productNameText;
     }
 }

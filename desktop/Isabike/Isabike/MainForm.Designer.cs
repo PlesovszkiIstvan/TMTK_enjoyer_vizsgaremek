@@ -30,12 +30,12 @@
         {
             this.viewGrid = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.filetBtn = new System.Windows.Forms.Button();
+            this.filterBtn = new System.Windows.Forms.Button();
             this.manufactererBox = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.categoryBox = new System.Windows.Forms.ComboBox();
             this.suly_textbox = new System.Windows.Forms.TextBox();
             this.termeknevTextbox = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.ReviewsBtn = new System.Windows.Forms.Button();
             this.SalesBtn = new System.Windows.Forms.Button();
             this.productBtn = new System.Windows.Forms.Button();
             this.refreshBtn = new System.Windows.Forms.Button();
@@ -54,9 +54,9 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Controls.Add(this.filetBtn);
+            this.panel1.Controls.Add(this.filterBtn);
             this.panel1.Controls.Add(this.manufactererBox);
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.categoryBox);
             this.panel1.Controls.Add(this.suly_textbox);
             this.panel1.Controls.Add(this.termeknevTextbox);
             this.panel1.Location = new System.Drawing.Point(565, 58);
@@ -64,15 +64,15 @@
             this.panel1.Size = new System.Drawing.Size(223, 159);
             this.panel1.TabIndex = 4;
             // 
-            // filetBtn
+            // filterBtn
             // 
-            this.filetBtn.Location = new System.Drawing.Point(4, 126);
-            this.filetBtn.Name = "filetBtn";
-            this.filetBtn.Size = new System.Drawing.Size(97, 23);
-            this.filetBtn.TabIndex = 8;
-            this.filetBtn.Text = "Filter";
-            this.filetBtn.UseVisualStyleBackColor = true;
-            this.filetBtn.Click += new System.EventHandler(this.filterBtn_Click);
+            this.filterBtn.Location = new System.Drawing.Point(4, 126);
+            this.filterBtn.Name = "filterBtn";
+            this.filterBtn.Size = new System.Drawing.Size(97, 23);
+            this.filterBtn.TabIndex = 8;
+            this.filterBtn.Text = "Filter";
+            this.filterBtn.UseVisualStyleBackColor = true;
+            this.filterBtn.Click += new System.EventHandler(this.filterBtn_Click);
             // 
             // manufactererBox
             // 
@@ -87,18 +87,18 @@
             this.manufactererBox.TabIndex = 7;
             this.manufactererBox.Text = "Gyarto";
             // 
-            // comboBox1
+            // categoryBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.categoryBox.FormattingEnabled = true;
+            this.categoryBox.Items.AddRange(new object[] {
             "Kategoria1",
             "Kategoria2",
             "Kategoria3"});
-            this.comboBox1.Location = new System.Drawing.Point(3, 55);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 6;
-            this.comboBox1.Text = "Kategoria";
+            this.categoryBox.Location = new System.Drawing.Point(3, 55);
+            this.categoryBox.Name = "categoryBox";
+            this.categoryBox.Size = new System.Drawing.Size(121, 21);
+            this.categoryBox.TabIndex = 6;
+            this.categoryBox.Text = "Kategoria";
             // 
             // suly_textbox
             // 
@@ -117,16 +117,16 @@
             this.termeknevTextbox.TabIndex = 0;
             this.termeknevTextbox.Text = "Termek neve";
             // 
-            // button5
+            // ReviewsBtn
             // 
-            this.button5.BackColor = System.Drawing.Color.Red;
-            this.button5.Location = new System.Drawing.Point(565, 233);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(96, 39);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Reviews";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.ReviewsBtn.BackColor = System.Drawing.Color.Red;
+            this.ReviewsBtn.Location = new System.Drawing.Point(565, 233);
+            this.ReviewsBtn.Name = "ReviewsBtn";
+            this.ReviewsBtn.Size = new System.Drawing.Size(96, 39);
+            this.ReviewsBtn.TabIndex = 5;
+            this.ReviewsBtn.Text = "Reviews";
+            this.ReviewsBtn.UseVisualStyleBackColor = false;
+            this.ReviewsBtn.Click += new System.EventHandler(this.ReviewsBtn_Click);
             // 
             // SalesBtn
             // 
@@ -168,7 +168,7 @@
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.productBtn);
             this.Controls.Add(this.SalesBtn);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.ReviewsBtn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.viewGrid);
             this.Name = "MainForm";
@@ -187,10 +187,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox suly_textbox;
         private System.Windows.Forms.TextBox termeknevTextbox;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox categoryBox;
         private System.Windows.Forms.ComboBox manufactererBox;
-        private System.Windows.Forms.Button filetBtn;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button filterBtn;
+        private System.Windows.Forms.Button ReviewsBtn;
         private System.Windows.Forms.Button SalesBtn;
         private System.Windows.Forms.Button productBtn;
         private System.Windows.Forms.Button refreshBtn;

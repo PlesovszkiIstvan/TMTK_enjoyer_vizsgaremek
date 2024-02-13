@@ -54,40 +54,28 @@ namespace Isabike
             Environment.Exit(0);
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void ReviewsBtn_Click(object sender, EventArgs e)
         {
-            
+            connectToDB(true);
+            if (ReviewsBtn.BackColor.Equals(Color.Green))
+            {
+                ReviewsBtn.BackColor = Color.Red;
+                gridState = false;
+                connectToDB(gridState);
+            }
+            else
+            {
+                ReviewsBtn.BackColor = Color.Green;
+                gridState = true;
+                connectToDB(gridState);
+            }
+
         }
 
         private void GetRESTData(string uri)
         {
             
-            try
-            {
-                var webRequest = (HttpWebRequest)WebRequest.Create(uri);
-                var webResponse = (HttpWebResponse)webRequest.GetResponse();
-                var reader = new StreamReader(webResponse.GetResponseStream());
-                string s = reader.ReadToEnd();
-                if ((webResponse.StatusCode == HttpStatusCode.OK) && (s.Length > 0))
-                {
-                    
-                    var arr = JsonConvert.DeserializeObject<JArray>(s);
-                    viewGrid.DataSource = arr;
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("Status code == {0}", webResponse.StatusCode));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            
-
-
-
-            //Source: https://www.codeproject.com/Tips/712109/How-to-Get-REST-Data-and-Display-it-in-a-DataGridV
+            viewGrid.DataSource = DbConnect.getData(uri); 
         }
 
         private void CreateConnection(string ip,string port,string uid,string pwd,string database)
@@ -143,7 +131,7 @@ namespace Isabike
         private void refreshBtn_Click(object sender, EventArgs e)
         {
 
-            if (SalesBtn.BackColor.Equals(Color.Green))
+            if (ReviewsBtn.BackColor.Equals(Color.Green))
             {
                 gridState = true;
             }
@@ -156,19 +144,6 @@ namespace Isabike
 
         private void SalesBtn_Click(object sender, EventArgs e)
         {
-            connectToDB(true);
-            if (SalesBtn.BackColor.Equals(Color.Green))
-            {
-                SalesBtn.BackColor = Color.Red;
-                gridState = false;
-                connectToDB(gridState);
-            }
-            else
-            {
-                SalesBtn.BackColor = Color.Green;
-                gridState = true;
-                connectToDB(gridState);
-            }
             
         }
 

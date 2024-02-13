@@ -22,16 +22,16 @@ namespace Isabike
 
         public void populateGyarto(string uri)
         {
-            manufactererBox.DataSource = DbConnect.getData(uri);
-            manufactererBox.ValueMember = "gyarto_id";
-            manufactererBox.DisplayMember = "gyarto_neve";
+            productManufactererBox.DataSource = DbConnect.getData(uri);
+            productManufactererBox.ValueMember = "gyarto_id";
+            productManufactererBox.DisplayMember = "gyarto_neve";
         }
 
         public void pupulateKategoria(string uri)
         {
-            categoryBox.DataSource = DbConnect.getData(uri);
-            categoryBox.ValueMember = "gyarto_id";
-            categoryBox.DisplayMember = "gyarto_neve";
+            productCategoryBox.DataSource = DbConnect.getData(uri);
+            productCategoryBox.ValueMember = "gyarto_id";
+            productCategoryBox.DisplayMember = "gyarto_neve";
         }
         public ProductOperationsForm()
         {
@@ -47,12 +47,12 @@ namespace Isabike
         {
             string url = "http://localhost:8000/termekek";
             string jsonData = "{ " +
-                " \"termek_kateg\":" + "\"" + categoryBox.SelectedText + "\"," +
-                " \"termek_nev\":" + "\"" + productName.Text + "\"," +
-                " \"gyarto_id\":" + "\"" + manufactererBox.SelectedText + "\"," +
+                " \"termek_kateg\":" + "\"" + productCategoryBox.SelectedText + "\"," +
+                " \"termek_nev\":" + "\"" + productNameText.Text + "\"," +
+                " \"gyarto_id\":" + "\"" + productManufactererBox.SelectedText + "\"," +
                 "\"raktarondb\": \"4\"," +
                 "\"tomeg_tulajdonsaga_id\": \"1\"," +
-                "\"tomeg_erteke\":" + "\"" + suly_textbox.Text + "\"," +
+                "\"tomeg_erteke\":" + "\"" + productWeightText.Text + "\"," +
                 "\"szine\": \"pink\"," +
                 "\"leiras\": \"Added via desktop\"," +
                 "\"egyseg_ar\": \"420\"," +
