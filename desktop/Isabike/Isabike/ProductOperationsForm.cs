@@ -45,7 +45,7 @@ namespace Isabike
 
         private void okBtn_Click(object sender, EventArgs e)
         {
-            string url = "http://localhost:8000/termekek";
+            string url = "http://localhost:8080/termekek";
             string jsonData = "{ " +
                 " \"termek_kateg\":" + "\"" + productCategoryBox.SelectedText + "\"," +
                 " \"termek_nev\":" + "\"" + productNameText.Text + "\"," +
@@ -96,7 +96,7 @@ namespace Isabike
 
         private void ProductOperationsForm_Load(object sender, EventArgs e)
         {
-            populateGyarto("http://172.16.16.157:8000/api/gyartok");
+            populateGyarto("http://172.16.16.157:8080/api/gyartok");
         }
     }
 }

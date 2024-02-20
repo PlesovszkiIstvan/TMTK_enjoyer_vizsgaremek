@@ -78,35 +78,6 @@ namespace Isabike
             viewGrid.DataSource = DbConnect.getData(uri); 
         }
 
-        private void CreateConnection(string ip,string port,string uid,string pwd,string database)
-        {
-            MySql.Data.MySqlClient.MySqlConnection conn;
-            string myConnectionString;
-
-
-            myConnectionString = 
-                "server=" + ip +
-                ";port=" + port +
-                ";uid=" + uid + 
-                ";pwd=" + pwd +
-                ";database=" + database;
-
-            try
-            {
-                conn = new MySql.Data.MySqlClient.MySqlConnection();
-                conn.ConnectionString = myConnectionString;
-                conn.Open();
-                MessageBox.Show("Sikeres csatlakozás!");
-                MySQL_ToDatagridview(myConnectionString);
-
-
-            }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void MySQL_ToDatagridview(string con)
         {
             MySqlConnection mysqlCon = new
@@ -149,7 +120,7 @@ namespace Isabike
 
         private void connectToDB(bool isSales)
         {
-            manufactererBox.DataSource = DbConnect.getData("http://172.16.16.157:8000/api/gyartok");
+            manufactererBox.DataSource = DbConnect.getData("http://172.16.16.157:8080/api/gyartok");
             manufactererBox.ValueMember = "gyarto_id";
             manufactererBox.DisplayMember = "gyarto_neve";
 
@@ -159,12 +130,12 @@ namespace Isabike
             }
             if (!isSales) {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://172.16.16.157:8000/api/termekek");
+                GetRESTData("http://172.16.16.157:8080/api/termekek");
             }
             else
             {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://172.16.16.157:8000/api/velemenyek");
+                GetRESTData("http://172.16.16.157:8080/api/velemenyek");
             }
 
             
@@ -173,7 +144,9 @@ namespace Isabike
         private void filterBtn_Click(object sender, EventArgs e)
         {
             MessageBox.Show(manufactererBox.Text);
-            (viewGrid.DataSource as DataTable).DefaultView.RowFilter = string.Format("gyarto_neve = '{0}'",manufactererBox.Text);
+            viewGrid.Rows.Clear();
+            viewGrid.Columns.Clear();
+            viewGrid.DataSource = DbConnect.getFilteredData("http://172.16.16.157:8080/api/termekek", manufactererBox.Text);
         }
     }
 }

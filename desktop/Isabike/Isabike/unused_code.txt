@@ -1,0 +1,78 @@
+﻿Connect to Database directly :
+
+private void CreateConnection(string ip,string port,string uid,string pwd,string database)
+        {
+            MySql.Data.MySqlClient.MySqlConnection conn;
+            string myConnectionString;
+
+
+            myConnectionString = 
+                "server=" + ip +
+                ";port=" + port +
+                ";uid=" + uid + 
+                ";pwd=" + pwd +
+                ";database=" + database;
+
+            try
+            {
+                conn = new MySql.Data.MySqlClient.MySqlConnection();
+                conn.ConnectionString = myConnectionString;
+                conn.Open();
+                MessageBox.Show("Sikeres csatlakozás!");
+                MySQL_ToDatagridview(myConnectionString);
+
+
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+--------------
+? :
+private void loginshite()
+        {
+            if (EmailTextfield.Text != null && PasswordTextfield.Text != null)
+            {
+                var request = WebRequest.Create("http://172.16.16.157:8080/api/login");
+                request.Method = "POST";
+                request.ContentType = "application/json";
+
+                if (PasswordTextfield.Text != "" && EmailTextfield.Text != "")
+                {
+                    var payload = new
+                    {
+                        password = PasswordTextfield.Text,
+                        email = EmailTextfield.Text,
+                    };
+
+                    var setting = new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        Formatting = Formatting.Indented,
+                    };
+
+                    string json = JsonConvert.SerializeObject(payload, setting);
+
+                    MessageBox.Show(payload.ToString());
+                    Stream dataStream = request.GetRequestStream();
+                    Serialize(dataStream, json);
+                    dataStream.Close();
+                }
+
+                try
+                {
+                    HttpWebRequest req = WebRequest.Create("http://172.16.16.157:8080/api/login") as HttpWebRequest;
+
+                    WebResponse wr = req.GetResponse();
+                    MessageBox.Show(wr.ToString());
+                }
+                    catch (WebException wex)
+                    {
+                        var pageContent = new StreamReader(wex.Response.GetResponseStream())
+                                              .ReadToEnd();
+                        MessageBox.Show(pageContent);
+                    }
+                }
+            }

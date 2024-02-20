@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.loginBtn = new System.Windows.Forms.Button();
-            this.UsernameTextfield = new System.Windows.Forms.TextBox();
+            this.EmailTextfield = new System.Windows.Forms.TextBox();
             this.PasswordTextfield = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,17 +46,18 @@
             this.loginBtn.UseVisualStyleBackColor = true;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
-            // UsernameTextfield
+            // EmailTextfield
             // 
-            this.UsernameTextfield.Location = new System.Drawing.Point(105, 29);
-            this.UsernameTextfield.Name = "UsernameTextfield";
-            this.UsernameTextfield.Size = new System.Drawing.Size(210, 20);
-            this.UsernameTextfield.TabIndex = 2;
+            this.EmailTextfield.Location = new System.Drawing.Point(105, 29);
+            this.EmailTextfield.Name = "EmailTextfield";
+            this.EmailTextfield.Size = new System.Drawing.Size(210, 20);
+            this.EmailTextfield.TabIndex = 2;
             // 
             // PasswordTextfield
             // 
             this.PasswordTextfield.Location = new System.Drawing.Point(103, 78);
             this.PasswordTextfield.Name = "PasswordTextfield";
+            this.PasswordTextfield.PasswordChar = '*';
             this.PasswordTextfield.Size = new System.Drawing.Size(212, 20);
             this.PasswordTextfield.TabIndex = 3;
             // 
@@ -65,9 +66,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(44, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Username";
+            this.label1.Text = "Email";
             // 
             // label2
             // 
@@ -97,7 +98,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.PasswordTextfield);
-            this.Controls.Add(this.UsernameTextfield);
+            this.Controls.Add(this.EmailTextfield);
             this.Controls.Add(this.loginBtn);
             this.Name = "Login";
             this.Text = "Login";
@@ -110,7 +111,7 @@
         #endregion
 
         private System.Windows.Forms.Button loginBtn;
-        private System.Windows.Forms.TextBox UsernameTextfield;
+        private System.Windows.Forms.TextBox EmailTextfield;
         private System.Windows.Forms.TextBox PasswordTextfield;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
