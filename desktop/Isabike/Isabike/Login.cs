@@ -1,11 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Runtime.Serialization;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 
 namespace Isabike
@@ -18,24 +25,25 @@ namespace Isabike
             
         }
 
+        
+
         private void Login_Load(object sender, EventArgs e)
         {
             this.Activate();
         }
 
-        private void login_button_Click(object sender, EventArgs e)
+        private void loginBtn_Click(object sender, EventArgs e)
         {
-            if (Username.Text=="root" && Password.Text=="root") {
-                MainForm main = new MainForm();
-                this.Visible = false;
-                main.ShowDialog();
-                
-            }
+            MainForm main = new MainForm();
+            this.Visible = false;
+            main.ShowDialog();
         }
 
-        private void closeButton_Click(object sender, EventArgs e)
+        private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        
     }
 }

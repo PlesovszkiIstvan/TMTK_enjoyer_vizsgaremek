@@ -18,51 +18,41 @@ namespace Isabike
     public partial class ProductOperationsForm : Form
     {
 
-        public void pupulateGyarto(string uri)
-        {
-            try
-            {
-                var webRequest = (HttpWebRequest)WebRequest.Create(uri);
-                var webResponse = (HttpWebResponse)webRequest.GetResponse();
-                var reader = new StreamReader(webResponse.GetResponseStream());
-                string s = reader.ReadToEnd();
-                
-                if ((webResponse.StatusCode == HttpStatusCode.OK) && (s.Length > 0))
-                {
 
-                    var arr = JsonConvert.DeserializeObject<gyartoList>(s);
-                    manufactererBox.DataSource = arr.gyartok.OrderBy(gyarto => gyarto.name).ToList();
-                }
-                else
-                {
-                    MessageBox.Show(string.Format("Status code == {0}", webResponse.StatusCode));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+        public void populateGyarto(string uri)
+        {
+            productManufactererBox.DataSource = DbConnect.getData(uri);
+            productManufactererBox.ValueMember = "gyarto_id";
+            productManufactererBox.DisplayMember = "gyarto_neve";
+        }
+
+        public void pupulateKategoria(string uri)
+        {
+            productCategoryBox.DataSource = DbConnect.getData(uri);
+            productCategoryBox.ValueMember = "gyarto_id";
+            productCategoryBox.DisplayMember = "gyarto_neve";
         }
         public ProductOperationsForm()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void okBtn_Click(object sender, EventArgs e)
         {
-            string url = "http://localhost:8000/termekek";
+            string url = "http://localhost:8080/termekek";
             string jsonData = "{ " +
-                " \"termek_kateg\":" + "\"" + categoryBox.SelectedText + "\"," +
-                " \"termek_nev\":" + "\"" + productName.Text + "\"," +
-                " \"gyarto_id\":" + "\"" + manufactererBox.SelectedText + "\"," +
+                " \"termek_kateg\":" + "\"" + productCategoryBox.SelectedText + "\"," +
+                " \"termek_nev\":" + "\"" + productNameText.Text + "\"," +
+                " \"gyarto_id\":" + "\"" + productManufactererBox.SelectedText + "\"," +
                 "\"raktarondb\": \"4\"," +
                 "\"tomeg_tulajdonsaga_id\": \"1\"," +
-                "\"tomeg_erteke\":" + "\"" + suly_textbox.Text + "\"," +
+                "\"tomeg_erteke\":" + "\"" + productWeightText.Text + "\"," +
                 "\"szine\": \"pink\"," +
                 "\"leiras\": \"Added via desktop\"," +
                 "\"egyseg_ar\": \"420\"," +
@@ -106,7 +96,7 @@ namespace Isabike
 
         private void ProductOperationsForm_Load(object sender, EventArgs e)
         {
-            pupulateGyarto("http://172.16.16.157:8000/api/gyartok");
+            populateGyarto("http://172.16.16.157:8080/api/gyartok");
         }
     }
 }

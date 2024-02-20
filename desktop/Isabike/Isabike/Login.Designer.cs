@@ -28,47 +28,47 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.login_button = new System.Windows.Forms.Button();
-            this.Username = new System.Windows.Forms.TextBox();
-            this.Password = new System.Windows.Forms.TextBox();
+            this.loginBtn = new System.Windows.Forms.Button();
+            this.EmailTextfield = new System.Windows.Forms.TextBox();
+            this.PasswordTextfield = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.closeButton = new System.Windows.Forms.Button();
+            this.closeBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // login_button
+            // loginBtn
             // 
-            this.login_button.Location = new System.Drawing.Point(321, 25);
-            this.login_button.Name = "login_button";
-            this.login_button.Size = new System.Drawing.Size(75, 34);
-            this.login_button.TabIndex = 0;
-            this.login_button.Text = "Login";
-            this.login_button.UseVisualStyleBackColor = true;
-            this.login_button.Click += new System.EventHandler(this.login_button_Click);
+            this.loginBtn.Location = new System.Drawing.Point(321, 25);
+            this.loginBtn.Name = "loginBtn";
+            this.loginBtn.Size = new System.Drawing.Size(75, 34);
+            this.loginBtn.TabIndex = 0;
+            this.loginBtn.Text = "Login";
+            this.loginBtn.UseVisualStyleBackColor = true;
+            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
-            // Username
+            // EmailTextfield
             // 
-            this.Username.Location = new System.Drawing.Point(105, 29);
-            this.Username.Name = "Username";
-            this.Username.Size = new System.Drawing.Size(210, 20);
-            this.Username.TabIndex = 2;
+            this.EmailTextfield.Location = new System.Drawing.Point(105, 29);
+            this.EmailTextfield.Name = "EmailTextfield";
+            this.EmailTextfield.Size = new System.Drawing.Size(210, 20);
+            this.EmailTextfield.TabIndex = 2;
             // 
-            // Password
+            // PasswordTextfield
             // 
-            this.Password.Location = new System.Drawing.Point(103, 78);
-            this.Password.Name = "Password";
-            this.Password.PasswordChar = '*';
-            this.Password.Size = new System.Drawing.Size(212, 20);
-            this.Password.TabIndex = 3;
+            this.PasswordTextfield.Location = new System.Drawing.Point(103, 78);
+            this.PasswordTextfield.Name = "PasswordTextfield";
+            this.PasswordTextfield.PasswordChar = '*';
+            this.PasswordTextfield.Size = new System.Drawing.Size(212, 20);
+            this.PasswordTextfield.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(44, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Username";
+            this.label1.Text = "Email";
             // 
             // label2
             // 
@@ -79,27 +79,27 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Password";
             // 
-            // closeButton
+            // closeBtn
             // 
-            this.closeButton.Location = new System.Drawing.Point(321, 78);
-            this.closeButton.Name = "closeButton";
-            this.closeButton.Size = new System.Drawing.Size(75, 34);
-            this.closeButton.TabIndex = 6;
-            this.closeButton.Text = "Close";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.closeButton_Click);
+            this.closeBtn.Location = new System.Drawing.Point(321, 78);
+            this.closeBtn.Name = "closeBtn";
+            this.closeBtn.Size = new System.Drawing.Size(75, 34);
+            this.closeBtn.TabIndex = 6;
+            this.closeBtn.Text = "Close";
+            this.closeBtn.UseVisualStyleBackColor = true;
+            this.closeBtn.Click += new System.EventHandler(this.closeBtn_Click);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(408, 153);
-            this.Controls.Add(this.closeButton);
+            this.Controls.Add(this.closeBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Password);
-            this.Controls.Add(this.Username);
-            this.Controls.Add(this.login_button);
+            this.Controls.Add(this.PasswordTextfield);
+            this.Controls.Add(this.EmailTextfield);
+            this.Controls.Add(this.loginBtn);
             this.Name = "Login";
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
@@ -110,11 +110,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Button login_button;
-        private System.Windows.Forms.TextBox Username;
-        private System.Windows.Forms.TextBox Password;
+        private System.Windows.Forms.Button loginBtn;
+        private System.Windows.Forms.TextBox EmailTextfield;
+        private System.Windows.Forms.TextBox PasswordTextfield;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Button closeBtn;
     }
 }
