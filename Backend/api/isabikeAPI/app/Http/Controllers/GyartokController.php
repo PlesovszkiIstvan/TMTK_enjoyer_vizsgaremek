@@ -14,11 +14,11 @@ class GyartokController extends Controller
         $tell = $body->telefonszam;
         $web = $body->webhely;
         //$response = DB::select('call add_gyartok_procedure("'.$name.'");');
-        $asdasd = 'call add_gyartok_procedure("'
+        $asdasd = DB::select('call add_gyartok_procedure("'
         .$name.'","'
         .$tell.'","'
         .$web.
-        '");';
+        '");');
         return $asdasd;
     }
 

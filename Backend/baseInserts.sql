@@ -3,8 +3,6 @@ USE isabike;
 INSERT INTO Felhasznalok (felhasznalo_nev, vezetek_nev, kereszt_nev, email, jelszo, jogosultsag, viszaigazolas_statusz, aktiv)
 VALUES ('nagyJ69','Nagy','János','nagyj69@gmail.com','Almafa12;','1',true,true);
 
-INSERT INTO Tokenek (felhasznalo_id,token)
-VALUES ('1','EZEGYTOKEN123');
 
 INSERT INTO ertekelesek (ertekeles_id,ertekeles)
 VALUES ('1','Szuper volt');
@@ -71,16 +69,16 @@ INSERT INTO Gyartok(gyarto_neve, telefonszama, webhely)
 VALUES('Kellys','06-23-400-5006','Kellysexample.com');
 
 INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
-VALUES ('01', 'PirosBicigli0', 5, 1, 1, 20, 'piros', 'lopott', 1500);
+VALUES ('01', 'PirosBicigli0', 1, 1, 1, 20, 'piros', 'lopott', 1500);
 
 INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
-VALUES ('01', 'PirosBicigli1', 5, 1, 1, 20, 'piros', 'lopott', 1500);
+VALUES ('01', 'PirosBicigli1', 2, 1, 1, 20, 'piros', 'lopott', 1500);
 
 INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
-VALUES ('01', 'PirosBicigli2', 5, 1, 1, 20, 'piros', 'lopott', 1500);
+VALUES ('01', 'PirosBicigli2', 3, 1, 1, 20, 'piros', 'lopott', 1500);
 
 INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
-VALUES ('01', 'PirosBicigli3', 5, 1, 1, 20, 'piros', 'lopott', 1500);
+VALUES ('01', 'PirosBicigli3', 4, 1, 1, 20, 'piros', 'lopott', 1500);
 
 INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
 VALUES ('01', 'PirosBicigli4', 5, 1, 1, 20, 'piros', 'lopott', 1500);
