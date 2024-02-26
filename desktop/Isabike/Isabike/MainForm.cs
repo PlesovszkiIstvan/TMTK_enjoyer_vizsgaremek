@@ -20,6 +20,8 @@ namespace Isabike
     public partial class MainForm : Form
     {
 
+        private string token {get;set;}
+
         private bool gridState = false;
         // false = termekek | true = velemenyek
 
@@ -78,26 +80,6 @@ namespace Isabike
             viewGrid.DataSource = DbConnect.getData(uri); 
         }
 
-        private void MySQL_ToDatagridview(string con)
-        {
-            MySqlConnection mysqlCon = new
-
-            MySqlConnection(con);
-            mysqlCon.Open();
-
-            MySqlDataAdapter MyDA = new MySqlDataAdapter();
-            string sqlSelectAll = "CALL get_termekek_procedure();";
-            MyDA.SelectCommand = new MySqlCommand(sqlSelectAll, mysqlCon);
-
-            DataTable table = new DataTable();
-            MyDA.Fill(table);
-
-            BindingSource bSource = new BindingSource();
-            bSource.DataSource = table;
-
-
-            viewGrid.DataSource = bSource;
-        }
 
         private void refreshBtn_Click(object sender, EventArgs e)
         {
@@ -120,7 +102,7 @@ namespace Isabike
 
         private void connectToDB(bool isSales)
         {
-            manufactererBox.DataSource = DbConnect.getData("http://172.16.16.157:8080/api/gyartok");
+            manufactererBox.DataSource = DbConnect.getData("http://172.16.16.157:8000/api/gyartok");
             manufactererBox.ValueMember = "gyarto_id";
             manufactererBox.DisplayMember = "gyarto_neve";
 
@@ -130,12 +112,12 @@ namespace Isabike
             }
             if (!isSales) {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://172.16.16.157:8080/api/termekek");
+                GetRESTData("http://172.16.16.157:8000/api/termekek");
             }
             else
             {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://172.16.16.157:8080/api/velemenyek");
+                GetRESTData("http://172.16.16.157:8000/api/velemenyek");
             }
 
             
@@ -143,10 +125,9 @@ namespace Isabike
 
         private void filterBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(manufactererBox.Text);
             viewGrid.Rows.Clear();
             viewGrid.Columns.Clear();
-            viewGrid.DataSource = DbConnect.getFilteredData("http://172.16.16.157:8080/api/termekek", manufactererBox.Text);
+            viewGrid.DataSource = DbConnect.getFilteredData("http://172.16.16.157:8000/api/termekek", manufactererBox.Text);
         }
     }
 }
