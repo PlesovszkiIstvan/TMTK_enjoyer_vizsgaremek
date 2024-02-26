@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\TermekekResponseController;
+use App\Http\Requests\TermekekAddChecker;
+use App\Http\Requests\TermekekUpdateChecker;
+use App\Http\Requests\TermekekDeleteChecker;
 
-class TermekContoller extends Controller
+class TermekContoller extends TermekekResponseController
 {
     public function getTermekek(){
         $termekek = DB::select("call get_termekek_procedure();");
@@ -14,8 +18,9 @@ class TermekContoller extends Controller
         return $termekek;
     }
 
-    public function addTermek(Request $req){
+    public function addTermek(TermekekAddChecker $req){
         $body = json_decode($req->getContent());
+        $token = $body->token;
         $termek_kateg = $body->termek_kateg;
         $termek_nev = $body->termek_nev;
         $gyarto_id = $body->gyarto_id;
@@ -26,7 +31,8 @@ class TermekContoller extends Controller
         $leiras = $body->leiras;
         $egyseg_ar = $body->egyseg_ar;
         $elerheto = $body->elerheto;
-        $response = 'call add_termek_procedure("'
+        $response = DB::select('call add_termek_procedure("'
+        .$token.'","'
         .$termek_kateg.'","'
         .$termek_nev.'",'
         .$gyarto_id.','
@@ -36,12 +42,19 @@ class TermekContoller extends Controller
         .$szine.'","'
         .$leiras.'",'
         .$egyseg_ar.
-        ');';
-        return DB::select($response);
+        ');');
+        if ($response[0]->result == 0) {
+            return $this->sendError($body, "Jogosultsági hiba!");
+        } else {
+            return $this->sendResponse($response, "Termék sikeresen hozzáadva!");
+        }
     }
 
-    public function updateTermek($id, Request $req){
+    public function updateTermek(TermekekUpdateChecker $req){
+
         $body = json_decode($req->getContent());
+        $token = $body->token;
+        $termek_id = $body->termek_id;
         $termek_kateg = $body->termek_kateg;
         $termek_nev = $body->termek_nev;
         $gyarto_id = $body->gyarto_id;
@@ -52,8 +65,9 @@ class TermekContoller extends Controller
         $leiras = $body->leiras;
         $egyseg_ar = $body->egyseg_ar;
         $elerheto = $body->elerheto;
-        $response = 'call update_termek_procedure('
-        .$id.',"'
+        $response = DB::select('call update_termek_procedure("'
+        .$token.'",'
+        .$termek_id.',"'
         .$termek_kateg.'","'
         .$termek_nev.'",'
         .$gyarto_id.','
@@ -63,12 +77,23 @@ class TermekContoller extends Controller
         .$szine.'","'
         .$leiras.'",'
         .$egyseg_ar.
-        ');';
-        //return $response;
-        return DB::select($response);
+        ');');
+        if ($response[0]->result == 0) {
+            return $this->sendError($body, "Jogosultsági hiba!");
+        } else {
+            return $this->sendResponse($response, "Termék sikeresen modositva!");
+        }
     }
 
-    public function deleteTermek($id){
-        return DB::select("call update_termekek_elerheto_procedure(".$id.");");
+    public function deleteTermek(TermekekDeleteChecker $req){
+        $token = $req->bearerToken();
+        $body = json_decode($req->getContent());
+        $response = DB::select("call update_termekek_elerheto_procedure('".$token."',".$body->termek_id.");");
+        if ($response[0]->result == 0) {
+            return $this->sendError($response, "Hibás token vagy nem létezö termék");
+        } else {
+            return $this->sendResponse($response, "A termék elérhetösége sikeresen modositva");
+        }
+        
     }
 }

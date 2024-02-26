@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 //use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\FelhasznalokResponseController;
+use App\Http\Requests\FelhasznalokRegistChecker;
+use App\Http\Requests\FelhasznalokLogInChecker;
 use Nette\Utils\Random;
 use libcurl;
 
@@ -16,7 +18,8 @@ use libcurl;
 class FelhasznaloController extends FelhasznalokResponseController
 {
 
-    public function registerUser(Request $req){
+    public function registerUser(FelhasznalokRegistChecker $req){
+        $req->validated();
         $body = json_decode($req->getContent());
         $DBresponse = DB::select("call check_if_felhasznalo_exist_procedure('".$body->felhasznalo_nev."', '".$body->email."');");
         if ($DBresponse[0]->result == 0) {
@@ -33,10 +36,14 @@ class FelhasznaloController extends FelhasznalokResponseController
         return $this->sendResponse($DBresponse, "Email vissza igazolva!");
     }
 
-    public function logIn(Request $req){
+    public function logIn(FelhasznalokLogInChecker $req){
         $body = json_decode($req->getContent());        
         $DBresponse = DB::select("call logIn_felhasznalo_procedure('".$this->hashPass($body->password)."', '".$body->email."','".$this->genToken()."');");
-        return $this->sendResponse($DBresponse, "A felhasználo sikeresen bejelentkezet!");
+        if ($DBresponse[0]->result == 0) {
+            return $this->sendError($body, "Hibás email jelszo páros, vagy már be van jelentkezve valaki a fiokba");
+        } else {
+            return $this->sendResponse($DBresponse[0]->token, "A felhasználo sikeresen bejelentkezet!");
+        }
     }
 
     public function logOut(Request $req){
@@ -44,6 +51,40 @@ class FelhasznaloController extends FelhasznalokResponseController
         $token = $body->token;
         $DBresponse = DB::select("call logout_procedure('".$token."')");
         return $this->sendResponse($DBresponse, "A felhasználo sikeresen kijelentkezet!");
+    }
+
+    public function getFelhasznalok(Request $req){
+        $token = $req->bearerToken();
+        $DBresponse = DB::select("call get_felhasznalok_procedure('".$token."');");
+        if ($DBresponse[0]->result > 0) {
+            return $this->sendResponse($DBresponse, "Felhasználok lekérve admin által");
+        } else {
+            return $this->sendError($DBresponse, "Jogosultság elutasitva!");
+        }
+    }
+
+    public function updateFelhasznalo(Request $req){
+        $body = json_decode($req->getContent());
+        $DBresponse = DB::select("call update_felhasznalok_procedure('"
+        .$body->token."',"
+        .$body->felhasznalo_id.",'"
+        .$body->felhasznalo_nev."','"
+        .$body->vezetek_nev."','"
+        .$body->kereszt_nev."','"
+        .$body->vasarlo_telefonszama."','"
+        .$body->email."','"
+        .$body->jelszo."','"
+        .$body->szalitasi_cime."',"
+        .$body->jogosultsag.","
+        .$body->aktiv.
+        "
+        );");
+        if ($DBresponse[0]->result > 0) {
+            return $this->sendResponse($DBresponse, "Felhasználo sikeresen modositva admin által");
+        } else {
+            return $this->sendError($DBresponse, "Jogosultság megtagadva vagy Hibás paraméterek");
+        }
+        
     }
 
     private function genToken(){
@@ -58,4 +99,5 @@ class FelhasznaloController extends FelhasznalokResponseController
     {
         return Random::generate(5, "0-9");
     }
+
 }

@@ -23,8 +23,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("/termekek", [ TermekContoller::class, "getTermekek"]);
 Route::post("/addtermek", [ TermekContoller::class, "addTermek"]);
-Route::patch("/updatetermek/{id}", [ TermekContoller::class, "updateTermek"]);
-Route::delete("/deletetermek/{id}", [ TermekContoller::class, "deleteTermek"]);
+Route::patch("/updatetermek", [ TermekContoller::class, "updateTermek"]);
+Route::delete("/deletetermek", [ TermekContoller::class, "deleteTermek"]);
 
 Route::post("/addgyarto", [ GyartokController::class, "addGyarto"]);
 Route::get("/gyartok", [ GyartokController::class, "getGyartok"]);
@@ -33,3 +33,13 @@ Route::post("/registration", [ FelhasznaloController::class, "registerUser"]);
 Route::put("/verify", [ FelhasznaloController::class, "verifyUser"]);
 Route::post("/login", [ FelhasznaloController::class, "logIn"]);
 Route::post("/logout", [ FelhasznaloController::class, "logOut"]);
+Route::get("/getfelhasznalok", [ FelhasznaloController::class, "getFelhasznalok"]);
+Route::put("/updatefelhasznalo", [ FelhasznaloController::class, "updateFelhasznalo"]);
+
+
+
+
+
+
+
+// Route::get("/asd", [ FelhasznaloController::class, "asd"]);
