@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Policy;
+using System.Web.UI.WebControls;
+using System.Collections.Specialized;
+using K4os.Compression.LZ4.Streams.Abstractions;
 
 namespace Isabike
 {
@@ -28,7 +31,7 @@ namespace Isabike
                 string s = reader.ReadToEnd();
                 if ((webResponse.StatusCode == HttpStatusCode.OK) && (s.Length > 0))
                 {
-                    termekek = JsonConvert.DeserializeObject<List<Termekek>>(s);    
+                    termekek = JsonConvert.DeserializeObject<List<Termekek>>(s);
                     return JsonConvert.DeserializeObject<JArray>(s);
                 }
                 else
@@ -44,7 +47,7 @@ namespace Isabike
             }
         }
 
-        public static JArray getFilteredData(string uri,string filter)
+        public static JArray getFilteredData(string uri, string filter)
         {
 
             try
@@ -70,6 +73,31 @@ namespace Isabike
                 MessageBox.Show(ex.Message);
                 return null;
             }
+        }
+
+        public static void loginToProg( string email, string password, string url) {
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            using(var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+{
+                string json = "{\"password\":\"" + password +"\"," +
+                              "\"email\":\""+ email +"\"}";
+
+                streamWriter.Write(json);
+            }
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+                MessageBox.Show(result);
+            }
+
+            
+
         }
 
     }

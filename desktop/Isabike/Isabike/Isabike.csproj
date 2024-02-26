@@ -165,8 +165,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TODO.txt" />
-    <Content Include="unused_code.txt" />
+    <Content Include="Text\TODO.txt" />
+    <Content Include="Text\unused_code.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
