@@ -116,7 +116,7 @@ create table termek_kepek(
 	termek_kep_id mediumint primary key auto_increment,
     termek_id mediumint not null,
     kep_helye varchar(100) unique default '/termek_kepek/noimage.jpg',
-    constraint kep_vizsgalat check (kep_helye LIKE '%.jpg'),
+    constraint kep_vizsgalat check (kep_helye LIKE '%.jpg' or '%.png' or '%.webp'),
     constraint fk_in_termekek_kep_id foreign key(termek_id) references Termekek(termek_id)
 );
 
@@ -161,8 +161,10 @@ GRANT EXECUTE ON isabike.* TO browserUser@'%';
 USE isabike;
 
 INSERT INTO Felhasznalok (felhasznalo_nev, vezetek_nev, kereszt_nev, email, jelszo, jogosultsag, viszaigazolas_statusz, aktiv)
-VALUES ('nagyJ69','Nagy','János','nagyj69@gmail.com','Almafa12;','1',true,true);
+VALUES ('admin','admin','admin','admin@super.lan','admin','3',true,true);
 
+INSERT INTO Tokenek(felhasznalo_id, token)
+VALUES (1, 'admin');
 
 INSERT INTO ertekelesek (ertekeles_id,ertekeles)
 VALUES ('1','Szuper volt');
@@ -243,104 +245,8 @@ VALUES ('01', 'PirosBicigli3', 4, 1, 1, 20, 'piros', 'lopott', 1500);
 INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
 VALUES ('01', 'PirosBicigli4', 5, 1, 1, 20, 'piros', 'lopott', 1500);   
 
-DELIMITER $$
-CREATE PROCEDURE add_termek_procedure(
-    IN termek_kateg_p varchar(8),
-    IN termek_nev_p varchar(20),
-    IN gyarto_id_p tinyint,
-    IN raktarondb_p smallint,
-    IN tomeg_tulajdonsaga_id_p tinyint,
-    IN tomeg_erteke_p double,
-    IN szine_p varchar(50),
-    IN leiras_p varchar(500),
-    IN egyseg_ar_p mediumint
-)
-BEGIN
-	INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar)
-	VALUES (termek_kateg_p, termek_nev_p, gyarto_id_p, raktarondb_p, tomeg_tulajdonsaga_id_p, tomeg_erteke_p, szine_p, leiras_p, egyseg_ar_p);
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE update_termek_procedure(
-    IN termek_id_p mediumint,
-    IN termek_kateg_p varchar(8),
-    IN termek_nev_p varchar(20),
-    IN gyarto_id_p tinyint,
-    IN raktarondb_p smallint,
-    IN tomeg_tulajdonsaga_id_p tinyint,
-    IN tomeg_erteke_p double,
-    IN szine_p varchar(50),
-    IN leiras_p varchar(500),
-    IN egyseg_ar_p mediumint
-)
-BEGIN
-    UPDATE Termekek
-	SET	termek_kateg = termek_kateg_p,
-    termek_nev = termek_nev_p,
-    gyarto_id = gyarto_id_p,
-    raktarondb = raktarondb_p,
-    tomeg_tulajdonsaga_id = tomeg_tulajdonsaga_id_p,
-    tomeg_erteke = tomeg_erteke_p,
-    szine = szine_p,
-    leiras = leiras_p,
-    egyseg_ar = egyseg_ar_p
-	WHERE termek_id = termek_id_p;
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE update_termekek_elerheto_procedure(IN termek_id_p MEDIUMINT)
-BEGIN
-	DECLARE elerheto_var boolean;
-    
-    SELECT Termekek.elerheto
-    INTO elerheto_var
-    FROM Termekek
-    WHERE Termekek.termek_id = termek_id_p;
-    
-    if elerheto_var = true
-    then
-		UPDATE Termekek
-        SET Termekek.elerheto = FALSE
-        WHERE Termekek.termek_id = termek_id_p;
-	else
-		UPDATE Termekek
-        SET Termekek.elerheto = TRUE
-        WHERE Termekek.termek_id = termek_id_p;
-    end if;
-END$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE get_termekek_procedure()
-BEGIN
-      select 
-        termekek.termek_id,
-        termek_kateg,
-        termek_nev,
-        termekek.gyarto_id,
-        gyarto_neve,
-        telefonszama,
-        webhely,
-        raktarondb,
-        termekek.tomeg_tulajdonsaga_id,
-        mertek_egysege, 
-        tomeg_erteke, 
-        szine, 
-        leiras, 
-        egyseg_ar, 
-        elerheto, 
-        kep_helye
-        from termekek
-        left join gyartok
-        on termekek.gyarto_id = gyartok.gyarto_id
-        left join tomeg_tulajdonsagai
-        on termekek.tomeg_tulajdonsaga_id = tomeg_tulajdonsagai.tomeg_tulajdonsaga_id
-        left join termek_kepek
-        on termekek.termek_id = termek_kepek.termek_id;
-   END$$
-DELIMITER ;
+INSERT INTO Kedvezmenyek (kedvezmeny_neve, kedvezmeny_leiras, kedvezmeny_összege)
+values('Nincs kedvezmény', '', 0);
 
 DElIMITER $$
 create procedure check_if_felhasznalo_exist_procedure(IN felhasznalo_nev_p varchar(20), IN email_p varchar(40))
@@ -417,7 +323,7 @@ BEGIN
         UPDATE felhasznalok
         SET felhasznalok.aktiv = 1
         WHERE felhasznalok.felhasznalo_id = felhasznalo_id_var;
-        select * from felhasznalok
+        select *, true as result from felhasznalok
         left join tokenek
         on Felhasznalok.felhasznalo_id = tokenek.felhasznalo_id
         where felhasznalok.felhasznalo_id = felhasznalo_id_var;
@@ -456,12 +362,666 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE get_felhasznalok_procedure(IN token_p varchar(120))
+BEGIN
+		declare felhasznalo_id_var int;
+        
+        SELECT tokenek.felhasznalo_id
+        INTO felhasznalo_id_var
+        FROM tokenek
+        inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+        where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+        
+        if felhasznalo_id_var is null
+        then
+			select false as result;
+		else
+			select * , true as result from felhasznalok;
+		end if;
+        
+END$$
+DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE get_one_felhasznalo_procedure(IN token_p varchar(120))
+BEGIN
+		declare felhasznalo_id_var int;
+        
+        SELECT tokenek.felhasznalo_id
+        INTO felhasznalo_id_var
+        FROM tokenek
+        inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+        where tokenek.token = token_p;
+        
+        if felhasznalo_id_var is null
+        then
+			select false as result;
+		else
+			select * , true as result from felhasznalok
+            where felhasznalok.felhasznalo_id = felhasznalo_id_var;
+		end if;
+        
+END$$
+DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE update_felhasznalok_procedure(IN token_p varchar(120),
+IN felhasznalo_id_p mediumint,
+IN felhasznalo_nev_p varchar(20),
+IN vezetek_nev_p varchar(30),
+IN kereszt_nev_p varchar(30),
+IN vasarlo_telefonszama_p varchar(20),
+IN email_p varchar(40),
+IN jelszo_p varchar(200),
+IN szalitasi_cime_p varchar(40),
+IN jogosultsag_p tinyint,
+IN aktiv_p boolean
+)
+BEGIN
+		declare felhasznalo_id_var int;
+        
+        SELECT tokenek.felhasznalo_id
+        INTO felhasznalo_id_var
+        FROM tokenek
+        inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+        where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+        
+        if felhasznalo_id_var is null
+        then
+			select false as result;
+		else
+			update felhasznalok
+            set felhasznalo_nev = felhasznalo_nev_p,
+				vezetek_nev = vezetek_nev_p,
+                kereszt_nev = kereszt_nev_p,
+                vasarlo_telefonszama = vasarlo_telefonszama_p,
+                email = email_p,
+                jelszo = jelszo_p,
+                szalitasi_cime = szalitasi_cime_p,
+                jogosultsag = jogosultsag_p,
+                aktiv = aktiv_p
+            where felhasznalok.felhasznalo_id = felhasznalo_id_P;
+            select * , TRUE AS result from felhasznalok
+            where felhasznalok.felhasznalo_id = felhasznalo_id_p;
+		end if;
+        
+END$$
+DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE update_one_felhasznalo_procedure(IN token_p varchar(120),
+IN felhasznalo_nev_p varchar(20),
+IN vezetek_nev_p varchar(30),
+IN kereszt_nev_p varchar(30),
+IN vasarlo_telefonszama_p varchar(20),
+IN email_p varchar(40),
+IN szalitasi_cime_p varchar(40)
+)
+BEGIN
+		declare felhasznalo_id_var int;
+        
+        SELECT tokenek.felhasznalo_id
+        INTO felhasznalo_id_var
+        FROM tokenek
+        inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+        where tokenek.token = token_p;
+        
+        if felhasznalo_id_var is null
+        then
+			select false as result;
+		else
+			update felhasznalok
+            set felhasznalo_nev = felhasznalo_nev_p,
+				vezetek_nev = vezetek_nev_p,
+                kereszt_nev = kereszt_nev_p,
+                vasarlo_telefonszama = vasarlo_telefonszama_p,
+                email = email_p,
+                szalitasi_cime = szalitasi_cime_p
+            where felhasznalok.felhasznalo_id = felhasznalo_id_var;
+            select felhasznalo_nev, vezetek_nev, kereszt_nev, vasarlo_telefonszama, email, szalitasi_cime , TRUE AS result from felhasznalok
+            where felhasznalok.felhasznalo_id = felhasznalo_id_var;
+		end if;
+END$$
+DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE add_termek_procedure(IN token_p varchar(120),
+    IN termek_kateg_p varchar(8),
+    IN termek_nev_p varchar(20),
+    IN gyarto_id_p tinyint,
+    IN raktarondb_p smallint,
+    IN tomeg_tulajdonsaga_id_p tinyint,
+    IN tomeg_erteke_p double,
+    IN szine_p varchar(50),
+    IN leiras_p varchar(500),
+    IN egyseg_ar_p mediumint
+)
+BEGIN
+	declare felhasznalo_id_var int;
+	
+	SELECT tokenek.felhasznalo_id
+	INTO felhasznalo_id_var
+	FROM tokenek
+	inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+	where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+	
+	if felhasznalo_id_var is null
+	then
+		select false as result;
+	else
+		INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar)
+		VALUES (termek_kateg_p, termek_nev_p, gyarto_id_p, raktarondb_p, tomeg_tulajdonsaga_id_p, tomeg_erteke_p, szine_p, leiras_p, egyseg_ar_p);
+        select *, true as result from Termekek ORDER BY termek_id DESC LIMIT 1;
+    
+    end if;
+END$$
+DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE update_termek_procedure(IN token_p varchar(120),
+    IN termek_id_p mediumint,
+    IN termek_kateg_p varchar(8),
+    IN termek_nev_p varchar(20),
+    IN gyarto_id_p tinyint,
+    IN raktarondb_p smallint,
+    IN tomeg_tulajdonsaga_id_p tinyint,
+    IN tomeg_erteke_p double,
+    IN szine_p varchar(50),
+    IN leiras_p varchar(500),
+    IN egyseg_ar_p mediumint
+)
+BEGIN
+	declare felhasznalo_id_var int;
+	
+	SELECT tokenek.felhasznalo_id
+	INTO felhasznalo_id_var
+	FROM tokenek
+	inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+	where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+	
+	if felhasznalo_id_var is null
+	then
+		select false as result;
+	else
+		UPDATE Termekek
+		SET	termek_kateg = termek_kateg_p,
+		termek_nev = termek_nev_p,
+		gyarto_id = gyarto_id_p,
+		raktarondb = raktarondb_p,
+		tomeg_tulajdonsaga_id = tomeg_tulajdonsaga_id_p,
+		tomeg_erteke = tomeg_erteke_p,
+		szine = szine_p,
+		leiras = leiras_p,
+		egyseg_ar = egyseg_ar_p
+		WHERE termek_id = termek_id_p;
+        select *, true as result from termekek
+        where termekek.termek_id = termek_id_p;
+	end if;
+END$$
+DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE update_termekek_elerheto_procedure(IN token_p varchar(120), IN termek_id_p MEDIUMINT)
+BEGIN
+	DECLARE elerheto_var boolean;
+	declare felhasznalo_id_var int;
+	
+	SELECT tokenek.felhasznalo_id
+	INTO felhasznalo_id_var
+	FROM tokenek
+	inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+	where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+	
+	if felhasznalo_id_var is null
+	then
+		select false as result;
+	else
+		SELECT Termekek.elerheto
+		INTO elerheto_var
+		FROM Termekek
+		WHERE Termekek.termek_id = termek_id_p;
+		if elerheto_var = true
+		then
+			UPDATE Termekek
+			SET Termekek.elerheto = FALSE
+			WHERE Termekek.termek_id = termek_id_p;
+            select true as result;
+		else
+			UPDATE Termekek
+			SET Termekek.elerheto = TRUE
+			WHERE Termekek.termek_id = termek_id_p;
+            select true as result;
+		end if;
+	end if;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE get_termekek_procedure(IN limit_p integer)
+BEGIN
+      select
+        termekek.termek_id,
+        termek_kateg,
+        termek_nev,
+        termekek.gyarto_id,
+        gyarto_neve,
+        telefonszama,
+        webhely,
+        raktarondb,
+        termekek.tomeg_tulajdonsaga_id,
+        mertek_egysege, 
+        tomeg_erteke, 
+        szine, 
+        leiras, 
+        egyseg_ar, 
+        elerheto, 
+        MIN(kep_helye) as kep_helye
+        from termekek
+        left join gyartok
+        on termekek.gyarto_id = gyartok.gyarto_id
+        left join tomeg_tulajdonsagai
+        on termekek.tomeg_tulajdonsaga_id = tomeg_tulajdonsagai.tomeg_tulajdonsaga_id
+        left join termek_kepek
+        on termekek.termek_id = termek_kepek.termek_id
+        group by
+        termekek.termek_id,
+        termek_kateg,
+        termek_nev,
+        termekek.gyarto_id,
+        gyarto_neve,
+        telefonszama,
+        webhely,
+        raktarondb,
+        termekek.tomeg_tulajdonsaga_id,
+        mertek_egysege, 
+        tomeg_erteke, 
+        szine, 
+        leiras, 
+        egyseg_ar, 
+        elerheto
+        limit limit_p;
+   END$$
+DELIMITER ;
+
+DElIMITER $$
+create procedure add_gyartok_procedure(IN token_p varchar(120), IN gyarto_neve_p varchar(20), IN telefonszama_p varchar(25), IN webhely_p varchar(50))
+BEGIN
+	declare felhasznalo_id_var int;
+	
+	SELECT tokenek.felhasznalo_id
+	INTO felhasznalo_id_var
+	FROM tokenek
+	inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+	where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+	
+	if felhasznalo_id_var is null
+	then
+		select false as result;
+	else
+		INSERT INTO Gyartok (gyarto_neve, telefonszama, webhely)
+		VALUES (gyarto_neve_p, telefonszama_p, webhely_p);
+        select true as result;
+	end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_gyartok_procedure()
+BEGIN
+	SELECT * FROM Gyartok;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure update_gyartok_procedure(IN token_p varchar(120), IN gyarto_id_p tinyint, IN gyarto_neve_p varchar(20), IN telefonszama_p varchar(25), IN webhely_p varchar(50))
+BEGIN
+	declare felhasznalo_id_var int;
+	
+	SELECT tokenek.felhasznalo_id
+	INTO felhasznalo_id_var
+	FROM tokenek
+	inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+	where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+	
+	if felhasznalo_id_var is null
+	then
+		select false as result;
+	else
+		UPDATE Gyartok
+		SET gyarto_neve = gyarto_neve_p,
+			telefonszama = telefonszama_p,
+			webhely = webhely_p
+		WHERE gyarto_id = gyarto_id_p;
+        select true as result;
+    end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_ertekelesek_procedure()
+BEGIN
+	SELECT * FROM ertekelesek;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_tomeg_tulajdonsagok_procedure()
+BEGIN
+	SELECT * FROM tomeg_tulajdonsagai;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure add_tomeg_tulajdonsagok_procedure(IN Token_p varchar(100), in mertek_egysege varchar(20))
+BEGIN
+		declare felhasznalo_id_var int;
+		
+		SELECT tokenek.felhasznalo_id
+		INTO felhasznalo_id_var
+		FROM tokenek
+		inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+		where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+		
+		if felhasznalo_id_var is null
+		then
+			select false as result;
+		else
+			insert into tomeg_tulajdonsagai(mertek_egysege)
+            values (mertek_egysege);
+            select *, true as result from tomeg_tulajdonsagai order by tomeg_tulajdonsagai.tomeg_tulajdonsaga_id desc limit 1;
+		end if;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE add_velemenyek_procedure(IN Token_p varchar(100), IN ertekeles_id_p tinyint, IN velemeny_p varchar(500))
+   BEGIN
+      DECLARE felhasznalo_id_var mediumint;
+      
+      SELECT Tokenek.felhasznalo_id
+      INTO felhasznalo_id_var
+      FROM Tokenek
+      WHERE Tokenek.token = Token_p;
+      if felhasznalo_id_var is null
+      then 
+			select false as result;
+		else
+		  INSERT INTO velemenyek (felhasznalo_id, ertekeles_id, velemeny)
+		  VALUES (felhasznalo_id_var, ertekeles_id_p, velemeny_p);
+		select true as result;
+        end if;
+   END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_velemenyek_procedure()
+BEGIN
+	SELECT * FROM velemenyek;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure change_velemenyek_lathato_procedure(IN Token_p varchar(100), IN velemeny_id_p smallint)
+BEGIN
+	DECLARE lathato_var boolean;
+	declare felhasznalo_id_var int;
+	
+	SELECT tokenek.felhasznalo_id
+	INTO felhasznalo_id_var
+	FROM tokenek
+	inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+	where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+	
+	if felhasznalo_id_var is null
+	then
+		select false as result;
+	else
+		SELECT velemenyek.lathato
+		INTO lathato_var
+		FROM velemenyek
+		WHERE velemenyek.velemeny_id = velemeny_id_p;
+		
+		if lathato_var = true
+		then
+			UPDATE velemenyek
+			SET velemenyek.lathato = FALSE
+			WHERE velemenyek.velemeny_id = velemeny_id_p;
+            select true as result;
+		else
+			UPDATE velemenyek
+			SET velemenyek.lathato = TRUE
+			WHERE velemenyek.velemeny_id = velemeny_id_p;
+            select true as result;
+		end if;
+	end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure add_termek_kep_procedure(IN Token_p varchar(100), IN termek_id_p mediumint, IN kep_helye_p varchar(100))
+BEGIN
+	declare felhasznalo_id_var int;
+	
+	SELECT tokenek.felhasznalo_id
+	INTO felhasznalo_id_var
+	FROM tokenek
+	inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+	where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+	
+	if felhasznalo_id_var is null
+	then
+		select false as result;
+	else
+		INSERT INTO termek_kepek(termek_id, kep_helye)
+		VALUES (termek_id_p, kep_helye_p);
+		select true as result;
+    end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure delete_termek_kep_procedure(IN Token_p varchar(100), IN termek_id_p mediumint)
+BEGIN
+	declare felhasznalo_id_var int;
+	
+	SELECT tokenek.felhasznalo_id
+	INTO felhasznalo_id_var
+	FROM tokenek
+	inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+	where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+	
+	if felhasznalo_id_var is null
+	then
+		select false as result;
+	else
+		DELETE FROM termek_kepek WHERE termek_kepek.termek_id = termek_id_p;
+		select true as result;
+    end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure add_kosarazot_termek_procedure(IN Token_p varchar(100), IN termekek_id_p mediumint, IN darabszam_p tinyint)
+BEGIN
+	  DECLARE felhasznalo_id_var mediumint;
+      DECLARE termek_darabszam_var tinyint;
+      
+      SELECT termekek.raktarondb
+      into termek_darabszam_var
+      from termekek
+      where termekek.termek_id = termekek_id_p;
+      SELECT Tokenek.felhasznalo_id
+      INTO felhasznalo_id_var
+      FROM Tokenek
+      WHERE Tokenek.token = Token_p;
+      
+	  if felhasznalo_id_var is null
+		then
+			select 0 as result;
+	  elseif termek_darabszam_var < darabszam_p
+		then
+			select 2 as result;
+		else
+		  INSERT INTO Kosarazot_termekek (felhasznalo_id, termekek_id, darabszam)
+		  VALUES(felhasznalo_id_var, termekek_id_p, darabszam_p);
+			select 3 as result;
+		end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_one_kosarazot_termek_procedure(IN Token_p varchar(100))
+BEGIN
+		DECLARE felhasznalo_id_var mediumint;
+      
+      SELECT Tokenek.felhasznalo_id
+      INTO felhasznalo_id_var
+      FROM Tokenek
+      WHERE Tokenek.token = Token_p;
+      
+	  if felhasznalo_id_var is null
+		then
+			select false as result;
+		else
+			SELECT *, true as result FROM Kosarazot_termekek
+            where kosarazot_termekek.felhasznalo_id = felhasznalo_id_var;
+		end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure update_kosarazot_termeke_darabszam_procedure(IN Token_p varchar(100), IN termekek_id_p mediumint, IN darabszam_p tinyint)
+BEGIN
+	DECLARE felhasznalo_id_var mediumint;
+	DECLARE termek_darabszam_var tinyint;
+      
+	SELECT termekek.raktarondb
+	into termek_darabszam_var
+	from termekek
+	where termekek.termek_id = termekek_id_p;
+	SELECT Tokenek.felhasznalo_id
+	INTO felhasznalo_id_var
+	FROM Tokenek
+	WHERE Tokenek.token = Token_p;
+    
+    if felhasznalo_id_var is null
+		then
+			select 0 as result;
+	elseif termek_darabszam_var < darabszam_p
+		then
+			select 1 as result;
+	else
+			UPDATE Kosarazot_termekek
+			SET darabszam  = darabszam_p
+			WHERE felhasznalo_id  = felhasznalo_id_var and termekek_id = termekek_id_p;
+            select 2 as result;
+	end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure delete_kosarazot_termekek_procedure(IN Token_p varchar(100), IN termekek_id_p mediumint)
+BEGIN
+		DECLARE felhasznalo_id_var mediumint;
+    
+		SELECT Tokenek.felhasznalo_id
+		INTO felhasznalo_id_var
+		FROM Tokenek
+		WHERE Tokenek.token = Token_p;
+		
+		if felhasznalo_id_var is null
+			then
+				select false as result;
+			else
+				DELETE FROM kosarazot_termekek WHERE felhasznalo_id  = felhasznalo_id_var and termekek_id = termekek_id_p;
+                SELECT true as result;
+		end if;
+				
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure add_rendeles_procedure(IN Token_p varchar(100), IN vasarlo_telefonszama_p varchar(20), IN szalitasi_cime_p varchar(40), IN megjegyzes_p varchar(200), IN szalito_id_p tinyint, IN fizetes_opcio_id_p tinyint, IN kedvezmeny_id_p tinyint)
+BEGIN
+		DECLARE felhasznalo_id_var mediumint;
+        declare rendeles_id_var mediumint;
+    
+		SELECT Tokenek.felhasznalo_id
+		INTO felhasznalo_id_var
+		FROM Tokenek
+		WHERE Tokenek.token = Token_p;
+		
+		if felhasznalo_id_var is null
+			then
+				select false as result;
+		else
+			INSERT INTO rendelesek (felhasznalo_id, megjegyzes, szalito_id, fizetes_opcio_id, kedvezmeny_id)
+			VALUES (felhasznalo_id_var, megjegyzes_p, szalito_id_p, fizetes_opcio_id_p, kedvezmeny_id_p);
+            
+            select rendelesek.rendeles_id
+            into rendeles_id_var
+            from rendelesek order by rendeles_id desc limit 1;
+            
+            INSERT INTO rendelt_termekek (rendeles_id, termek_id, darabszam)
+			SELECT rendeles_id_var, termekek_id, darabszam
+			FROM kosarazot_termekek
+			WHERE felhasznalo_id = felhasznalo_id_var;
+			
+            UPDATE felhasznalok
+			SET felhasznalok.vasarlo_telefonszama = vasarlo_telefonszama_p, felhasznalok.szalitasi_cime = szalitasi_cime_p
+			WHERE felhasznalok.felhasznalo_id = felhasznalo_id_var;
+        end if;
+        select *, true as result from rendelesek where rendelesek.felhasznalo_id = felhasznalo_id_var order by rendeles_id desc limit 1;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_one_rendeles_procedure(IN Token_p varchar(100))
+BEGIN
+		DECLARE felhasznalo_id_var mediumint;
+      
+      SELECT Tokenek.felhasznalo_id
+      INTO felhasznalo_id_var
+      FROM Tokenek
+      WHERE Tokenek.token = Token_p;
+      
+	  if felhasznalo_id_var is null
+		then
+			select false as result;
+		else
+			SELECT *, true as result FROM rendelesek
+            where rendelesek.felhasznalo_id = felhasznalo_id_var;
+		end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_all_rendeles_procedure(IN Token_p varchar(100))
+BEGIN
+		declare felhasznalo_id_var int;
+		
+		SELECT tokenek.felhasznalo_id
+		INTO felhasznalo_id_var
+		FROM tokenek
+		inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+		where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+		
+		if felhasznalo_id_var is null
+		then
+			select false as result;
+		else
+			SELECT *, true as result FROM rendelesek;
+		end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_one_rendeles_procedure(IN felhasznalo_id_p int)
+BEGIN
+	select * from rendelt_termekek where rendelt_termekek.felhasznalo_id = felhasznalo_id_p;
+END $$
+DELIMITER ;
 
 
 

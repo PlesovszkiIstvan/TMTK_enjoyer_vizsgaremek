@@ -12,8 +12,9 @@ use App\Http\Requests\TermekekDeleteChecker;
 
 class TermekContoller extends TermekekResponseController
 {
-    public function getTermekek(){
-        $termekek = DB::select("call get_termekek_procedure();");
+    public function getTermekek(Request $req){
+        $body = json_decode($req->getContent());
+        $termekek = DB::select("call get_termekek_procedure(".$body->limit.");");
 
         return $termekek;
     }
@@ -88,6 +89,7 @@ class TermekContoller extends TermekekResponseController
     public function deleteTermek(TermekekDeleteChecker $req){
         $token = $req->bearerToken();
         $body = json_decode($req->getContent());
+        $this->bearerToken()->hasBearer($token);
         $response = DB::select("call update_termekek_elerheto_procedure('".$token."',".$body->termek_id.");");
         if ($response[0]->result == 0) {
             return $this->sendError($response, "Hibás token vagy nem létezö termék");

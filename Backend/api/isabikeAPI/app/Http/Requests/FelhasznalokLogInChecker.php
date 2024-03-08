@@ -42,6 +42,6 @@ class FelhasznalokLogInChecker extends FormRequest
             "success"=>false,
             "message"=>"Adatbeviteli hiba",
             "data"=>$validator->errors()
-        ]));
+        ], 405));
     }
 }

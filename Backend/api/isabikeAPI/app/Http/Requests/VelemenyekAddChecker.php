@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class TermekekDeleteChecker extends FormRequest
+class VelemenyekAddChecker extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,20 @@ class TermekekDeleteChecker extends FormRequest
     public function rules(): array
     {
         return [
-            'termek_id' => 'required|numeric|min:1'
+            'token' => 'required|string',
+            'ertekeles_id' => 'required|integer',
+            'velemeny' => 'required|string',
         ];
     }
 
     public function messages(){
         return[
-            'termek_id.required' => 'A termék azonosító mező kitöltése kötelező.',
-            'termek_id.numeric' => 'A termék azonosító mező csak számot tartalmazhat.',
-            'termek_id.min' => 'A termék azonosító mező minimum értéke 1.'
+            'token.required' => 'A token mező megadása kötelező.',
+            'token.string' => 'A token mezőnek string típusúnak kell lennie.',
+            'ertekeles_id.required' => 'Az értékelés azonosítója mező megadása kötelező.',
+            'ertekeles_id.integer' => 'Az értékelés azonosítója mezőnek egész számnak kell lennie.',
+            'velemeny.required' => 'A vélemény mező megadása kötelező.',
+            'velemeny.string' => 'A vélemény mezőnek string típusúnak kell lennie.',
         ];
     }
 

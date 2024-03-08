@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 //use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\FelhasznalokResponseController;
+use App\Http\Controllers\EmailController;
 use App\Http\Requests\FelhasznalokRegistChecker;
 use App\Http\Requests\FelhasznalokLogInChecker;
+
 use Nette\Utils\Random;
 use libcurl;
 
@@ -23,7 +25,9 @@ class FelhasznaloController extends FelhasznalokResponseController
         $body = json_decode($req->getContent());
         $DBresponse = DB::select("call check_if_felhasznalo_exist_procedure('".$body->felhasznalo_nev."', '".$body->email."');");
         if ($DBresponse[0]->result == 0) {
-            $DBresponse = DB::select("CALL add_felhasznalo_procedure('".$body->felhasznalo_nev."','".$body->vezetek_nev."','".$body->kereszt_nev."','".$body->email."','".$this->hashPass($body->password)."','".$this->genEmailCode()."');");
+            $emailCode = $this->genEmailCode();
+            ( new EmailController)->sendMail($emailCode, $body->email);
+            $DBresponse = DB::select("CALL add_felhasznalo_procedure('".$body->felhasznalo_nev."','".$body->vezetek_nev."','".$body->kereszt_nev."','".$body->email."','".$this->hashPass($body->password)."','".$emailCode."');");
             return $this->sendResponse($DBresponse,"Felhasználo sikeresen regisztrálva!");
         }else {
             return $this->sendError($body, "Ez a felhasználo már létezik!");
@@ -55,6 +59,7 @@ class FelhasznaloController extends FelhasznalokResponseController
 
     public function getFelhasznalok(Request $req){
         $token = $req->bearerToken();
+        $this->bearerToken()->hasBearer($token);
         $DBresponse = DB::select("call get_felhasznalok_procedure('".$token."');");
         if ($DBresponse[0]->result > 0) {
             return $this->sendResponse($DBresponse, "Felhasználok lekérve admin által");
@@ -85,6 +90,35 @@ class FelhasznaloController extends FelhasznalokResponseController
             return $this->sendError($DBresponse, "Jogosultság megtagadva vagy Hibás paraméterek");
         }
         
+    }
+
+    public function updateOneFelhasznalo(Request $req){
+        $body = json_decode($req->getContent());
+        $DBresponse = DB::select("call update_one_felhasznalo_procedure('"
+        .$body->token."','"
+        .$body->felhasznalo_nev."','"
+        .$body->vezetek_nev."','"
+        .$body->kereszt_nev."','"
+        .$body->vasarlo_telefonszama."','"
+        .$body->email."','"
+        .$body->szalitasi_cime."');");
+        if ($DBresponse[0]->result > 0) {
+            return $this->sendResponse($DBresponse, "Felhasználofiok sikeresen modositva");
+        } else {
+            return $this->sendError($DBresponse, "Jogosultság megtagadva vagy Hibás paraméterek");
+        }
+    }
+
+    public function getOneFelhasznalo(Request $req){
+        $token = $req->bearerToken();
+        $this->bearerToken()->hasBearer($token);
+        $DBresponse = DB::select("call get_one_felhasznalo_procedure('".$token."');");
+        if ($DBresponse[0]->result == 0) {
+            return $this->sendError($DBresponse, "ilyen felhasználo nincs");
+        } else {
+            return $this->sendResponse($DBresponse, "Felhasznalo adatok sikeresen listázva");
+        }
+        return $token;
     }
 
     private function genToken(){

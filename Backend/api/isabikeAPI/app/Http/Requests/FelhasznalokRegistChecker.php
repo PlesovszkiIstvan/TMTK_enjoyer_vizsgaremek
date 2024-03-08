@@ -28,7 +28,7 @@ class FelhasznalokRegistChecker extends FormRequest
             "kereszt_nev"=>"required|min:3|max:10",
             "vezetek_nev"=>"required|min:3|max:10",
             "email"=>"required|email",
-            "password"=>"required|min:3|max:10"
+            "password"=>"required|min:3|regex:/^(?=.*[a-z])(?=.*[A-Z]).+$/"
         ];
     }
 
@@ -45,6 +45,7 @@ class FelhasznalokRegistChecker extends FormRequest
             "kereszt_nev.min"=>"Kereszt név formátum hibás",
             "vezetek_nev.min"=>"Vezeték név formátum hibás",
             "password.min"=>"Jelszo tull rövid",
+            "password.regex" => "A jelszónak kis- és nagybetűket is kell tartalmaznia.",
 
             "felhasznalo_nev.max"=>"Felhasználo név formátum hibás",
             "kereszt_nev.max"=>"Kereszt név formátum hibás",
@@ -57,6 +58,6 @@ class FelhasznalokRegistChecker extends FormRequest
             "success"=>false,
             "message"=>"Adatbeviteli hiba",
             "data"=>$validator->errors()
-        ]));
+        ], 405));
     }
 }
