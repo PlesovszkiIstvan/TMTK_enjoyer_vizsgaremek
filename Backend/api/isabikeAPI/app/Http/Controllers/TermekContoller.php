@@ -12,9 +12,8 @@ use App\Http\Requests\TermekekDeleteChecker;
 
 class TermekContoller extends TermekekResponseController
 {
-    public function getTermekek(Request $req){
-        $body = json_decode($req->getContent());
-        $termekek = DB::select("call get_termekek_procedure(".$body->limit.");");
+    public function getTermekek( $limit ){
+        $termekek = DB::select("call get_termekek_procedure(".$limit.");");
 
         return $termekek;
     }

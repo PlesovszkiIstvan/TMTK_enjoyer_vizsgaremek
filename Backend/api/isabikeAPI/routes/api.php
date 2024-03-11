@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/termekek", [ TermekContoller::class, "getTermekek"]);
+Route::get("/termekek/{limit}", [ TermekContoller::class, "getTermekek"]);
 Route::post("/addtermek", [ TermekContoller::class, "addTermek"]);
 Route::patch("/updatetermek", [ TermekContoller::class, "updateTermek"]);
 Route::delete("/deletetermek", [ TermekContoller::class, "deleteTermek"]);
