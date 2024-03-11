@@ -1016,12 +1016,7 @@ BEGIN
 END $$
 DELIMITER ;
 
-DElIMITER $$
-create procedure get_one_rendeles_procedure(IN felhasznalo_id_p int)
-BEGIN
-	select * from rendelt_termekek where rendelt_termekek.felhasznalo_id = felhasznalo_id_p;
-END $$
-DELIMITER ;
+
 
 
 
