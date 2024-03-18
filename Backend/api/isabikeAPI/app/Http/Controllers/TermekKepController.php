@@ -27,4 +27,8 @@ class TermekKepController extends TermekKepResponseController
         $DBresponse = DB::select("CALL delete_termek_kep_procedure('".$token."',".$body->termek_id.");"); 
         return $DBresponse;
     }
+
+    public function getOneTermekKepek($termekId){
+        $DBresponse = DB::select("CALL get_termek_kepek_procedure(".$termekId.");");
+    }
 }

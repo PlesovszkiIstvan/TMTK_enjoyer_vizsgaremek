@@ -26,7 +26,7 @@ class FelhasznaloController extends FelhasznalokResponseController
         $DBresponse = DB::select("call check_if_felhasznalo_exist_procedure('".$body->felhasznalo_nev."', '".$body->email."');");
         if ($DBresponse[0]->result == 0) {
             $emailCode = $this->genEmailCode();
-            ( new EmailController)->sendMail($emailCode, $body->email);
+            ( new EmailController)->sendVisszaIgazoloMail($emailCode, $body->email);
             $DBresponse = DB::select("CALL add_felhasznalo_procedure('".$body->felhasznalo_nev."','".$body->vezetek_nev."','".$body->kereszt_nev."','".$body->email."','".$this->hashPass($body->password)."','".$emailCode."');");
             return $this->sendResponse($DBresponse,"Felhasználo sikeresen regisztrálva!");
         }else {

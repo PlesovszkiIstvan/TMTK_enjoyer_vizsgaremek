@@ -22,7 +22,7 @@ class Email extends Mailable
 
     public function __construct($content)
     {
-        $this->$content = $content;
+        $this->content = $content;
     }
 
     /**

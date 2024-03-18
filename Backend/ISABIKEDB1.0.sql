@@ -97,7 +97,7 @@ create table Tomeg_tulajdonsagai(
 create table Termekek(
 	termek_id mediumint primary key auto_increment,
     termek_kateg varchar(8) default '00000000',
-    termek_nev varchar(20) not null,
+    termek_nev varchar(50) not null,
     gyarto_id tinyint not null,
     raktarondb smallint default 0,
     tomeg_tulajdonsaga_id tinyint not null,
@@ -230,20 +230,27 @@ VALUES('Merida','06-23-400-5005','Meridaexample.com');
 INSERT INTO Gyartok(gyarto_neve, telefonszama, webhely)
 VALUES('Kellys','06-23-400-5006','Kellysexample.com');
 
-INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
-VALUES ('01', 'PirosBicigli0', 1, 1, 1, 20, 'piros', 'lopott', 1500);
-
-INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
-VALUES ('01', 'PirosBicigli1', 2, 1, 1, 20, 'piros', 'lopott', 1500);
-
-INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
-VALUES ('01', 'PirosBicigli2', 3, 1, 1, 20, 'piros', 'lopott', 1500);
-
-INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
-VALUES ('01', 'PirosBicigli3', 4, 1, 1, 20, 'piros', 'lopott', 1500);
-
-INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar )
-VALUES ('01', 'PirosBicigli4', 5, 1, 1, 20, 'piros', 'lopott', 1500);   
+INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar)
+VALUES
+('01', 'Trek Procaliber 9.8 Mountain Bike', 1, 12, 3, 13.2, 'Zöld/fekete', 'Könnyű, versenyzésre tervezett mountain bike profi kerékpárosoknak.', 600000),
+('01', 'Specialized Epic EVO Comp Mountain Bike', 2, 8, 4, 27.5, 'Szürke/narancs', 'Sokoldalú mountain bike terepre és túrázáshoz.', 750000),
+('01', 'Canyon Neuron AL 7.0 Mountain Bike', 3, 15, 3, 14.5, 'Kék/fehér', 'Megbízható mountain bike kezdőknek és hobbi kerékpárosoknak.', 400000),
+('01', 'Cube Acid Hybrid One 400 E-Bike', 4, 10, 4, 25, 'Fekete/ezüst', 'Kényelmes elektromos kerékpár városi közlekedéshez.', 320000),
+('01', 'Giant Explore E+ 3 Hybrid E-Bike', 5, 8, 4, 25, 'Zöld/barna', 'Stílusos elektromos trekking kerékpár túrázáshoz.', 450000),
+('01', 'Scott Contessa Active E-Ride 2023 E-Bike', 6, 12, 4, 25, 'Fehér/lila', 'Könnyű elektromos városi kerékpár nőknek.', 380000),
+('02', 'Csepel Budapest 700C Városi kerékpár', 4, 20, 3, 16, 'Fekete/ezüst', 'Klasszikus városi kerékpár kényelmes közlekedéshez.', 150000),
+('02', 'Kross Trans Hybrid 1.0 Városi kerékpár', 5, 15, 4, 25, 'Szürke/kék', 'Modern elektromos városi kerékpár praktikus funkciókkal.', 400000),
+('02', 'Trek Verve 3 Disc Városi kerékpár', 1, 12, 3, 12.7, 'Kék/fehér', 'Sportos városi kerékpár gyors közlekedéshez.', 300000),
+('02', 'Specialized Sirrus X 2.0 Disc Városi kerékpár', 2, 10, 3, 13.5, 'Fekete/piros', 'Sokoldalú városi kerékpár terepre és aszfaltra.', 250000),
+('02', 'Giant Liv Alight 3 City Disc Városi kerékpár', 3, 15, 3, 15, 'Lila/fehér', 'Kényelmes városi kerékpár nőknek.', 200000),
+('02', 'Cube Hyde Race Urban Bike', 6, 12, 3, 14, 'Szürke/narancs', 'Stílusos városi kerékpár fiatalos designnal.', 220000),
+('03', 'Kellys Kids Spider 16 BMX Kerékpár', 6, 20, 1, 8, 'Piros/kék', 'Klasszikus BMX kerékpár gyerekeknek trükkökhöz és ugráshoz.', 80000),
+('04', 'Merida Crossway 100 T Trekking Kerékpár', 5, 10, 3, 16, 'Fekete/zöld', 'Kényelmes trekking kerékpár túrázáshoz.', 350000),
+('04', 'Trek 520 Touring Bike', 1, 15, 3, 17, 'Kék/ezüst', 'Strapabíró túra kerékpár hosszú utazásokhoz.', 500000),
+('04', 'Csepel Viator Trekking Kerékpár', 4, 20, 3, 18, 'Zöld/barna', 'Klasszikus trekking kerékpár kényelmes túrázáshoz.', 250000),
+('04', 'Giant Anycubic E+ 1 Trekking E-Bike', 3, 12, 4, 25, 'Szürke/kék', 'Erős elektromos trekking kerékpár terepre és túrázáshoz.', 600000),
+('05', 'KTM Revelator AERO Road Bike', 1, 8, 2, 8.5, 'Fekete/piros', 'Aerodinamikus országúti kerékpár versenyzéshez.', 700000),
+('03', 'Csepel BMX Freestyle 20" Kerékpár', 4, 15, 1, 9, 'Fekete/zöld', 'Könnyű BMX kerékpár profi BMX-eseknek.', 120000);
 
 INSERT INTO Kedvezmenyek (kedvezmeny_neve, kedvezmeny_leiras, kedvezmeny_összege)
 values('Nincs kedvezmény', '', 0);
@@ -488,7 +495,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE add_termek_procedure(IN token_p varchar(120),
     IN termek_kateg_p varchar(8),
-    IN termek_nev_p varchar(20),
+    IN termek_nev_p varchar(50),
     IN gyarto_id_p tinyint,
     IN raktarondb_p smallint,
     IN tomeg_tulajdonsaga_id_p tinyint,
@@ -522,7 +529,7 @@ DELIMITER $$
 CREATE PROCEDURE update_termek_procedure(IN token_p varchar(120),
     IN termek_id_p mediumint,
     IN termek_kateg_p varchar(8),
-    IN termek_nev_p varchar(20),
+    IN termek_nev_p varchar(50),
     IN gyarto_id_p tinyint,
     IN raktarondb_p smallint,
     IN tomeg_tulajdonsaga_id_p tinyint,
@@ -821,6 +828,13 @@ END $$
 DELIMITER ;
 
 DElIMITER $$
+create procedure get_termek_kepek_procedure(IN termek_id_p mediumint)
+BEGIN
+	SELECT * FROM termek_kepek where termek_kepek.termek_id = termek_id_p;
+END $$
+DELIMITER ;
+
+DElIMITER $$
 create procedure delete_termek_kep_procedure(IN Token_p varchar(100), IN termek_id_p mediumint)
 BEGIN
 	declare felhasznalo_id_var int;
@@ -968,9 +982,15 @@ BEGIN
 			FROM kosarazot_termekek
 			WHERE felhasznalo_id = felhasznalo_id_var;
 			
+            update termekek, rendelt_termekek
+			set termekek.raktarondb = raktarondb - rendelt_termekek.darabszam
+			where termekek.termek_id = rendelt_termekek.termek_id and rendelt_termekek.rendeles_id = rendeles_id_var;
+            
             UPDATE felhasznalok
 			SET felhasznalok.vasarlo_telefonszama = vasarlo_telefonszama_p, felhasznalok.szalitasi_cime = szalitasi_cime_p
 			WHERE felhasznalok.felhasznalo_id = felhasznalo_id_var;
+            
+            delete from kosarazot_termekek where kosarazot_termekek.felhasznalo_id = felhasznalo_id_var;
         end if;
         select *, true as result from rendelesek where rendelesek.felhasznalo_id = felhasznalo_id_var order by rendeles_id desc limit 1;
 END $$

@@ -56,6 +56,7 @@ Route::delete("/deletevelemenyek", [ VelemenyekController::class, "deleteVelemen
 
 Route::post("/addtermekkep", [ TermekKepController::class, "addTermekKep"]);
 Route::delete("/deletetermekkep", [ TermekKepController::class, "deleteTermekKep"]);
+Route::get("/onetermekkepek/{termekid}", [ TermekKepController::class, "getOneTermekKepek"]);
 
 Route::get("/getonekosar", [ KosarazotTermekekController::class, "getOneKosar"]);
 Route::post("/addkosar", [ KosarazotTermekekController::class, "addToKosar"]);

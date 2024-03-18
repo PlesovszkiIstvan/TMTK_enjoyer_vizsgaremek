@@ -9,7 +9,7 @@ use App\Mail\Email;
 
 class EmailController extends Controller
 {
-    public function sendMail($code, $email){
+    public function sendVisszaIgazoloMail($code, $email){
         $content = [
             "title" => "Visza Igazolo kod",
             "code" => $code
