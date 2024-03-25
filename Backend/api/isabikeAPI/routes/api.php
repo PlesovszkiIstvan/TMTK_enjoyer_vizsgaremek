@@ -31,6 +31,7 @@ Route::get("/termekek/{limit}", [ TermekContoller::class, "getTermekek"]);
 Route::post("/addtermek", [ TermekContoller::class, "addTermek"]);
 Route::patch("/updatetermek", [ TermekContoller::class, "updateTermek"]);
 Route::delete("/deletetermek", [ TermekContoller::class, "deleteTermek"]);
+Route::get("/kategoriak", [ TermekContoller::class, "getKategoriak"]);
 
 Route::put("/updategyarto", [ GyartokController::class, "updateGyarto"]);
 Route::post("/addgyarto", [ GyartokController::class, "addGyarto"]);

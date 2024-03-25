@@ -1,3 +1,4 @@
+
 CREATE DATABASE isabike;
 USE isabike;
 
@@ -89,6 +90,11 @@ create table Gyartok(
     webhely varchar(50) not null 
 );
 
+create table Kategoriak(
+	kategoria_id mediumint primary key auto_increment,
+	kategoria_neve varchar(50) not null
+);
+
 create table Tomeg_tulajdonsagai(
 	tomeg_tulajdonsaga_id tinyint primary key auto_increment,
     mertek_egysege varchar(20)
@@ -96,7 +102,7 @@ create table Tomeg_tulajdonsagai(
 
 create table Termekek(
 	termek_id mediumint primary key auto_increment,
-    termek_kateg varchar(8) default '00000000',
+    kategoria_id mediumint not null,
     termek_nev varchar(50) not null,
     gyarto_id tinyint not null,
     raktarondb smallint default 0,
@@ -109,6 +115,7 @@ create table Termekek(
     constraint ar_check check (egyseg_ar >= 1),
     constraint suly_check check(tomeg_erteke > 0),
     constraint fk_in_Termekek_gyarto_id foreign key(gyarto_id) references Gyartok(gyarto_id),
+	constraint fk_in_Termekek_kategoria_id foreign key(kategoria_id) references Kategoriak(kategoria_id),
     constraint fk_in_Termekek_tomeg_tulajdonsaga_id foreign key(tomeg_tulajdonsaga_id) references Tomeg_tulajdonsagai(tomeg_tulajdonsaga_id)
 );
 
@@ -230,27 +237,40 @@ VALUES('Merida','06-23-400-5005','Meridaexample.com');
 INSERT INTO Gyartok(gyarto_neve, telefonszama, webhely)
 VALUES('Kellys','06-23-400-5006','Kellysexample.com');
 
-INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar)
+insert into Kategoriak(kategoria_neve)
 VALUES
-('01', 'Trek Procaliber 9.8 Mountain Bike', 1, 12, 3, 13.2, 'Zöld/fekete', 'Könnyű, versenyzésre tervezett mountain bike profi kerékpárosoknak.', 600000),
-('01', 'Specialized Epic EVO Comp Mountain Bike', 2, 8, 4, 27.5, 'Szürke/narancs', 'Sokoldalú mountain bike terepre és túrázáshoz.', 750000),
-('01', 'Canyon Neuron AL 7.0 Mountain Bike', 3, 15, 3, 14.5, 'Kék/fehér', 'Megbízható mountain bike kezdőknek és hobbi kerékpárosoknak.', 400000),
-('01', 'Cube Acid Hybrid One 400 E-Bike', 4, 10, 4, 25, 'Fekete/ezüst', 'Kényelmes elektromos kerékpár városi közlekedéshez.', 320000),
-('01', 'Giant Explore E+ 3 Hybrid E-Bike', 5, 8, 4, 25, 'Zöld/barna', 'Stílusos elektromos trekking kerékpár túrázáshoz.', 450000),
-('01', 'Scott Contessa Active E-Ride 2023 E-Bike', 6, 12, 4, 25, 'Fehér/lila', 'Könnyű elektromos városi kerékpár nőknek.', 380000),
-('02', 'Csepel Budapest 700C Városi kerékpár', 4, 20, 3, 16, 'Fekete/ezüst', 'Klasszikus városi kerékpár kényelmes közlekedéshez.', 150000),
-('02', 'Kross Trans Hybrid 1.0 Városi kerékpár', 5, 15, 4, 25, 'Szürke/kék', 'Modern elektromos városi kerékpár praktikus funkciókkal.', 400000),
-('02', 'Trek Verve 3 Disc Városi kerékpár', 1, 12, 3, 12.7, 'Kék/fehér', 'Sportos városi kerékpár gyors közlekedéshez.', 300000),
-('02', 'Specialized Sirrus X 2.0 Disc Városi kerékpár', 2, 10, 3, 13.5, 'Fekete/piros', 'Sokoldalú városi kerékpár terepre és aszfaltra.', 250000),
-('02', 'Giant Liv Alight 3 City Disc Városi kerékpár', 3, 15, 3, 15, 'Lila/fehér', 'Kényelmes városi kerékpár nőknek.', 200000),
-('02', 'Cube Hyde Race Urban Bike', 6, 12, 3, 14, 'Szürke/narancs', 'Stílusos városi kerékpár fiatalos designnal.', 220000),
-('03', 'Kellys Kids Spider 16 BMX Kerékpár', 6, 20, 1, 8, 'Piros/kék', 'Klasszikus BMX kerékpár gyerekeknek trükkökhöz és ugráshoz.', 80000),
-('04', 'Merida Crossway 100 T Trekking Kerékpár', 5, 10, 3, 16, 'Fekete/zöld', 'Kényelmes trekking kerékpár túrázáshoz.', 350000),
-('04', 'Trek 520 Touring Bike', 1, 15, 3, 17, 'Kék/ezüst', 'Strapabíró túra kerékpár hosszú utazásokhoz.', 500000),
-('04', 'Csepel Viator Trekking Kerékpár', 4, 20, 3, 18, 'Zöld/barna', 'Klasszikus trekking kerékpár kényelmes túrázáshoz.', 250000),
-('04', 'Giant Anycubic E+ 1 Trekking E-Bike', 3, 12, 4, 25, 'Szürke/kék', 'Erős elektromos trekking kerékpár terepre és túrázáshoz.', 600000),
-('05', 'KTM Revelator AERO Road Bike', 1, 8, 2, 8.5, 'Fekete/piros', 'Aerodinamikus országúti kerékpár versenyzéshez.', 700000),
-('03', 'Csepel BMX Freestyle 20" Kerékpár', 4, 15, 1, 9, 'Fekete/zöld', 'Könnyű BMX kerékpár profi BMX-eseknek.', 120000);
+("komplet biciklik"),
+("alkatrészek"),
+("kiegészitök"),
+("felnöt bicikli"),
+("gyerek bicikli"),
+("kormányok és reszei"),
+("ülések"),
+("fék rendszerk és részei"),
+("kerekek és részei"),
+("hajtás és részei");
+
+INSERT INTO Termekek (kategoria_id, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar)
+VALUES
+('4', 'Trek Procaliber 9.8 Mountain Bike', 1, 12, 3, 13.2, 'Zöld/fekete', 'Könnyű, versenyzésre tervezett mountain bike profi kerékpárosoknak.', 600000),
+('4', 'Specialized Epic EVO Comp Mountain Bike', 2, 8, 4, 27.5, 'Szürke/narancs', 'Sokoldalú mountain bike terepre és túrázáshoz.', 750000),
+('4', 'Canyon Neuron AL 7.0 Mountain Bike', 3, 15, 3, 14.5, 'Kék/fehér', 'Megbízható mountain bike kezdőknek és hobbi kerékpárosoknak.', 400000),
+('4', 'Cube Acid Hybrid One 400 E-Bike', 4, 10, 4, 25, 'Fekete/ezüst', 'Kényelmes elektromos kerékpár városi közlekedéshez.', 320000),
+('4', 'Giant Explore E+ 3 Hybrid E-Bike', 5, 8, 4, 25, 'Zöld/barna', 'Stílusos elektromos trekking kerékpár túrázáshoz.', 450000),
+('4', 'Scott Contessa Active E-Ride 2023 E-Bike', 6, 12, 4, 25, 'Fehér/lila', 'Könnyű elektromos városi kerékpár nőknek.', 380000),
+('4', 'Csepel Budapest 700C Városi kerékpár', 4, 20, 3, 16, 'Fekete/ezüst', 'Klasszikus városi kerékpár kényelmes közlekedéshez.', 150000),
+('4', 'Kross Trans Hybrid 1.0 Városi kerékpár', 5, 15, 4, 25, 'Szürke/kék', 'Modern elektromos városi kerékpár praktikus funkciókkal.', 400000),
+('4', 'Trek Verve 3 Disc Városi kerékpár', 1, 12, 3, 12.7, 'Kék/fehér', 'Sportos városi kerékpár gyors közlekedéshez.', 300000),
+('4', 'Specialized Sirrus X 2.0 Disc Városi kerékpár', 2, 10, 3, 13.5, 'Fekete/piros', 'Sokoldalú városi kerékpár terepre és aszfaltra.', 250000),
+('4', 'Giant Liv Alight 3 City Disc Városi kerékpár', 3, 15, 3, 15, 'Lila/fehér', 'Kényelmes városi kerékpár nőknek.', 200000),
+('4', 'Cube Hyde Race Urban Bike', 6, 12, 3, 14, 'Szürke/narancs', 'Stílusos városi kerékpár fiatalos designnal.', 220000),
+('4', 'Kellys Kids Spider 16 BMX Kerékpár', 6, 20, 1, 8, 'Piros/kék', 'Klasszikus BMX kerékpár gyerekeknek trükkökhöz és ugráshoz.', 80000),
+('4', 'Merida Crossway 100 T Trekking Kerékpár', 5, 10, 3, 16, 'Fekete/zöld', 'Kényelmes trekking kerékpár túrázáshoz.', 350000),
+('4', 'Trek 520 Touring Bike', 1, 15, 3, 17, 'Kék/ezüst', 'Strapabíró túra kerékpár hosszú utazásokhoz.', 500000),
+('4', 'Csepel Viator Trekking Kerékpár', 4, 20, 3, 18, 'Zöld/barna', 'Klasszikus trekking kerékpár kényelmes túrázáshoz.', 250000),
+('4', 'Giant Anycubic E+ 1 Trekking E-Bike', 3, 12, 4, 25, 'Szürke/kék', 'Erős elektromos trekking kerékpár terepre és túrázáshoz.', 600000),
+('4', 'KTM Revelator AERO Road Bike', 1, 8, 2, 8.5, 'Fekete/piros', 'Aerodinamikus országúti kerékpár versenyzéshez.', 700000),
+('4', 'Csepel BMX Freestyle 20" Kerékpár', 4, 15, 1, 9, 'Fekete/zöld', 'Könnyű BMX kerékpár profi BMX-eseknek.', 120000);
 
 INSERT INTO Kedvezmenyek (kedvezmeny_neve, kedvezmeny_leiras, kedvezmeny_összege)
 values('Nincs kedvezmény', '', 0);
@@ -420,7 +440,6 @@ IN vezetek_nev_p varchar(30),
 IN kereszt_nev_p varchar(30),
 IN vasarlo_telefonszama_p varchar(20),
 IN email_p varchar(40),
-IN jelszo_p varchar(200),
 IN szalitasi_cime_p varchar(40),
 IN jogosultsag_p tinyint,
 IN aktiv_p boolean
@@ -444,7 +463,6 @@ BEGIN
                 kereszt_nev = kereszt_nev_p,
                 vasarlo_telefonszama = vasarlo_telefonszama_p,
                 email = email_p,
-                jelszo = jelszo_p,
                 szalitasi_cime = szalitasi_cime_p,
                 jogosultsag = jogosultsag_p,
                 aktiv = aktiv_p
@@ -494,7 +512,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE add_termek_procedure(IN token_p varchar(120),
-    IN termek_kateg_p varchar(8),
+    IN kategoria_id_p mediumint,
     IN termek_nev_p varchar(50),
     IN gyarto_id_p tinyint,
     IN raktarondb_p smallint,
@@ -517,8 +535,8 @@ BEGIN
 	then
 		select false as result;
 	else
-		INSERT INTO Termekek (termek_kateg, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar)
-		VALUES (termek_kateg_p, termek_nev_p, gyarto_id_p, raktarondb_p, tomeg_tulajdonsaga_id_p, tomeg_erteke_p, szine_p, leiras_p, egyseg_ar_p);
+		INSERT INTO Termekek (kategoria_id, termek_nev, gyarto_id, raktarondb, tomeg_tulajdonsaga_id, tomeg_erteke, szine, leiras, egyseg_ar)
+		VALUES (kategoria_id_p, termek_nev_p, gyarto_id_p, raktarondb_p, tomeg_tulajdonsaga_id_p, tomeg_erteke_p, szine_p, leiras_p, egyseg_ar_p);
         select *, true as result from Termekek ORDER BY termek_id DESC LIMIT 1;
     
     end if;
@@ -528,7 +546,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE update_termek_procedure(IN token_p varchar(120),
     IN termek_id_p mediumint,
-    IN termek_kateg_p varchar(8),
+    IN kategoria_id_p mediumint,
     IN termek_nev_p varchar(50),
     IN gyarto_id_p tinyint,
     IN raktarondb_p smallint,
@@ -552,7 +570,7 @@ BEGIN
 		select false as result;
 	else
 		UPDATE Termekek
-		SET	termek_kateg = termek_kateg_p,
+		SET	kategoria_id = kategoria_id_p,
 		termek_nev = termek_nev_p,
 		gyarto_id = gyarto_id_p,
 		raktarondb = raktarondb_p,
@@ -608,8 +626,9 @@ DELIMITER $$
 CREATE PROCEDURE get_termekek_procedure(IN limit_p integer)
 BEGIN
       select
-        termekek.termek_id,
-        termek_kateg,
+		termekek.termek_id,
+        termekek.kategoria_id,
+        kategoria_neve,
         termek_nev,
         termekek.gyarto_id,
         gyarto_neve,
@@ -625,6 +644,8 @@ BEGIN
         elerheto, 
         MIN(kep_helye) as kep_helye
         from termekek
+        left join kategoriak
+        on termekek.kategoria_id = kategoriak.kategoria_id
         left join gyartok
         on termekek.gyarto_id = gyartok.gyarto_id
         left join tomeg_tulajdonsagai
@@ -633,7 +654,8 @@ BEGIN
         on termekek.termek_id = termek_kepek.termek_id
         group by
         termekek.termek_id,
-        termek_kateg,
+        termekek.kategoria_id,
+        kategoria_neve,
         termek_nev,
         termekek.gyarto_id,
         gyarto_neve,
@@ -1036,8 +1058,12 @@ BEGIN
 END $$
 DELIMITER ;
 
-
-
+DElIMITER $$
+create procedure get_kategoriak_procedure()
+BEGIN
+	select * from kategoriak;
+END $$
+DELIMITER ;
 
 
 

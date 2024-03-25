@@ -97,4 +97,9 @@ class TermekContoller extends TermekekResponseController
         }
         
     }
+
+    public function getKategoriak(){
+        $kategoriak = DB::select("call get_kategoriak_procedure();");
+        return $kategoriak; 
+    }
 }

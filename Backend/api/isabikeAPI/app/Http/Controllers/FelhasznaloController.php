@@ -78,7 +78,6 @@ class FelhasznaloController extends FelhasznalokResponseController
         .$body->kereszt_nev."','"
         .$body->vasarlo_telefonszama."','"
         .$body->email."','"
-        .$body->jelszo."','"
         .$body->szalitasi_cime."',"
         .$body->jogosultsag.","
         .$body->aktiv.
