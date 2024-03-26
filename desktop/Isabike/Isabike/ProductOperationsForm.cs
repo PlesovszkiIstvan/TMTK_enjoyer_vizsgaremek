@@ -45,21 +45,7 @@ namespace Isabike
 
         private void okBtn_Click(object sender, EventArgs e)
         {
-            string url = "http://localhost:8000/termekek";
-            string jsonData = "{ " +
-                " \"termek_kateg\":" + "\"" + productCategoryBox.SelectedText + "\"," +
-                " \"termek_nev\":" + "\"" + productNameText.Text + "\"," +
-                " \"gyarto_id\":" + "\"" + productManufactererBox.SelectedText + "\"," +
-                "\"raktarondb\": \"4\"," +
-                "\"tomeg_tulajdonsaga_id\": \"1\"," +
-                "\"tomeg_erteke\":" + "\"" + productWeightText.Text + "\"," +
-                "\"szine\": \"pink\"," +
-                "\"leiras\": \"Added via desktop\"," +
-                "\"egyseg_ar\": \"420\"," +
-                "\"elerheto\": \"true\"," +
-                "}";
-
-            PostData(url, jsonData).Wait(5);
+            
         }
 
         static async Task PostData(string apiUrl, string jsonData)

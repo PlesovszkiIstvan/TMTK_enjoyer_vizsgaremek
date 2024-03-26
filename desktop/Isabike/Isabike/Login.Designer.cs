@@ -41,7 +41,7 @@
             this.loginBtn.Location = new System.Drawing.Point(321, 25);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(75, 34);
-            this.loginBtn.TabIndex = 0;
+            this.loginBtn.TabIndex = 3;
             this.loginBtn.Text = "Login";
             this.loginBtn.UseVisualStyleBackColor = true;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
@@ -51,7 +51,7 @@
             this.EmailTextfield.Location = new System.Drawing.Point(105, 29);
             this.EmailTextfield.Name = "EmailTextfield";
             this.EmailTextfield.Size = new System.Drawing.Size(210, 20);
-            this.EmailTextfield.TabIndex = 2;
+            this.EmailTextfield.TabIndex = 1;
             // 
             // PasswordTextfield
             // 
@@ -59,7 +59,7 @@
             this.PasswordTextfield.Name = "PasswordTextfield";
             this.PasswordTextfield.PasswordChar = '*';
             this.PasswordTextfield.Size = new System.Drawing.Size(212, 20);
-            this.PasswordTextfield.TabIndex = 3;
+            this.PasswordTextfield.TabIndex = 2;
             // 
             // label1
             // 

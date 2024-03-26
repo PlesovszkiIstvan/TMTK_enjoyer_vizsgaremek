@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Security.Policy;
 using System.Text;
@@ -25,7 +26,14 @@ namespace Isabike
             
         }
 
-        
+        private static string token { get;set; }
+
+        public static void setToken(string userToken)
+        {
+           token = userToken;
+        }
+
+        public static string getToken() { return token; }
 
         private void Login_Load(object sender, EventArgs e)
         {
