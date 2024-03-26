@@ -34,7 +34,7 @@ class RendelesekController extends RendelesekResponseController
             if ($DBresponse1[0]->result == 0) {
                 return $this->sendError($body, "Hibás token ilyen felhasználo nem létezik");
             } else {
-                $DBresponse2 = DB::select("CALL get_one_rendelt_termekek_procedure(".$DBresponse1[0]->rendeles_id.");");
+                $DBresponse2 = DB::select("CALL get_one_rendeles_termekek_procedure(".$DBresponse1[0]->rendeles_id.");");
                 $DBresponse1["rendelt_termekek"] = $DBresponse2;
                 return $this->sendResponse($DBresponse1, "Felhasznalo rendelései sikeresen kilistázva");
             }
@@ -47,10 +47,14 @@ class RendelesekController extends RendelesekResponseController
         $body = json_decode($req->getContent());
         $this->bearerToken()->hasBearer($token);
         $DBresponse = DB::select("CALL get_all_rendeles_procedure('".$token."');");
-        if ($DBresponse[0]->result == 0) {
-            return $this->sendError($body, "Hibás token ilyen admin nem létezik");
+        if (empty($DBresponse)) {
+            return $this->sendError($body, "Nincs még rendelés az áruházban");
         } else {
+            if ($DBresponse[0]->result == 0) {
+                return $this->sendError($body, "Hibás token ilyen admin nem létezik");
+            } else {
             return $this->sendResponse($DBresponse, "Felhasznalok rendelései sikeresen kilistázva");
+            } 
         }     
     }
 
