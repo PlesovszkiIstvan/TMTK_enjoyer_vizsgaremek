@@ -27,44 +27,44 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/termekek/{limit}", [ TermekContoller::class, "getTermekek"]);
+Route::get("/termekek/{limit}", [ TermekContoller::class, "getTermekek"]); //web
 Route::post("/addtermek", [ TermekContoller::class, "addTermek"]);
 Route::patch("/updatetermek", [ TermekContoller::class, "updateTermek"]);
 Route::delete("/deletetermek", [ TermekContoller::class, "deleteTermek"]);
-Route::get("/kategoriak", [ TermekContoller::class, "getKategoriak"]);
+Route::get("/kategoriak", [ TermekContoller::class, "getKategoriak"]); //web
 
 Route::put("/updategyarto", [ GyartokController::class, "updateGyarto"]);
 Route::post("/addgyarto", [ GyartokController::class, "addGyarto"]);
-Route::get("/gyartok", [ GyartokController::class, "getGyartok"]);
+Route::get("/gyartok", [ GyartokController::class, "getGyartok"]); //web
 
-Route::post("/registration", [ FelhasznaloController::class, "registerUser"]);
-Route::put("/verify", [ FelhasznaloController::class, "verifyUser"]);
-Route::post("/login", [ FelhasznaloController::class, "logIn"]);
-Route::post("/logout", [ FelhasznaloController::class, "logOut"]);
+Route::post("/registration", [ FelhasznaloController::class, "registerUser"]); //web
+Route::put("/verify", [ FelhasznaloController::class, "verifyUser"]); //web
+Route::post("/login", [ FelhasznaloController::class, "logIn"]); //web
+Route::post("/logout", [ FelhasznaloController::class, "logOut"]); //web
 Route::get("/getfelhasznalok", [ FelhasznaloController::class, "getFelhasznalok"]);
 Route::put("/updatefelhasznalo", [ FelhasznaloController::class, "updateFelhasznalo"]);
-Route::put("/updateonefelhasznalo", [ FelhasznaloController::class, "updateOneFelhasznalo"]);
-Route::get("/getonefelhasznalo", [ FelhasznaloController::class, "getOneFelhasznalo"]);
+Route::put("/updateonefelhasznalo", [ FelhasznaloController::class, "updateOneFelhasznalo"]); //web
+Route::get("/getonefelhasznalo", [ FelhasznaloController::class, "getOneFelhasznalo"]); //web
 
-Route::get("/ertekelesek", [ ErtekelesekController::class, "getErtekelesek"]);
+Route::get("/ertekelesek", [ ErtekelesekController::class, "getErtekelesek"]); //web
 
-Route::get("/tomegtulajdonsagok", [ TomegTulajdonsagokController::class, "getTomegTulajdonsagok"]);
+Route::get("/tomegtulajdonsagok", [ TomegTulajdonsagokController::class, "getTomegTulajdonsagok"]); //web
 Route::post("/addtomegtulajdonsagok", [ TomegTulajdonsagokController::class, "addTomegTulajdonsagok"]);
 
-Route::get("/getvelemenyek", [ VelemenyekController::class, "getVelemenyek"]);
-Route::post("/addvelemenyek", [ VelemenyekController::class, "addVelemenyek"]);
+Route::get("/getvelemenyek", [ VelemenyekController::class, "getVelemenyek"]); //web
+Route::post("/addvelemenyek", [ VelemenyekController::class, "addVelemenyek"]); //web 
 Route::delete("/deletevelemenyek", [ VelemenyekController::class, "deleteVelemenyek"]);
 
 Route::post("/addtermekkep", [ TermekKepController::class, "addTermekKep"]);
 Route::delete("/deletetermekkep", [ TermekKepController::class, "deleteTermekKep"]);
-Route::get("/onetermekkepek/{termekid}", [ TermekKepController::class, "getOneTermekKepek"]);
+Route::get("/onetermekkepek/{termekid}", [ TermekKepController::class, "getOneTermekKepek"]); //web 
 
-Route::get("/getonekosar", [ KosarazotTermekekController::class, "getOneKosar"]);
-Route::post("/addkosar", [ KosarazotTermekekController::class, "addToKosar"]);
-Route::put("/updatekosar", [ KosarazotTermekekController::class, "updateKosar"]);
-Route::delete("/deletekosar", [ KosarazotTermekekController::class, "deleteKosar"]);
+Route::get("/getonekosar", [ KosarazotTermekekController::class, "getOneKosar"]); //web 
+Route::post("/addkosar", [ KosarazotTermekekController::class, "addToKosar"]); //web 
+Route::put("/updatekosar", [ KosarazotTermekekController::class, "updateKosar"]); //web 
+Route::delete("/deletekosar", [ KosarazotTermekekController::class, "deleteKosar"]); //web
 
-Route::post("/addrendeles", [RendelesekController::class, "addRendeles"]);
+Route::post("/addrendeles", [RendelesekController::class, "addRendeles"]); //web 
 Route::get("/getallrendeles", [RendelesekController::class, "getAllRendeles"]);
-Route::get("/getonerendeles", [RendelesekController::class, "getOneRendeles"]);
-Route::get("/getallrendelttermek", [RendelesekController::class, "getAllRendeltTermek"]);
+Route::get("/getonerendeles", [RendelesekController::class, "getOneRendeles"]); //web
+Route::get("/getallrendelttermek", [RendelesekController::class, "getAllRendeltTermek"]); 
