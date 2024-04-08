@@ -9,8 +9,8 @@ namespace Isabike
     public class Termekek
     {
         public int termek_id { get;set;}
-
-        public int termek_kateg { get; set;}
+        public int kategoria_id { get;set;}
+        public string termek_kateg { get; set;}
 
         public string termek_nev { get; set;}
 
@@ -28,7 +28,7 @@ namespace Isabike
 
         public string mertek_egysege { get; set;}
 
-        public int tomeg_erteke { get; set;}
+        public float tomeg_erteke { get; set;}
 
         public string szine { get; set;}
 
