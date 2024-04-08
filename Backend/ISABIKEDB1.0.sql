@@ -1014,7 +1014,7 @@ BEGIN
             
             delete from kosarazot_termekek where kosarazot_termekek.felhasznalo_id = felhasznalo_id_var;
         end if;
-        select *, true as result from rendelesek where rendelesek.felhasznalo_id = felhasznalo_id_var order by rendeles_id desc limit 1;
+        select *, felhasznalok.email, true as result from rendelesek inner join felhasznalok on rendelesek.felhasznalo_id = felhasznalok.felhasznalo_id  where rendelesek.felhasznalo_id = felhasznalo_id_var order by rendeles_id desc limit 1;
 END $$
 DELIMITER ;
 
@@ -1055,6 +1055,33 @@ BEGIN
 		else
 			SELECT *, true as result FROM rendelesek;
 		end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_rendelt_termekek_procedure(IN Token_p varchar(100))
+BEGIN
+	declare felhasznalo_id_var int;
+		
+		SELECT tokenek.felhasznalo_id
+		INTO felhasznalo_id_var
+		FROM tokenek
+		inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+		where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+		
+		if felhasznalo_id_var is null
+		then
+			select false as result;
+		else
+			SELECT *, true as result FROM rendelt_termekek;
+		end if;
+END $$
+DELIMITER ;
+
+DElIMITER $$
+create procedure get_one_rendeles_termekek_procedure(IN rendeles_id mediumint)
+BEGIN
+	select * from rendelt_termekek where rendelt_termekek.rendeles_id = rendeles_id;
 END $$
 DELIMITER ;
 

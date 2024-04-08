@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\GetRendelesekChecker;
 use App\Http\Requests\AddRendelesChecker;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\EmailController;
 
 
 
@@ -19,6 +20,8 @@ class RendelesekController extends RendelesekResponseController
         if ($DBresponse[0]->result == 0) {
             return $this->sendError($body, "Hibás token ilyen felhasználo nem létezik");
         } else {
+            $rendelt_termekek = DB::select("CALL get_one_rendeles_termekek_procedure(".$DBresponse[0]->rendeles_id.");");
+            $DBresponse["rendelt_termekek"] = $rendelt_termekek;
             return $this->sendResponse($DBresponse, "Rendelés sikeresen leadva");
         }     
     }
