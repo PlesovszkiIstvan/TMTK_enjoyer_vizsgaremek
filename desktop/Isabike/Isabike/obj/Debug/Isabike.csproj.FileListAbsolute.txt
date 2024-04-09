@@ -290,3 +290,12 @@ E:\c_hashmark\xd\desktop\Isabike\Isabike\obj\Debug\Isabike.csproj.CoreCompileInp
 E:\c_hashmark\xd\desktop\Isabike\Isabike\obj\Debug\Isabike.csproj.CopyComplete
 E:\c_hashmark\xd\desktop\Isabike\Isabike\obj\Debug\Isabike.exe
 E:\c_hashmark\xd\desktop\Isabike\Isabike\obj\Debug\Isabike.pdb
+C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Compression.Base.dll
+C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Core.WinForms.dll
+C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Licensing.dll
+C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Pdf.Base.dll
+C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Shared.Base.dll
+C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Compression.Base.xml
+C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Core.WinForms.xml
+C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Pdf.Base.xml
+C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Shared.Base.xml

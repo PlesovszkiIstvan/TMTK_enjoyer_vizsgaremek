@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -41,7 +42,17 @@ namespace Isabike
         private void Main_Load(object sender, EventArgs e)
         {
             connectToDB(gridState);
-
+            DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn
+            {
+                Name = "delete_column",
+                Text = "Delete"
+            };
+            int columnIndex = 0;
+            if (viewGrid.Columns["delete_column"] == null)
+            {
+                viewGrid.Columns.Insert(columnIndex, deleteButtonColumn);
+            }
+            
         }
 
 
@@ -53,7 +64,7 @@ namespace Isabike
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DbConnect.logOut(Login.getToken(), "http://192.168.0.103:8000/api/logout");
+            DbConnect.logOut(Login.getToken(), "http://172.16.16.157:8000/api/logout");
             Environment.Exit(0);
         }
 
@@ -94,6 +105,16 @@ namespace Isabike
                 gridState = false;
             }
             connectToDB(gridState);
+            DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn
+            {
+                Name = "delete_column",
+                Text = "Delete"
+            };
+            int columnIndex = 0;
+            if (viewGrid.Columns["delete_column"] == null)
+            {
+                viewGrid.Columns.Insert(columnIndex, deleteButtonColumn);
+            }
         }
 
         private void SalesBtn_Click(object sender, EventArgs e)
@@ -103,10 +124,10 @@ namespace Isabike
 
         private void connectToDB(bool isSales)
         {
-            manufactererBox.DataSource = DbConnect.getData("http://192.168.0.103:8000/api/gyartok");
+            manufactererBox.DataSource = DbConnect.getData("http://172.16.16.157:8000/api/gyartok");
             manufactererBox.ValueMember = "gyarto_id";
             manufactererBox.DisplayMember = "gyarto_neve";
-            categoryBox.DataSource = DbConnect.getData("http://192.168.0.103:8000/api/kategoria");
+            categoryBox.DataSource = DbConnect.getData("http://172.16.16.157:8000/api/kategoria");
             categoryBox.ValueMember = "kategoria_id";
             categoryBox.DisplayMember = "kategoria_neve";
 
@@ -116,12 +137,12 @@ namespace Isabike
             }
             if (!isSales) {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://192.168.0.103:8000/api/termekek/100");
+                GetRESTData("http://172.16.16.157:8000/api/termekek/100");
             }
             else
             {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://192.168.0.103:8000/api/getvelemenyek");
+                GetRESTData("http://172.16.16.157:8000/api/getvelemenyek");
             }
 
             
@@ -131,7 +152,42 @@ namespace Isabike
         {
             viewGrid.Rows.Clear();
             viewGrid.Columns.Clear();
-            viewGrid.DataSource = DbConnect.getFilteredData("http://192.168.0.103:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text), manufactererBox.Text);
+            viewGrid.DataSource = DbConnect.getFilteredData("http://172.16.16.157:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text), manufactererBox.Text);
+            DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn
+            {
+                Name = "delete_column",
+                Text = "Delete"
+            };
+            int columnIndex = 0;
+            if (viewGrid.Columns["delete_column"] == null)
+            {
+                viewGrid.Columns.Insert(columnIndex, deleteButtonColumn);
+            }
         }
+
+        private void viewGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == viewGrid.Columns["delete_column"].Index)
+            {
+                try
+                {
+                    var json = new
+                    {
+                        termek_id = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[1].Value)
+                    };
+                    
+                    string jsonString = JsonConvert.SerializeObject(json);
+                    MessageBox.Show(jsonString);
+                    DbOperations.deleteProduct(jsonString, "http://172.16.16.157:8000/api/deletetermek");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    throw;
+                }
+                
+            }
+        }
+
     }
 }
