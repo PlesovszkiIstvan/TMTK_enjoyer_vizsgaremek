@@ -32,6 +32,7 @@ namespace Isabike
                 string s = reader.ReadToEnd();
                 if ((webResponse.StatusCode == HttpStatusCode.OK) && (s.Length > 0))
                 {
+
                     termekek = JsonConvert.DeserializeObject<List<Termekek>>(s);
                     return JsonConvert.DeserializeObject<JArray>(s);
                 }
@@ -48,7 +49,7 @@ namespace Isabike
             }
         }
 
-        public static JArray getFilteredData(string uri, string termeknev, double suly, string kategoria, string gyarto)
+        public static JArray getFilteredData(string uri, string termeknev, double suly, string gyarto)
         {
 
             try
@@ -62,8 +63,7 @@ namespace Isabike
                     List<Termekek> termekekFiltered = JsonConvert.DeserializeObject<List<Termekek>>(s);
                     var filtered = termekekFiltered.Where(termek => termek.gyarto_neve == gyarto)
                         .Where(termek => termek.termek_nev == termeknev)
-                        .Where(termek => termek.tomeg_erteke == suly)
-                        .Where(termek => termek.termek_kateg == kategoria);
+                        .Where(termek => termek.tomeg_erteke == suly);
                     return JArray.FromObject(filtered);
                 }
                 else

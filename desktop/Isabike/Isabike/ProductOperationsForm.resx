@@ -120,34 +120,4 @@
   <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="addToolstripBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAVCAYAAACzK0UYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACeSURBVEhLY/hPBzD4LDn48sz/qKOV/9c83AMVIQ6QZIn5
-        jtj/Sht9/mtuDoKKEAdIsgRkAQyTAkYtgYoQBwbGElAytdudjGIgsRikD1vyxrCEXAtgGFvyxrBk+q3V
-        WDUTi2suToWahADDOOLxgeFjifqmgP/KIEs20NAS3a2hYF+obvKHihAHSLIElAdoHlywPIQtL+ADJFlC
-        Hvj/HwBOc4MrfYWxtQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="modifyToolstripBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAVCAYAAACzK0UYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADBSURBVEhLzZTBDcMgDAC7/1qAEGIFXrx4sQKRrVp1GgOp
-        Q6KexAcjnwHDqz3Af0tqrS3G2Iwx4oBYKQXXqiQg8N6LyflwzuF6lSSEICaVBqCS8CQppffsB9jBUolE
-        zhljVMBlCV3uCJWEHwdd7oifJL22ne3mtORM2/K3wZlKRo/OWnuYk45vKOlVT11DXSTFOKJkVL2UZMZB
-        Mqtew05yhwBASe94riYnUCJ9eKsEAEr4C14tAFDy/aGtZnfx99DaBqKo1guJ/3euAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="deactivateToolstripBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAVCAYAAACzK0UYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEwSURBVEhLrdKxagJBEAbgfZAExSgRrbSz8yVS+QZWYhNS
-        5C1SpLawEHwBCYS8jzlB1JwpsuFf2Mvs3MzeGu+HQdg997udG/N507bZXd/mq7WtM9/vH3b/MHHnOqRu
-        CEDWGxbnFkhdEAV8mdPLa7BwDSQBx6dna7DJIV+70TgJxOF4lv8fAOIQRINQMUx6e5QHkAJBYpDUxhQA
-        CRAaCQT0tVi6fa3/UlTER7xds1ta0wCkEkHUNt523G8MQJIQ5Lx5s1mrV4Kyxn3lBFYifDy3BPBFv5WU
-        KBKbHqmF2qiLCH97WrT/2gRyqISkzr7PT57bw/wxeJZDAYKNSwAafisKOURrT8rhNBrkkN1gFGyiLgV8
-        JMjgFnTxMJ25Pl8TDhneprqCGxQIVf/bIil/57btL3j1w5AKNNldAAAAAElFTkSuQmCC
-</value>
-  </data>
 </root>

@@ -53,7 +53,7 @@ namespace Isabike
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DbConnect.logOut(Login.getToken(), "http://172.16.16.157:8000/api/logout");
+            DbConnect.logOut(Login.getToken(), "http://192.168.0.103:8000/api/logout");
             Environment.Exit(0);
         }
 
@@ -103,10 +103,10 @@ namespace Isabike
 
         private void connectToDB(bool isSales)
         {
-            manufactererBox.DataSource = DbConnect.getData("http://172.16.16.157:8000/api/gyartok");
+            manufactererBox.DataSource = DbConnect.getData("http://192.168.0.103:8000/api/gyartok");
             manufactererBox.ValueMember = "gyarto_id";
             manufactererBox.DisplayMember = "gyarto_neve";
-            categoryBox.DataSource = DbConnect.getData("http://172.16.16.157:8000/api/kategoria");
+            categoryBox.DataSource = DbConnect.getData("http://192.168.0.103:8000/api/kategoria");
             categoryBox.ValueMember = "kategoria_id";
             categoryBox.DisplayMember = "kategoria_neve";
 
@@ -116,12 +116,12 @@ namespace Isabike
             }
             if (!isSales) {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://172.16.16.157:8000/api/termekek/100");
+                GetRESTData("http://192.168.0.103:8000/api/termekek/100");
             }
             else
             {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://172.16.16.157:8000/api/getvelemenyek");
+                GetRESTData("http://192.168.0.103:8000/api/getvelemenyek");
             }
 
             
@@ -131,7 +131,7 @@ namespace Isabike
         {
             viewGrid.Rows.Clear();
             viewGrid.Columns.Clear();
-            viewGrid.DataSource = DbConnect.getFilteredData("http://172.16.16.157:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text),categoryBox.Text, manufactererBox.Text);
+            viewGrid.DataSource = DbConnect.getFilteredData("http://192.168.0.103:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text), manufactererBox.Text);
         }
     }
 }

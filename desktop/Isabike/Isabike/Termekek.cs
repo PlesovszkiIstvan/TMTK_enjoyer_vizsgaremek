@@ -8,9 +8,13 @@ namespace Isabike
 {
     public class Termekek
     {
+
+        public string token { get; set; }
         public int termek_id { get;set;}
-        public int kategoria_id { get;set;}
-        public string termek_kateg { get; set;}
+
+        public int termek_kateg { get;set;}
+
+        public string kategoria_neve { get; set; }
 
         public string termek_nev { get; set;}
 
