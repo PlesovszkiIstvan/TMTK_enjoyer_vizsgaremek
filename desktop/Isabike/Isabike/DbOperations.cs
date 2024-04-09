@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MySqlX.XDevAPI;
+using Newtonsoft.Json;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Collections;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,9 +36,9 @@ namespace Isabike
 
         public static void addProduct(string jsondata , string url)
         {
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-                httpWebRequest.ContentType = "application/json";
-                httpWebRequest.Method = "POST";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                 {
@@ -52,25 +54,35 @@ namespace Isabike
 
         }
 
-        public static void deleteProduct(string jsondata , string url) {
+        public async void deleteProduct(string jsondata , string url) {
             try
             {
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-                httpWebRequest.ContentType = "application/json";
-                httpWebRequest.Accept = "application/json";
-                httpWebRequest.Method = "DELETE";
+                using (HttpClient client = new HttpClient())
+                {
 
-                using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                {
-                    streamWriter.Write(jsondata);
-                    streamWriter.Flush();
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Login.getToken());
+
+                    HttpRequestMessage request = new HttpRequestMessage
+                    {
+                        Content = new StringContent(jsondata, Encoding.UTF8, "application/json"),
+                        Method = HttpMethod.Delete,
+                        RequestUri = new Uri(url)
+                    };
+                    HttpResponseMessage response = await client.SendAsync(request);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Item deleted successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Failed to delete item. Status code: {response.StatusCode}");
+                        // Optionally, you can read the response content for more details
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show($"Response body: {responseBody}");
+                    }
                 }
-                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-                    MessageBox.Show(result);
-                }
+                
             }
             catch (Exception e)
             {

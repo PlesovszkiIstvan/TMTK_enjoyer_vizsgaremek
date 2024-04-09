@@ -299,3 +299,12 @@ C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabi
 C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Core.WinForms.xml
 C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Pdf.Base.xml
 C:\Users\diak\Documents\Plesovszki Iszvan\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Shared.Base.xml
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Compression.Base.dll
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Core.WinForms.dll
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Licensing.dll
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Pdf.Base.dll
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Shared.Base.dll
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Compression.Base.xml
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Core.WinForms.xml
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Pdf.Base.xml
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\bin\Debug\Syncfusion.Shared.Base.xml

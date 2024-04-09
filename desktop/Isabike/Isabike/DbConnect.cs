@@ -80,27 +80,34 @@ namespace Isabike
         }
 
         public static void loginToProg( string email, string password, string url) {
-
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-
-            using(var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            try
+            {
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+                httpWebRequest.ContentType = "application/json";
+                httpWebRequest.Method = "POST";
+    
+                using(var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
 {
-                string json = "{\"password\":\"" + password +"\"," +
+                 string json = "{\"password\":\"" + password +"\"," +
                               "\"email\":\""+ email +"\"}";
-
                 streamWriter.Write(json);
             }
 
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-                MessageBox.Show(result);
-                string token = DbOperations.getKey(result);
-                Login.setToken(token);
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    MessageBox.Show(result);
+                    string token = DbOperations.getKey(result);
+                    Login.setToken(token);
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
 
