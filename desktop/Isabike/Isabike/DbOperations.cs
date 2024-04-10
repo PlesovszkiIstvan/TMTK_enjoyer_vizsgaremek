@@ -91,5 +91,45 @@ namespace Isabike
             }
             
         }
+
+        public async void updateProduct(string jsondata, string url)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Login.getToken());
+
+                    HttpRequestMessage request = new HttpRequestMessage
+                    {
+                        Content = new StringContent(jsondata, Encoding.UTF8, "application/json"),
+                        Method = new HttpMethod("PATCH"),
+                        RequestUri = new Uri(url)
+                    };
+                    HttpResponseMessage response = await client.SendAsync(request);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Item updated successfully.");
+                        MessageBox.Show(response.ReasonPhrase);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Failed to updated item. Status code: {response.StatusCode}");
+                        // Optionally, you can read the response content for more details
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show($"Response body: {responseBody}");
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                throw;
+            }
+
+        }
     }
 }

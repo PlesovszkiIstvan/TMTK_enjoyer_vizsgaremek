@@ -181,6 +181,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="img\elipse.png" />
     <Content Include="img\icons8-add-50.png" />
     <Content Include="img\icons8-edit-30.png" />
     <Content Include="img\icons8-x-50.png" />

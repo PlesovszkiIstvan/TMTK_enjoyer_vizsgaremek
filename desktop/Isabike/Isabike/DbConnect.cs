@@ -79,7 +79,7 @@ namespace Isabike
             }
         }
 
-        public static void loginToProg( string email, string password, string url) {
+        public static bool loginToProg( string email, string password, string url) {
             try
             {
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
@@ -101,11 +101,12 @@ namespace Isabike
                     string token = DbOperations.getKey(result);
                     Login.setToken(token);
                 }
+                return true;
             }
             catch (Exception)
             {
-
-                throw;
+                MessageBox.Show("Hibás bejelentkezési paraméterek!");
+                return false;
             }
            
         }

@@ -40,9 +40,10 @@
             this.suly_textbox = new System.Windows.Forms.TextBox();
             this.termeknevTextbox = new System.Windows.Forms.TextBox();
             this.ReviewsBtn = new System.Windows.Forms.Button();
-            this.SalesBtn = new System.Windows.Forms.Button();
             this.productBtn = new System.Windows.Forms.Button();
             this.refreshBtn = new System.Windows.Forms.Button();
+            this.SalesBtn = new System.Windows.Forms.Button();
+            this.sfButton1 = new Syncfusion.WinForms.Controls.SfButton();
             ((System.ComponentModel.ISupportInitialize)(this.viewGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +53,7 @@
             this.viewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.viewGrid.Location = new System.Drawing.Point(13, 58);
             this.viewGrid.Name = "viewGrid";
-            this.viewGrid.Size = new System.Drawing.Size(546, 380);
+            this.viewGrid.Size = new System.Drawing.Size(1162, 380);
             this.viewGrid.TabIndex = 3;
             this.viewGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.viewGrid_CellClick);
             // 
@@ -68,7 +69,7 @@
             this.panel1.Controls.Add(this.categoryBox);
             this.panel1.Controls.Add(this.suly_textbox);
             this.panel1.Controls.Add(this.termeknevTextbox);
-            this.panel1.Location = new System.Drawing.Point(565, 58);
+            this.panel1.Location = new System.Drawing.Point(1181, 58);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(223, 159);
             this.panel1.TabIndex = 4;
@@ -111,7 +112,7 @@
             // 
             // filterBtn
             // 
-            this.filterBtn.Location = new System.Drawing.Point(4, 126);
+            this.filterBtn.Location = new System.Drawing.Point(9, 124);
             this.filterBtn.Name = "filterBtn";
             this.filterBtn.Size = new System.Drawing.Size(97, 23);
             this.filterBtn.TabIndex = 8;
@@ -163,26 +164,13 @@
             this.ReviewsBtn.BackColor = System.Drawing.Color.Red;
             this.ReviewsBtn.FlatAppearance.BorderSize = 0;
             this.ReviewsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ReviewsBtn.Location = new System.Drawing.Point(565, 233);
+            this.ReviewsBtn.Location = new System.Drawing.Point(217, 12);
             this.ReviewsBtn.Name = "ReviewsBtn";
             this.ReviewsBtn.Size = new System.Drawing.Size(96, 39);
             this.ReviewsBtn.TabIndex = 5;
             this.ReviewsBtn.Text = "Reviews";
             this.ReviewsBtn.UseVisualStyleBackColor = false;
             this.ReviewsBtn.Click += new System.EventHandler(this.ReviewsBtn_Click);
-            // 
-            // SalesBtn
-            // 
-            this.SalesBtn.BackColor = System.Drawing.Color.Red;
-            this.SalesBtn.Cursor = System.Windows.Forms.Cursors.No;
-            this.SalesBtn.Enabled = false;
-            this.SalesBtn.Location = new System.Drawing.Point(115, 13);
-            this.SalesBtn.Name = "SalesBtn";
-            this.SalesBtn.Size = new System.Drawing.Size(96, 39);
-            this.SalesBtn.TabIndex = 6;
-            this.SalesBtn.Text = "Sales";
-            this.SalesBtn.UseVisualStyleBackColor = false;
-            this.SalesBtn.Click += new System.EventHandler(this.SalesBtn_Click);
             // 
             // productBtn
             // 
@@ -197,7 +185,7 @@
             // 
             // refreshBtn
             // 
-            this.refreshBtn.Location = new System.Drawing.Point(569, 278);
+            this.refreshBtn.Location = new System.Drawing.Point(1190, 237);
             this.refreshBtn.Name = "refreshBtn";
             this.refreshBtn.Size = new System.Drawing.Size(75, 23);
             this.refreshBtn.TabIndex = 8;
@@ -205,11 +193,35 @@
             this.refreshBtn.UseVisualStyleBackColor = true;
             this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
             // 
+            // SalesBtn
+            // 
+            this.SalesBtn.BackColor = System.Drawing.Color.Red;
+            this.SalesBtn.Cursor = System.Windows.Forms.Cursors.No;
+            this.SalesBtn.Enabled = false;
+            this.SalesBtn.Location = new System.Drawing.Point(115, 13);
+            this.SalesBtn.Name = "SalesBtn";
+            this.SalesBtn.Size = new System.Drawing.Size(96, 39);
+            this.SalesBtn.TabIndex = 6;
+            this.SalesBtn.Text = "Sales";
+            this.SalesBtn.UseVisualStyleBackColor = false;
+            this.SalesBtn.Click += new System.EventHandler(this.SalesBtn_Click);
+            // 
+            // sfButton1
+            // 
+            this.sfButton1.FocusRectangleVisible = true;
+            this.sfButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            this.sfButton1.Location = new System.Drawing.Point(565, 22);
+            this.sfButton1.Name = "sfButton1";
+            this.sfButton1.Size = new System.Drawing.Size(96, 28);
+            this.sfButton1.TabIndex = 9;
+            this.sfButton1.Text = "sfButton1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1405, 450);
+            this.Controls.Add(this.sfButton1);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.productBtn);
             this.Controls.Add(this.SalesBtn);
@@ -243,6 +255,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private Syncfusion.WinForms.Controls.SfButton sfButton1;
     }
 }
 

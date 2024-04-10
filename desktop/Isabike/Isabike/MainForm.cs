@@ -21,10 +21,10 @@ namespace Isabike
     public partial class MainForm : Form
     {
 
-        private string token {get;set;}
-
         private bool gridState = false;
         // false = termekek | true = velemenyek
+
+        int[] ColumnIndex = [0,1];
 
         public MainForm()
         {
@@ -42,17 +42,14 @@ namespace Isabike
         private void Main_Load(object sender, EventArgs e)
         {
             connectToDB(gridState);
-            DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn
+
+            if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
             {
-                Name = "delete_column",
-                Text = "Delete"
-            };
-            int columnIndex = 0;
-            if (viewGrid.Columns["delete_column"] == null)
-            {
-                viewGrid.Columns.Insert(columnIndex, deleteButtonColumn);
+                viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
+                viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
+
             }
-            
+
         }
 
 
@@ -64,7 +61,7 @@ namespace Isabike
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DbConnect.logOut(Login.getToken(), "http://192.168.0.103:8000/api/logout");
+            DbConnect.logOut(Login.getToken(), "http://172.16.16.157:8000/api/logout");
             Environment.Exit(0);
         }
 
@@ -88,7 +85,6 @@ namespace Isabike
 
         private void GetRESTData(string uri)
         {
-            
             viewGrid.DataSource = DbConnect.getData(uri); 
         }
 
@@ -115,11 +111,11 @@ namespace Isabike
                 gridState = false;
             }
             connectToDB(gridState);
-            int columnIndex = 0;
-            if (viewGrid.Columns["delete_column"] == null)
+            if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
             {
-                viewGrid.Columns.Insert(columnIndex, deleteButtonColumn);
-                viewGrid.Columns.Insert(columnIndex++, updateButtonColumn);
+                viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
+                viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
+                
             }
         }
 
@@ -130,10 +126,10 @@ namespace Isabike
 
         private void connectToDB(bool isSales)
         {
-            manufactererBox.DataSource = DbConnect.getData("http://192.168.0.103:8000/api/gyartok");
+            manufactererBox.DataSource = DbConnect.getData("http://172.16.16.157:8000/api/gyartok");
             manufactererBox.ValueMember = "gyarto_id";
             manufactererBox.DisplayMember = "gyarto_neve";
-            categoryBox.DataSource = DbConnect.getData("http://192.168.0.103:8000/api/kategoria");
+            categoryBox.DataSource = DbConnect.getData("http://172.16.16.157:8000/api/kategoria");
             categoryBox.ValueMember = "kategoria_id";
             categoryBox.DisplayMember = "kategoria_neve";
 
@@ -143,12 +139,12 @@ namespace Isabike
             }
             if (!isSales) {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://192.168.0.103:8000/api/termekek/100");
+                GetRESTData("http://172.16.16.157:8000/api/termekek/100");
             }
             else
             {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://192.168.0.103:8000/api/getvelemenyek");
+                GetRESTData("http://172.16.16.157:8000/api/getvelemenyek");
             }
 
             
@@ -158,12 +154,12 @@ namespace Isabike
         {
             viewGrid.Rows.Clear();
             viewGrid.Columns.Clear();
-            viewGrid.DataSource = DbConnect.getFilteredData("http://192.168.0.103:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text), manufactererBox.Text);
-            int columnIndex = 0;
-            if (viewGrid.Columns["delete_column"] == null)
+            viewGrid.DataSource = DbConnect.getFilteredData("http://172.16.16.157:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text), manufactererBox.Text);
+            if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
             {
-                viewGrid.Columns.Insert(columnIndex, deleteButtonColumn);
-                viewGrid.Columns.Insert(columnIndex++, updateButtonColumn);
+                viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
+                viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
+
             }
         }
 
@@ -181,7 +177,7 @@ namespace Isabike
                     string jsonString = JsonConvert.SerializeObject(json);
                     MessageBox.Show(jsonString);
                     DbOperations dbOperations = new DbOperations();
-                    dbOperations.deleteProduct(jsonString, "http://192.168.0.103:8000/api/deletetermek");
+                    dbOperations.deleteProduct(jsonString, "http://172.16.16.157:8000/api/deletetermek");
                 }
                 catch (Exception ex)
                 {
@@ -194,15 +190,25 @@ namespace Isabike
             {
                 try
                 {
-                    var json = new
+                    var jsonString = new
                     {
-                        termek_id = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[1].Value)
+                        token = Login.getToken(),
+                        termek_id = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[2].Value),
+                        termek_kateg = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[3].Value),
+                        termek_nev = viewGrid.Rows[e.RowIndex].Cells[5].Value,
+                        gyarto_id = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[6].Value),
+                        raktarondb = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[10].Value),
+                        tomeg_tulajdonsaga_id = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[11].Value),
+                        tomeg_erteke = Convert.ToDouble(viewGrid.Rows[e.RowIndex].Cells[13].Value),
+                        szine = viewGrid.Rows[e.RowIndex].Cells[14].Value,
+                        leiras = viewGrid.Rows[e.RowIndex].Cells[15].Value,
+                        egyseg_ar = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[16].Value),
+                        elerheto = viewGrid.Rows[e.RowIndex].Cells[17].Value
                     };
-
-                    string jsonString = JsonConvert.SerializeObject(json);
-                    MessageBox.Show(jsonString);
+                    string json = JsonConvert.SerializeObject(jsonString);
+                    MessageBox.Show(jsonString.ToString());
                     DbOperations dbOperations = new DbOperations();
-                    dbOperations.deleteProduct(jsonString, "http://192.168.0.103:8000/api/deletetermek");
+                    dbOperations.updateProduct(json, "http://172.16.16.157:8000/api/updatetermek");
                 }
                 catch (Exception ex)
                 {
