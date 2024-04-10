@@ -11,10 +11,40 @@ class EmailController extends Controller
 {
     public function sendVisszaIgazoloMail($code, $email){
         $content = [
-            "title" => "Visza Igazolo kod",
-            "code" => $code
+            "subject" => "Visszaigazoló kód.",
+            "title" => "Visszaigazoló kód.",
+            "code" => $code,
+            "view" => 'mail'
         ];
 
         Mail::to( $email )->send( new Email($content) );
+    }
+
+    public function sendRendelesMail($rendelt_termekek, $rendeles_ideje, $megjegyzes, $felhasznalo_nev, $szalitasi_cime, $vasarlo_telefonszama, $email){
+        $content = [
+            "subject" => "Isabike Rendeles",
+            "title" => "Köszönjük a rendelést!",
+            "rendeles_ideje" => $rendeles_ideje,
+            "megjegyzes" => $megjegyzes,
+            "felhasznalo_nev" => $felhasznalo_nev,
+            "szalitasi_cime" => $szalitasi_cime,
+            "vasarlo_telefonszama" => $vasarlo_telefonszama,
+            "rendelt_termekek" => $rendelt_termekek,
+            "view" => 'rendeles'
+        ];
+
+        Mail::to( $email )->send( new Email($content) );
+    }
+
+    public function asd($email){
+        $content = [
+            "subject" => "Visza igazolo kod",
+            "title" => "Visza Igazolo kod",
+            "code" => $email,
+            "view" => 'testt'
+        ];
+
+        Mail::to( $email )->send( new Email($content) );
+        return $email;
     }
 }

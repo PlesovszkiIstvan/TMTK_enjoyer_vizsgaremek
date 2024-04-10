@@ -22,6 +22,12 @@ class RendelesekController extends RendelesekResponseController
         } else {
             $rendelt_termekek = DB::select("CALL get_one_rendeles_termekek_procedure(".$DBresponse[0]->rendeles_id.");");
             $DBresponse["rendelt_termekek"] = $rendelt_termekek;
+            
+            $email = $DBresponse[0]->email;
+            //( new EmailController)->sendRendelesMail($email);
+            //return $email;
+            ( new EmailController)->sendRendelesMail($rendelt_termekek, $DBresponse[0]->rendeles_ideje, $DBresponse[0]->megjegyzes, $DBresponse[0]->felhasznalo_nev, $DBresponse[0]->szalitasi_cime, $DBresponse[0]->vasarlo_telefonszama, $email);
+            //return $DBresponse[0]->email;
             return $this->sendResponse($DBresponse, "Rendelés sikeresen leadva");
         }     
     }
