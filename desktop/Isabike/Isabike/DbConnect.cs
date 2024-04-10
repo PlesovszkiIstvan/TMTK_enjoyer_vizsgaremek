@@ -13,6 +13,8 @@ using System.Web.UI.WebControls;
 using System.Collections.Specialized;
 using K4os.Compression.LZ4.Streams.Abstractions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using MySqlX.XDevAPI;
+using System.Net.Http;
 
 namespace Isabike
 {
@@ -45,6 +47,29 @@ namespace Isabike
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+        public static JArray getUserData(string uri)
+        {
+
+            try
+            {
+                var webRequest = (HttpWebRequest)WebRequest.Create(uri);
+                webRequest.Headers.Add(HttpRequestHeader.Authorization, "Bearer " + Login.getToken());
+                var webResponse = (HttpWebResponse)webRequest.GetResponse();
+                var reader = new StreamReader(webResponse.GetResponseStream());
+                string jsonResponse = reader.ReadToEnd();
+                JObject responseObject = JObject.Parse(jsonResponse);
+                JArray data = (JArray)responseObject["data"];
+                MessageBox.Show("donexd");
+                return data;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show("catchxd");
                 return null;
             }
         }

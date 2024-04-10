@@ -42,7 +42,7 @@ namespace Isabike
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            if (DbConnect.loginToProg(EmailTextfield.Text, PasswordTextfield.Text, "http://172.16.16.157:8000/api/login"))
+            if (DbConnect.loginToProg(EmailTextfield.Text, PasswordTextfield.Text, "http://192.168.0.103:8000/api/login"))
             {
                 MainForm main = new MainForm();
                 this.Visible = false;
