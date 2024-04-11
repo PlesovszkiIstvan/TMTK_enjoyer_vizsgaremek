@@ -79,8 +79,7 @@ class FelhasznaloController extends FelhasznalokResponseController
         .$body->vasarlo_telefonszama."','"
         .$body->email."','"
         .$body->szalitasi_cime."',"
-        .$body->jogosultsag.","
-        .$body->aktiv.
+        .$body->jogosultsag.
         "
         );");
         if ($DBresponse[0]->result > 0) {

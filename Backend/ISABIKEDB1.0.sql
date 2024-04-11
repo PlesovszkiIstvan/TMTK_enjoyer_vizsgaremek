@@ -442,7 +442,6 @@ IN vasarlo_telefonszama_p varchar(20),
 IN email_p varchar(40),
 IN szalitasi_cime_p varchar(40),
 IN jogosultsag_p tinyint,
-IN aktiv_p boolean
 )
 BEGIN
 		declare felhasznalo_id_var int;
@@ -465,7 +464,6 @@ BEGIN
                 email = email_p,
                 szalitasi_cime = szalitasi_cime_p,
                 jogosultsag = jogosultsag_p,
-                aktiv = aktiv_p
             where felhasznalok.felhasznalo_id = felhasznalo_id_P;
             select * , TRUE AS result from felhasznalok
             where felhasznalok.felhasznalo_id = felhasznalo_id_p;
@@ -1081,7 +1079,8 @@ DELIMITER ;
 DElIMITER $$
 create procedure get_one_rendeles_termekek_procedure(IN rendeles_id mediumint)
 BEGIN
-	select * from rendelt_termekek where rendelt_termekek.rendeles_id = rendeles_id;
+	select termek_nev, darabszam, egyseg_ar from rendelt_termekek left join termekek
+        on rendelt_termekek.termek_id = termekek.termek_id where rendelt_termekek.rendeles_id = rendeles_id;
 END $$
 DELIMITER ;
 
@@ -1093,16 +1092,37 @@ END $$
 DELIMITER ;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+DElIMITER $$
+create procedure get_one_termek_procedure(IN termek_id_p mediumint)
+BEGIN
+	select 
+		termekek.termek_id,
+        termekek.kategoria_id,
+        kategoria_neve,
+        termek_nev,
+        termekek.gyarto_id,
+        gyarto_neve,
+        telefonszama,
+        webhely,
+        raktarondb,
+        termekek.tomeg_tulajdonsaga_id,
+        mertek_egysege, 
+        tomeg_erteke, 
+        szine, 
+        leiras, 
+        egyseg_ar, 
+        elerheto,
+        kep_helye as kep_helye
+    from termekek 
+		left join kategoriak
+        on termekek.kategoria_id = kategoriak.kategoria_id
+        left join gyartok
+        on termekek.gyarto_id = gyartok.gyarto_id
+        left join tomeg_tulajdonsagai
+        on termekek.tomeg_tulajdonsaga_id = tomeg_tulajdonsagai.tomeg_tulajdonsaga_id
+		left join termek_kepek
+        on termekek.termek_id = termek_kepek.termek_id
+	where termekek.termek_id = termek_id_p;
+END $$
+DELIMITER ;
 
