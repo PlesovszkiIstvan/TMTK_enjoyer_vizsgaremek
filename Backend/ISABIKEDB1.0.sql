@@ -1,4 +1,4 @@
-
+drop database if exists isabike;
 CREATE DATABASE isabike;
 USE isabike;
 
@@ -105,7 +105,7 @@ create table Termekek(
     kategoria_id mediumint not null,
     termek_nev varchar(50) not null,
     gyarto_id tinyint not null,
-    raktarondb smallint default 0,
+    raktarondb bigint default 0,
     tomeg_tulajdonsaga_id tinyint not null,
     tomeg_erteke double,
     szine varchar(50) default 'valoszinü',
@@ -510,7 +510,7 @@ CREATE PROCEDURE add_termek_procedure(IN token_p varchar(120),
     IN kategoria_id_p mediumint,
     IN termek_nev_p varchar(50),
     IN gyarto_id_p tinyint,
-    IN raktarondb_p smallint,
+    IN raktarondb_p bigint,
     IN tomeg_tulajdonsaga_id_p tinyint,
     IN tomeg_erteke_p double,
     IN szine_p varchar(50),
@@ -544,7 +544,7 @@ CREATE PROCEDURE update_termek_procedure(IN token_p varchar(120),
     IN kategoria_id_p mediumint,
     IN termek_nev_p varchar(50),
     IN gyarto_id_p tinyint,
-    IN raktarondb_p smallint,
+    IN raktarondb_p bigint,
     IN tomeg_tulajdonsaga_id_p tinyint,
     IN tomeg_erteke_p double,
     IN szine_p varchar(50),

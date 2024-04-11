@@ -21,6 +21,14 @@ class EmailController extends Controller
     }
 
     public function sendRendelesMail($rendelt_termekek, $rendeles_ideje, $megjegyzes, $felhasznalo_nev, $szalitasi_cime, $vasarlo_telefonszama, $email){
+
+        $teljesar = 0;
+
+        foreach ($rendelt_termekek as $termek) {
+            $egytermekar = $termek->darabszam*$termek->egyseg_ar;
+            $teljesar = $teljesar+$egytermekar;
+        }
+
         $content = [
             "subject" => "Isabike Rendeles",
             "title" => "Köszönjük a rendelést!",
@@ -30,6 +38,7 @@ class EmailController extends Controller
             "szalitasi_cime" => $szalitasi_cime,
             "vasarlo_telefonszama" => $vasarlo_telefonszama,
             "rendelt_termekek" => $rendelt_termekek,
+            "osszesitet_ar" => $teljesar,
             "view" => 'rendeles'
         ];
 

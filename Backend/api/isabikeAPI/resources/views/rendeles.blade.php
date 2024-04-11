@@ -13,6 +13,7 @@
         <p></p>
     </div>
 @endforeach
+<p style="font-size: 30px;">Összesitet ár: <span style="color:orange; font-weight: bold;">{{$content[ 'osszesitet_ar' ]}}</span></p>
 
 
 
