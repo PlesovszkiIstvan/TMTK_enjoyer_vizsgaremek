@@ -21,7 +21,7 @@ namespace Isabike
     public partial class MainForm : Form
     {
 
-        private bool gridState = false;
+        private bool gridState = true;
         // false = termekek | true = velemenyek
 
         int[] ColumnIndex = [0,1];
@@ -61,7 +61,7 @@ namespace Isabike
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DbConnect.logOut(Login.getToken(), "http://192.168.0.103:8000/api/logout");
+            DbConnect.logOut(Login.getToken(), "http://127.0.0.1:8000/api/logout");
             Environment.Exit(0);
         }
 
@@ -126,10 +126,10 @@ namespace Isabike
 
         private void connectToDB(bool isSales)
         {
-            manufactererBox.DataSource = DbConnect.getData("http://192.168.0.103:8000/api/gyartok");
+            manufactererBox.DataSource = DbConnect.getData("http://127.0.0.1:8000/api/gyartok");
             manufactererBox.ValueMember = "gyarto_id";
             manufactererBox.DisplayMember = "gyarto_neve";
-            categoryBox.DataSource = DbConnect.getData("http://192.168.0.103:8000/api/kategoria");
+            categoryBox.DataSource = DbConnect.getData("http://127.0.0.1:8000/api/kategoria");
             categoryBox.ValueMember = "kategoria_id";
             categoryBox.DisplayMember = "kategoria_neve";
 
@@ -139,12 +139,12 @@ namespace Isabike
             }
             if (!isSales) {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://192.168.0.103:8000/api/termekek/100");
+                GetRESTData("http://127.0.0.1:8000/api/termekek/100");
             }
             else
             {
                 //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
-                GetRESTData("http://192.168.0.103:8000/api/getvelemenyek");
+                GetRESTData("http://127.0.0.1:8000/api/getvelemenyek");
             }
 
             
@@ -154,7 +154,7 @@ namespace Isabike
         {
             viewGrid.Rows.Clear();
             viewGrid.Columns.Clear();
-            viewGrid.DataSource = DbConnect.getFilteredData("http://192.168.0.103:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text), manufactererBox.Text);
+            viewGrid.DataSource = DbConnect.getFilteredData("http://127.0.0.1:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text), manufactererBox.Text);
             if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
             {
                 viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
@@ -177,7 +177,7 @@ namespace Isabike
                     string jsonString = JsonConvert.SerializeObject(json);
                     MessageBox.Show(jsonString);
                     DbOperations dbOperations = new DbOperations();
-                    dbOperations.deleteProduct(jsonString, "http://192.168.0.103:8000/api/deletetermek");
+                    dbOperations.deleteProduct(jsonString, "http://127.0.0.1:8000/api/deletetermek");
                 }
                 catch (Exception ex)
                 {
@@ -208,7 +208,7 @@ namespace Isabike
                     string json = JsonConvert.SerializeObject(jsonString);
                     MessageBox.Show(jsonString.ToString());
                     DbOperations dbOperations = new DbOperations();
-                    dbOperations.updateProduct(json, "http://192.168.0.103:8000/api/updatetermek");
+                    dbOperations.updateProduct(json, "http://127.0.0.1:8000/api/updatetermek");
                 }
                 catch (Exception ex)
                 {

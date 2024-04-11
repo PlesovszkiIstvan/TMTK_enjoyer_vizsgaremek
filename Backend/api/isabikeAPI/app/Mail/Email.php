@@ -31,7 +31,7 @@ class Email extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'visza igazolo kod',
+            subject: $this->content["subject"],
         );
     }
 
@@ -41,7 +41,7 @@ class Email extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail',
+            view: $this->content["view"],
         );
     }
 

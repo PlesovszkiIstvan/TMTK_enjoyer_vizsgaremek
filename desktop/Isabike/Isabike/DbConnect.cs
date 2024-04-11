@@ -35,7 +35,6 @@ namespace Isabike
                 if ((webResponse.StatusCode == HttpStatusCode.OK) && (s.Length > 0))
                 {
 
-                    termekek = JsonConvert.DeserializeObject<List<Termekek>>(s);
                     return JsonConvert.DeserializeObject<JArray>(s);
                 }
                 else
@@ -51,6 +50,7 @@ namespace Isabike
             }
         }
 
+
         public static JArray getUserData(string uri)
         {
 
@@ -63,13 +63,11 @@ namespace Isabike
                 string jsonResponse = reader.ReadToEnd();
                 JObject responseObject = JObject.Parse(jsonResponse);
                 JArray data = (JArray)responseObject["data"];
-                MessageBox.Show("donexd");
                 return data;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                MessageBox.Show("catchxd");
                 return null;
             }
         }

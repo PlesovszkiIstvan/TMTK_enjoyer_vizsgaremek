@@ -28,7 +28,7 @@ namespace Isabike
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-            GetRESTData("http://192.168.0.103:8000/api/getfelhasznalok");
+            GetRESTData("http://127.0.0.1:8000/api/getfelhasznalok");
             adminButtonCreate();
         }
 
@@ -64,8 +64,14 @@ namespace Isabike
                 };
                 string json = JsonConvert.SerializeObject(jsonString);
                 DbOperations dbOperations = new DbOperations();
-                dbOperations.updateUser(json, "http://192.168.0.103:8000/api/updatefelhasznalo");
+                dbOperations.updateUser(json, "http://127.0.0.1:8000/api/updatefelhasznalo");
             }
+        }
+
+        private void refreshBtn_Click(object sender, EventArgs e)
+        {
+            GetRESTData("http://127.0.0.1:8000/api/getfelhasznalok");
+            adminButtonCreate();
         }
     }
 }

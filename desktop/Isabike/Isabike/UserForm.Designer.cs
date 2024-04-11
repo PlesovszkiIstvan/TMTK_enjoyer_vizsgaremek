@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.userDataGridView = new System.Windows.Forms.DataGridView();
+            this.refreshBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.userDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,11 +45,22 @@
             this.userDataGridView.TabIndex = 0;
             this.userDataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.userDataGridView_CellClick);
             // 
+            // refreshBtn
+            // 
+            this.refreshBtn.Location = new System.Drawing.Point(794, 24);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(90, 28);
+            this.refreshBtn.TabIndex = 1;
+            this.refreshBtn.Text = "Frissítés";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
+            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(896, 450);
+            this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.userDataGridView);
             this.Name = "UserForm";
             this.Text = "UserForm";
@@ -61,5 +73,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView userDataGridView;
+        private System.Windows.Forms.Button refreshBtn;
     }
 }

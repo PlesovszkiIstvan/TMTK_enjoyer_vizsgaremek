@@ -122,8 +122,7 @@ create table Termekek(
 create table termek_kepek(
 	termek_kep_id mediumint primary key auto_increment,
     termek_id mediumint not null,
-    kep_helye varchar(100) unique default '/termek_kepek/noimage.jpg',
-    constraint kep_vizsgalat check (kep_helye LIKE '%.jpg' or '%.png' or '%.webp'),
+    kep_helye text unique,
     constraint fk_in_termekek_kep_id foreign key(termek_id) references Termekek(termek_id)
 );
 
@@ -254,23 +253,20 @@ INSERT INTO Termekek (kategoria_id, termek_nev, gyarto_id, raktarondb, tomeg_tul
 VALUES
 ('4', 'Trek Procaliber 9.8 Mountain Bike', 1, 12, 3, 13.2, 'Zöld/fekete', 'Könnyű, versenyzésre tervezett mountain bike profi kerékpárosoknak.', 600000),
 ('4', 'Specialized Epic EVO Comp Mountain Bike', 2, 8, 4, 27.5, 'Szürke/narancs', 'Sokoldalú mountain bike terepre és túrázáshoz.', 750000),
-('4', 'Canyon Neuron AL 7.0 Mountain Bike', 3, 15, 3, 14.5, 'Kék/fehér', 'Megbízható mountain bike kezdőknek és hobbi kerékpárosoknak.', 400000),
-('4', 'Cube Acid Hybrid One 400 E-Bike', 4, 10, 4, 25, 'Fekete/ezüst', 'Kényelmes elektromos kerékpár városi közlekedéshez.', 320000),
-('4', 'Giant Explore E+ 3 Hybrid E-Bike', 5, 8, 4, 25, 'Zöld/barna', 'Stílusos elektromos trekking kerékpár túrázáshoz.', 450000),
-('4', 'Scott Contessa Active E-Ride 2023 E-Bike', 6, 12, 4, 25, 'Fehér/lila', 'Könnyű elektromos városi kerékpár nőknek.', 380000),
-('4', 'Csepel Budapest 700C Városi kerékpár', 4, 20, 3, 16, 'Fekete/ezüst', 'Klasszikus városi kerékpár kényelmes közlekedéshez.', 150000),
-('4', 'Kross Trans Hybrid 1.0 Városi kerékpár', 5, 15, 4, 25, 'Szürke/kék', 'Modern elektromos városi kerékpár praktikus funkciókkal.', 400000),
-('4', 'Trek Verve 3 Disc Városi kerékpár', 1, 12, 3, 12.7, 'Kék/fehér', 'Sportos városi kerékpár gyors közlekedéshez.', 300000),
-('4', 'Specialized Sirrus X 2.0 Disc Városi kerékpár', 2, 10, 3, 13.5, 'Fekete/piros', 'Sokoldalú városi kerékpár terepre és aszfaltra.', 250000),
-('4', 'Giant Liv Alight 3 City Disc Városi kerékpár', 3, 15, 3, 15, 'Lila/fehér', 'Kényelmes városi kerékpár nőknek.', 200000),
-('4', 'Cube Hyde Race Urban Bike', 6, 12, 3, 14, 'Szürke/narancs', 'Stílusos városi kerékpár fiatalos designnal.', 220000),
-('4', 'Kellys Kids Spider 16 BMX Kerékpár', 6, 20, 1, 8, 'Piros/kék', 'Klasszikus BMX kerékpár gyerekeknek trükkökhöz és ugráshoz.', 80000),
-('4', 'Merida Crossway 100 T Trekking Kerékpár', 5, 10, 3, 16, 'Fekete/zöld', 'Kényelmes trekking kerékpár túrázáshoz.', 350000),
-('4', 'Trek 520 Touring Bike', 1, 15, 3, 17, 'Kék/ezüst', 'Strapabíró túra kerékpár hosszú utazásokhoz.', 500000),
-('4', 'Csepel Viator Trekking Kerékpár', 4, 20, 3, 18, 'Zöld/barna', 'Klasszikus trekking kerékpár kényelmes túrázáshoz.', 250000),
-('4', 'Giant Anycubic E+ 1 Trekking E-Bike', 3, 12, 4, 25, 'Szürke/kék', 'Erős elektromos trekking kerékpár terepre és túrázáshoz.', 600000),
-('4', 'KTM Revelator AERO Road Bike', 1, 8, 2, 8.5, 'Fekete/piros', 'Aerodinamikus országúti kerékpár versenyzéshez.', 700000),
-('4', 'Csepel BMX Freestyle 20" Kerékpár', 4, 15, 1, 9, 'Fekete/zöld', 'Könnyű BMX kerékpár profi BMX-eseknek.', 120000);
+('4', 'Csepel BMX Freestyle 20" Kerékpár', 4, 15, 1, 9, 'Fekete/zöld', 'Könnyű BMX kerékpár profi BMX-eseknek.', 120000),
+('7', 'KLS TREKKINGLINE NYEREG TÖBB SZÍNBEN', 6, 20, 3, 1, 'Fekete/zöld/piros/kék', 'Maximális komfortra tervezve Zone cut', 8000),
+('3', 'GEPIDA KULACS SZÜRKE/PIROS 800ML', 6, 40, 2, 500, 'Szürke/piros', 'Két állású gumi szívó rész Praktikus mm széles betöltő nyílás', 1200),
+('9', 'KTM Fűzött Kerék Első Deore CL 28', 1, 4, 3, 4, 'Fekete', 'Front 28" Deore CL', 35000);
+
+insert into termek_kepek (termek_id, kep_helye)
+values 
+(1, "https://www.wheelbase.co.uk/wp-content/uploads/2021/12/Procaliber-9.8-x15.jpg"),
+(2, "https://downhillendurokerekpar.hu/uploads/shop/downhillendurokerekpar.hu/termek/3761688_big.jpg"),
+(3, "https://static.testbike.hu/images/prpic/Schwinn-Csepel-Rebel-2013-NO.jpg"),
+(4, "https://ebike.hu/kepek/1BtU/kls-trekkingline-nyereg.jpg"),
+(5, "https://speedbike2.cdn.shoprenter.hu/custom/speedbike2/image/cache/w191h191q100/1/4.jpg?lastmod=1702121164.1667481212"),
+(6, "https://bringaboard2.cdn.shoprenter.hu/custom/bringaboard2/image/cache/w1350h750wt1/Termékek/KTM/Alkatrészek/Fűzött%20Kerék/Deore%20CL%2028%20első.jpg?lastmod=1695382539.1701073421");
+
 
 INSERT INTO Kedvezmenyek (kedvezmeny_neve, kedvezmeny_leiras, kedvezmeny_összege)
 values('Nincs kedvezmény', '', 0);
@@ -441,7 +437,7 @@ IN kereszt_nev_p varchar(30),
 IN vasarlo_telefonszama_p varchar(20),
 IN email_p varchar(40),
 IN szalitasi_cime_p varchar(40),
-IN jogosultsag_p tinyint,
+IN jogosultsag_p tinyint
 )
 BEGIN
 		declare felhasznalo_id_var int;
@@ -463,7 +459,7 @@ BEGIN
                 vasarlo_telefonszama = vasarlo_telefonszama_p,
                 email = email_p,
                 szalitasi_cime = szalitasi_cime_p,
-                jogosultsag = jogosultsag_p,
+                jogosultsag = jogosultsag_p
             where felhasznalok.felhasznalo_id = felhasznalo_id_P;
             select * , TRUE AS result from felhasznalok
             where felhasznalok.felhasznalo_id = felhasznalo_id_p;

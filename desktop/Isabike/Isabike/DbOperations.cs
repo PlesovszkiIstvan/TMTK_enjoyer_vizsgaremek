@@ -113,7 +113,6 @@ namespace Isabike
                     if (response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Item updated successfully.");
-                        MessageBox.Show(response.ReasonPhrase);
                     }
                     else
                     {
@@ -148,7 +147,6 @@ namespace Isabike
                 if (response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("User updated successfully.");
-                    MessageBox.Show(response.ReasonPhrase);
                 }
                 else
                 {
