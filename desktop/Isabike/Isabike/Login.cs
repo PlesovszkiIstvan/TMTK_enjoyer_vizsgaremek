@@ -44,9 +44,11 @@ namespace Isabike
         {
             if (DbConnect.loginToProg(EmailTextfield.Text, PasswordTextfield.Text, "http://127.0.0.1:8000/api/login"))
             {
+                MessageBox.Show("Sikeres bejelentkezés!");
                 MainForm main = new MainForm();
                 this.Visible = false;
                 main.ShowDialog();
+            
             }
             
         }

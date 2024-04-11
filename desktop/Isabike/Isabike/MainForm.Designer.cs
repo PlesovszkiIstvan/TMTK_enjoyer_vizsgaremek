@@ -42,7 +42,6 @@
             this.ReviewsBtn = new System.Windows.Forms.Button();
             this.productBtn = new System.Windows.Forms.Button();
             this.refreshBtn = new System.Windows.Forms.Button();
-            this.SalesBtn = new System.Windows.Forms.Button();
             this.UserBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.viewGrid)).BeginInit();
             this.panel1.SuspendLayout();
@@ -51,9 +50,11 @@
             // viewGrid
             // 
             this.viewGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.viewGrid.Location = new System.Drawing.Point(13, 58);
+            this.viewGrid.Location = new System.Drawing.Point(17, 71);
+            this.viewGrid.Margin = new System.Windows.Forms.Padding(4);
             this.viewGrid.Name = "viewGrid";
-            this.viewGrid.Size = new System.Drawing.Size(1162, 380);
+            this.viewGrid.RowHeadersWidth = 51;
+            this.viewGrid.Size = new System.Drawing.Size(1549, 468);
             this.viewGrid.TabIndex = 3;
             this.viewGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.viewGrid_CellClick);
             // 
@@ -69,52 +70,58 @@
             this.panel1.Controls.Add(this.categoryBox);
             this.panel1.Controls.Add(this.suly_textbox);
             this.panel1.Controls.Add(this.termeknevTextbox);
-            this.panel1.Location = new System.Drawing.Point(1181, 58);
+            this.panel1.Location = new System.Drawing.Point(1575, 71);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(223, 159);
+            this.panel1.Size = new System.Drawing.Size(297, 196);
             this.panel1.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 85);
+            this.label4.Location = new System.Drawing.Point(8, 105);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.Size = new System.Drawing.Size(50, 16);
             this.label4.TabIndex = 12;
             this.label4.Text = "Gyártó:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 58);
+            this.label3.Location = new System.Drawing.Point(8, 71);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.Size = new System.Drawing.Size(68, 16);
             this.label3.TabIndex = 11;
             this.label3.Text = "Kategória:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 32);
+            this.label2.Location = new System.Drawing.Point(8, 39);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 13);
+            this.label2.Size = new System.Drawing.Size(36, 16);
             this.label2.TabIndex = 10;
             this.label2.Text = "Súly:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 6);
+            this.label1.Location = new System.Drawing.Point(8, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.Size = new System.Drawing.Size(90, 16);
             this.label1.TabIndex = 9;
             this.label1.Text = "Termék neve:";
             // 
             // filterBtn
             // 
-            this.filterBtn.Location = new System.Drawing.Point(9, 124);
+            this.filterBtn.Location = new System.Drawing.Point(12, 153);
+            this.filterBtn.Margin = new System.Windows.Forms.Padding(4);
             this.filterBtn.Name = "filterBtn";
-            this.filterBtn.Size = new System.Drawing.Size(97, 23);
+            this.filterBtn.Size = new System.Drawing.Size(129, 28);
             this.filterBtn.TabIndex = 8;
             this.filterBtn.Text = "Filter";
             this.filterBtn.UseVisualStyleBackColor = true;
@@ -127,9 +134,10 @@
             "Gyarto1",
             "Gyarto2",
             "Gyarto3"});
-            this.manufactererBox.Location = new System.Drawing.Point(99, 82);
+            this.manufactererBox.Location = new System.Drawing.Point(132, 101);
+            this.manufactererBox.Margin = new System.Windows.Forms.Padding(4);
             this.manufactererBox.Name = "manufactererBox";
-            this.manufactererBox.Size = new System.Drawing.Size(121, 21);
+            this.manufactererBox.Size = new System.Drawing.Size(160, 24);
             this.manufactererBox.TabIndex = 7;
             // 
             // categoryBox
@@ -139,24 +147,27 @@
             "Kategoria1",
             "Kategoria2",
             "Kategoria3"});
-            this.categoryBox.Location = new System.Drawing.Point(99, 55);
+            this.categoryBox.Location = new System.Drawing.Point(132, 68);
+            this.categoryBox.Margin = new System.Windows.Forms.Padding(4);
             this.categoryBox.Name = "categoryBox";
-            this.categoryBox.Size = new System.Drawing.Size(121, 21);
+            this.categoryBox.Size = new System.Drawing.Size(160, 24);
             this.categoryBox.TabIndex = 6;
             // 
             // suly_textbox
             // 
-            this.suly_textbox.Location = new System.Drawing.Point(99, 29);
+            this.suly_textbox.Location = new System.Drawing.Point(132, 36);
+            this.suly_textbox.Margin = new System.Windows.Forms.Padding(4);
             this.suly_textbox.Name = "suly_textbox";
-            this.suly_textbox.Size = new System.Drawing.Size(98, 20);
+            this.suly_textbox.Size = new System.Drawing.Size(129, 22);
             this.suly_textbox.TabIndex = 1;
             this.suly_textbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // termeknevTextbox
             // 
-            this.termeknevTextbox.Location = new System.Drawing.Point(99, 3);
+            this.termeknevTextbox.Location = new System.Drawing.Point(132, 4);
+            this.termeknevTextbox.Margin = new System.Windows.Forms.Padding(4);
             this.termeknevTextbox.Name = "termeknevTextbox";
-            this.termeknevTextbox.Size = new System.Drawing.Size(98, 20);
+            this.termeknevTextbox.Size = new System.Drawing.Size(129, 22);
             this.termeknevTextbox.TabIndex = 0;
             // 
             // ReviewsBtn
@@ -164,9 +175,10 @@
             this.ReviewsBtn.BackColor = System.Drawing.Color.Red;
             this.ReviewsBtn.FlatAppearance.BorderSize = 0;
             this.ReviewsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ReviewsBtn.Location = new System.Drawing.Point(217, 12);
+            this.ReviewsBtn.Location = new System.Drawing.Point(153, 16);
+            this.ReviewsBtn.Margin = new System.Windows.Forms.Padding(4);
             this.ReviewsBtn.Name = "ReviewsBtn";
-            this.ReviewsBtn.Size = new System.Drawing.Size(96, 39);
+            this.ReviewsBtn.Size = new System.Drawing.Size(128, 48);
             this.ReviewsBtn.TabIndex = 5;
             this.ReviewsBtn.Text = "Reviews";
             this.ReviewsBtn.UseVisualStyleBackColor = false;
@@ -175,10 +187,11 @@
             // productBtn
             // 
             this.productBtn.BackColor = System.Drawing.Color.Lime;
-            this.productBtn.Location = new System.Drawing.Point(13, 13);
+            this.productBtn.Location = new System.Drawing.Point(17, 16);
+            this.productBtn.Margin = new System.Windows.Forms.Padding(4);
             this.productBtn.Name = "productBtn";
             this.productBtn.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.productBtn.Size = new System.Drawing.Size(96, 38);
+            this.productBtn.Size = new System.Drawing.Size(128, 47);
             this.productBtn.TabIndex = 7;
             this.productBtn.Text = "Product Operations";
             this.productBtn.UseVisualStyleBackColor = false;
@@ -186,33 +199,22 @@
             // 
             // refreshBtn
             // 
-            this.refreshBtn.Location = new System.Drawing.Point(1190, 237);
+            this.refreshBtn.Location = new System.Drawing.Point(1587, 292);
+            this.refreshBtn.Margin = new System.Windows.Forms.Padding(4);
             this.refreshBtn.Name = "refreshBtn";
-            this.refreshBtn.Size = new System.Drawing.Size(75, 23);
+            this.refreshBtn.Size = new System.Drawing.Size(100, 28);
             this.refreshBtn.TabIndex = 8;
             this.refreshBtn.Text = "Refresh";
             this.refreshBtn.UseVisualStyleBackColor = true;
             this.refreshBtn.Click += new System.EventHandler(this.refreshBtn_Click);
             // 
-            // SalesBtn
-            // 
-            this.SalesBtn.BackColor = System.Drawing.Color.Red;
-            this.SalesBtn.Cursor = System.Windows.Forms.Cursors.No;
-            this.SalesBtn.Enabled = false;
-            this.SalesBtn.Location = new System.Drawing.Point(115, 13);
-            this.SalesBtn.Name = "SalesBtn";
-            this.SalesBtn.Size = new System.Drawing.Size(96, 39);
-            this.SalesBtn.TabIndex = 6;
-            this.SalesBtn.Text = "Sales";
-            this.SalesBtn.UseVisualStyleBackColor = false;
-            this.SalesBtn.Click += new System.EventHandler(this.SalesBtn_Click);
-            // 
             // UserBtn
             // 
             this.UserBtn.BackColor = System.Drawing.Color.Lime;
-            this.UserBtn.Location = new System.Drawing.Point(319, 13);
+            this.UserBtn.Location = new System.Drawing.Point(289, 16);
+            this.UserBtn.Margin = new System.Windows.Forms.Padding(4);
             this.UserBtn.Name = "UserBtn";
-            this.UserBtn.Size = new System.Drawing.Size(96, 39);
+            this.UserBtn.Size = new System.Drawing.Size(128, 48);
             this.UserBtn.TabIndex = 10;
             this.UserBtn.Text = "User Operations";
             this.UserBtn.UseVisualStyleBackColor = false;
@@ -220,16 +222,16 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1405, 450);
+            this.ClientSize = new System.Drawing.Size(1873, 554);
             this.Controls.Add(this.UserBtn);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.productBtn);
-            this.Controls.Add(this.SalesBtn);
             this.Controls.Add(this.ReviewsBtn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.viewGrid);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Isabike";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -250,7 +252,6 @@
         private System.Windows.Forms.ComboBox manufactererBox;
         private System.Windows.Forms.Button filterBtn;
         private System.Windows.Forms.Button ReviewsBtn;
-        private System.Windows.Forms.Button SalesBtn;
         private System.Windows.Forms.Button productBtn;
         private System.Windows.Forms.Button refreshBtn;
         private System.Windows.Forms.Label label4;

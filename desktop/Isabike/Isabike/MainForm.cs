@@ -21,10 +21,10 @@ namespace Isabike
     public partial class MainForm : Form
     {
 
-        private bool gridState = true;
+        private bool gridState = false;
         // false = termekek | true = velemenyek
 
-        int[] ColumnIndex = [0,1];
+        int[] ColumnIndex = { 0, 1 };
 
         public MainForm()
         {
@@ -67,8 +67,8 @@ namespace Isabike
 
         private void ReviewsBtn_Click(object sender, EventArgs e)
         {
-            connectToDB(true);
-            if (ReviewsBtn.BackColor.Equals(Color.Green))
+            connectToDB(gridState);
+            if (gridState)
             {
                 ReviewsBtn.BackColor = Color.Red;
                 gridState = false;
@@ -91,36 +91,34 @@ namespace Isabike
         DataGridViewButtonColumn deleteButtonColumn = new DataGridViewButtonColumn
         {
             Name = "delete_column",
-            Text = "Delete"
+            Text = "Delete",
+            HeaderText = "Delete"
         };
+
         DataGridViewButtonColumn updateButtonColumn = new DataGridViewButtonColumn
         {
             Name = "update_column",
-            Text = "Update"
+            Text = "Update",
+            HeaderText = "Update"
         };
 
         private void refreshBtn_Click(object sender, EventArgs e)
         {
 
-            if (ReviewsBtn.BackColor.Equals(Color.Green))
+            if (!gridState)
             {
                 gridState = true;
             }
             else
             {
                 gridState = false;
+                if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
+                {
+                    viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
+                    viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
+                }
             }
             connectToDB(gridState);
-            if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
-            {
-                viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
-                viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
-                
-            }
-        }
-
-        private void SalesBtn_Click(object sender, EventArgs e)
-        {
             
         }
 
@@ -138,12 +136,10 @@ namespace Isabike
                 viewGrid.Columns.Clear();
             }
             if (!isSales) {
-                //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
                 GetRESTData("http://127.0.0.1:8000/api/termekek/100");
             }
             else
             {
-                //CreateConnection("192.168.1.103","3306","desktopUser","desktopadmin","isabike");
                 GetRESTData("http://127.0.0.1:8000/api/getvelemenyek");
             }
 
@@ -155,12 +151,16 @@ namespace Isabike
             viewGrid.Rows.Clear();
             viewGrid.Columns.Clear();
             viewGrid.DataSource = DbConnect.getFilteredData("http://127.0.0.1:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text), manufactererBox.Text);
-            if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
+            if (!gridState)
             {
-                viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
-                viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
+                if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
+                {
+                     viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
+                     viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
 
+                }
             }
+            
         }
 
         private void viewGrid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -175,7 +175,6 @@ namespace Isabike
                     };
                     
                     string jsonString = JsonConvert.SerializeObject(json);
-                    MessageBox.Show(jsonString);
                     DbOperations dbOperations = new DbOperations();
                     dbOperations.deleteProduct(jsonString, "http://127.0.0.1:8000/api/deletetermek");
                 }
@@ -206,7 +205,6 @@ namespace Isabike
                         elerheto = viewGrid.Rows[e.RowIndex].Cells[17].Value
                     };
                     string json = JsonConvert.SerializeObject(jsonString);
-                    MessageBox.Show(jsonString.ToString());
                     DbOperations dbOperations = new DbOperations();
                     dbOperations.updateProduct(json, "http://127.0.0.1:8000/api/updatetermek");
                 }

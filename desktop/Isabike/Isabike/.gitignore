@@ -1,0 +1,54 @@
+﻿# Ignore Visual Studio files
+.vs/
+*.suo
+*.user
+*.userprefs
+*.sln.cache
+*.suo
+*.user
+*.vssscc
+*.vspscc
+*.obj
+*.dll
+*.exe
+*.pdb
+*.log
+*.tlog
+*.zip
+*.rar
+*.7z
+*.exe
+*.dll
+*.pdb
+*.mdb
+*.sqlproj.user
+*.sqlproj.suo
+*.user
+*.docstates
+
+# Ignore build and publish output
+bin/
+obj/
+*.exe
+*.pdb
+
+# Ignore NuGet packages
+packages/
+
+# Ignore any temporary files
+*.tmp
+
+# Ignore ReSharper files
+_ReSharper*/
+
+# Ignore Visual Studio Code files
+.vscode/
+
+# Ignore ReSharper files
+*.resharper
+*.resharper.user
+
+# Ignore any backup files
+*~
+
+Text/

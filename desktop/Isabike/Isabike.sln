@@ -5,16 +5,20 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isabike", "Isabike\Isabike.csproj", "{5E4C957B-BC73-427E-8300-02398436E443}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "IsabikeSetup", "IsabikeSetup\IsabikeSetup.vdproj", "{4639D7FB-F680-4AFF-BCCA-565EC019A216}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5E4C957B-BC73-427E-8300-02398436E443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E4C957B-BC73-427E-8300-02398436E443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E4C957B-BC73-427E-8300-02398436E443}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{5E4C957B-BC73-427E-8300-02398436E443}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{5E4C957B-BC73-427E-8300-02398436E443}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E4C957B-BC73-427E-8300-02398436E443}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4639D7FB-F680-4AFF-BCCA-565EC019A216}.Debug|Any CPU.ActiveCfg = Release
+		{4639D7FB-F680-4AFF-BCCA-565EC019A216}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

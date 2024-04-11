@@ -143,7 +143,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Termekek.cs" />
-    <Compile Include="User.cs" />
     <Compile Include="UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\elipse.png" />
+    <Content Include=".gitignore" />
     <Content Include="img\icons8-add-50.png" />
     <Content Include="img\icons8-edit-30.png" />
     <Content Include="img\icons8-x-50.png" />

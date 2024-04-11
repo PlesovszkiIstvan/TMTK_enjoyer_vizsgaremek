@@ -12,7 +12,6 @@ using System.Windows.Forms;
 namespace Isabike
 {
 
-    //192.168.0.103
     public partial class UserForm : Form
     {
         public UserForm()

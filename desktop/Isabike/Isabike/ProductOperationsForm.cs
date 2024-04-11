@@ -13,16 +13,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//icons by https://icons8.com
-
 namespace Isabike
 {
 
 
     public partial class ProductOperationsForm : Form
     {
-
-        private int state;
 
         public void populateTomeg(string uri)
         {
@@ -56,38 +52,29 @@ namespace Isabike
 
         private void okBtn_Click(object sender, EventArgs e)
         {
-
-            switch (state)
+            try
             {
-                case 0:
-                    try
-                    {
-                        var jsonString = new
-                        {
-                            token = Login.getToken(),
-                            termek_kateg = Convert.ToInt32(productCategoryBox.SelectedValue),
-                            termek_nev = productNameText.Text,
-                            gyarto_id = Convert.ToInt32(productManufactererBox.SelectedValue),
-                            raktarondb = Convert.ToInt32(productCountText.Text),
-                            tomeg_tulajdonsaga_id = Convert.ToInt32(productWeightclassBox.SelectedValue),
-                            tomeg_erteke = Convert.ToDouble(productWeightText.Text),
-                            szine = productColorText.Text,
-                            leiras = productDescText.Text,
-                            egyseg_ar = Convert.ToInt32(productPriceText.Text),
-                            elerheto = productAvelableBox.Checked
-                        };
-                        string json = JsonConvert.SerializeObject(jsonString);
-                        DbOperations.addProduct(json, "http://127.0.0.1:8000/api/addtermek");
-                        break;
-                    }
-                    catch (Exception exp)
-                    {
-                        MessageBox.Show(exp.ToString());
-                        break;
-                        throw;
-                    }
-                default:
-                    break;
+                var jsonString = new
+                 {
+                    token = Login.getToken(),
+                    termek_kateg = Convert.ToInt32(productCategoryBox.SelectedValue),
+                    termek_nev = productNameText.Text,
+                    gyarto_id = Convert.ToInt32(productManufactererBox.SelectedValue),
+                    raktarondb = Convert.ToInt32(productCountText.Text),
+                    tomeg_tulajdonsaga_id = Convert.ToInt32(productWeightclassBox.SelectedValue),
+                    tomeg_erteke = Convert.ToDouble(productWeightText.Text),
+                    szine = productColorText.Text,
+                    leiras = productDescText.Text,
+                    egyseg_ar = Convert.ToInt32(productPriceText.Text),
+                    elerheto = productAvelableBox.Checked
+                  };
+                  string json = JsonConvert.SerializeObject(jsonString);
+                  DbOperations.addProduct(json, "http://127.0.0.1:8000/api/addtermek");
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.ToString());
+                throw;
             }
         }
 
@@ -98,19 +85,5 @@ namespace Isabike
             populateTomeg("http://127.0.0.1:8000/api/tomegtulajdonsagok");
         }
 
-        private void addToolstripBtn_Click(object sender, EventArgs e)
-        {
-            state = 0;
-        }
-
-        private void modifyToolstripBtn_Click(object sender, EventArgs e)
-        {
-            state = 1;
-        }
-
-        private void deactivateToolstripBtn_Click(object sender, EventArgs e)
-        {
-            state = 2;
-        }
     }
 }
