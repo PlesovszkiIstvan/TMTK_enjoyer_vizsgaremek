@@ -43,7 +43,7 @@
             this.productBtn = new System.Windows.Forms.Button();
             this.refreshBtn = new System.Windows.Forms.Button();
             this.SalesBtn = new System.Windows.Forms.Button();
-            this.sfButton1 = new Syncfusion.WinForms.Controls.SfButton();
+            this.UserBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.viewGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -177,7 +177,8 @@
             this.productBtn.BackColor = System.Drawing.Color.Lime;
             this.productBtn.Location = new System.Drawing.Point(13, 13);
             this.productBtn.Name = "productBtn";
-            this.productBtn.Size = new System.Drawing.Size(96, 39);
+            this.productBtn.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.productBtn.Size = new System.Drawing.Size(96, 38);
             this.productBtn.TabIndex = 7;
             this.productBtn.Text = "Product Operations";
             this.productBtn.UseVisualStyleBackColor = false;
@@ -206,22 +207,23 @@
             this.SalesBtn.UseVisualStyleBackColor = false;
             this.SalesBtn.Click += new System.EventHandler(this.SalesBtn_Click);
             // 
-            // sfButton1
+            // UserBtn
             // 
-            this.sfButton1.FocusRectangleVisible = true;
-            this.sfButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.sfButton1.Location = new System.Drawing.Point(565, 22);
-            this.sfButton1.Name = "sfButton1";
-            this.sfButton1.Size = new System.Drawing.Size(96, 28);
-            this.sfButton1.TabIndex = 9;
-            this.sfButton1.Text = "sfButton1";
+            this.UserBtn.BackColor = System.Drawing.Color.Lime;
+            this.UserBtn.Location = new System.Drawing.Point(319, 13);
+            this.UserBtn.Name = "UserBtn";
+            this.UserBtn.Size = new System.Drawing.Size(96, 39);
+            this.UserBtn.TabIndex = 10;
+            this.UserBtn.Text = "User Operations";
+            this.UserBtn.UseVisualStyleBackColor = false;
+            this.UserBtn.Click += new System.EventHandler(this.UserBtn_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1405, 450);
-            this.Controls.Add(this.sfButton1);
+            this.Controls.Add(this.UserBtn);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.productBtn);
             this.Controls.Add(this.SalesBtn);
@@ -255,7 +257,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private Syncfusion.WinForms.Controls.SfButton sfButton1;
+        private System.Windows.Forms.Button UserBtn;
     }
 }
 

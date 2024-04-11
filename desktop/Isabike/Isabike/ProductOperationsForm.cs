@@ -22,11 +22,6 @@ namespace Isabike
     public partial class ProductOperationsForm : Form
     {
 
-        public ProductOperationsForm (string updateData)
-        {
-
-        }
-
         private int state;
 
         public void populateTomeg(string uri)
@@ -82,7 +77,7 @@ namespace Isabike
                             elerheto = productAvelableBox.Checked
                         };
                         string json = JsonConvert.SerializeObject(jsonString);
-                        DbOperations.addProduct(json, "http://172.16.16.157:8000/api/addtermek");
+                        DbOperations.addProduct(json, "http://192.168.0.103:8000/api/addtermek");
                         break;
                     }
                     catch (Exception exp)
@@ -98,9 +93,9 @@ namespace Isabike
 
         private void ProductOperationsForm_Load(object sender, EventArgs e)
         {
-            populateGyarto("http://172.16.16.157:8000/api/gyartok");
-            populateKategoria("http://172.16.16.157:8000/api/kategoriak");
-            populateTomeg("http://172.16.16.157:8000/api/tomegtulajdonsagok");
+            populateGyarto("http://192.168.0.103:8000/api/gyartok");
+            populateKategoria("http://192.168.0.103:8000/api/kategoriak");
+            populateTomeg("http://192.168.0.103:8000/api/tomegtulajdonsagok");
         }
 
         private void addToolstripBtn_Click(object sender, EventArgs e)

@@ -18,13 +18,6 @@ class TermekContoller extends TermekekResponseController
         return $termekek;
     }
 
-    
-    public function getOneTermekek( $id ){
-        $termek = DB::select("call get_one_termek_procedure(".$id.");");
-
-        return $termek;
-    }
-
     public function addTermek(TermekekAddChecker $req){
         $body = json_decode($req->getContent());
         $token = $body->token;

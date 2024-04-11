@@ -363,3 +363,4 @@ C:\Users\diak\Documents\Plesovszki Iszvan\clone\TMTK_enjoyer_vizsgaremek-main\de
 C:\Users\diak\Documents\Plesovszki Iszvan\clone\TMTK_enjoyer_vizsgaremek-main\desktop\Isabike\Isabike\obj\Debug\Isabike.csproj.CopyComplete
 C:\Users\diak\Documents\Plesovszki Iszvan\clone\TMTK_enjoyer_vizsgaremek-main\desktop\Isabike\Isabike\obj\Debug\Isabike.exe
 C:\Users\diak\Documents\Plesovszki Iszvan\clone\TMTK_enjoyer_vizsgaremek-main\desktop\Isabike\Isabike\obj\Debug\Isabike.pdb
+E:\c_hashmark\TMTK_enjoyer_vizsgaremek\desktop\Isabike\Isabike\obj\Debug\Isabike.UserForm.resources

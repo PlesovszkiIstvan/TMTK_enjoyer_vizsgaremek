@@ -11,6 +11,7 @@ class EmailController extends Controller
 {
     public function sendVisszaIgazoloMail($code, $email){
         $content = [
+<<<<<<< HEAD
             "subject" => "Visszaigazoló kód.",
             "title" => "Visszaigazoló kód.",
             "code" => $code,
@@ -48,12 +49,12 @@ class EmailController extends Controller
     public function asd($email){
         $content = [
             "subject" => "Visza igazolo kod",
+=======
+>>>>>>> 35691a7f6a53f4362a94f28f74e382f56e4cfaa4
             "title" => "Visza Igazolo kod",
-            "code" => $email,
-            "view" => 'testt'
+            "code" => $code
         ];
 
         Mail::to( $email )->send( new Email($content) );
-        return $email;
     }
 }
