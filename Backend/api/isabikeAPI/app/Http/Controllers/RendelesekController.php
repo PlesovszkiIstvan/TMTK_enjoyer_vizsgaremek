@@ -39,8 +39,6 @@ class RendelesekController extends RendelesekResponseController
             if ($DBresponse1[0]->result == 0) {
                 return $this->sendError($body, "Hibás token ilyen felhasználo nem létezik");
             } else {
-                $DBresponse2 = DB::select("CALL get_one_rendeles_termekek_procedure(".$DBresponse1[0]->rendeles_id.");");
-                $DBresponse1["rendelt_termekek"] = $DBresponse2;
                 return $this->sendResponse($DBresponse1, "Felhasznalo rendelései sikeresen kilistázva");
             }
         }

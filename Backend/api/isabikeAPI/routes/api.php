@@ -46,7 +46,8 @@ Route::post("/logout", [ FelhasznaloController::class, "logOut"]); //web
 Route::get("/getfelhasznalok", [ FelhasznaloController::class, "getFelhasznalok"]);
 Route::put("/updatefelhasznalo", [ FelhasznaloController::class, "updateFelhasznalo"]);
 Route::put("/updateonefelhasznalo", [ FelhasznaloController::class, "updateOneFelhasznalo"]); //web
-Route::get("/getonefelhasznalo", [ FelhasznaloController::class, "getOneFelhasznalo"]); //web
+Route::post("/getonefelhasznalo", [ FelhasznaloController::class, "getOneFelhasznalo"]); //web
+//Route::get("/getonefelhasznalo", [ FelhasznaloController::class, "getOneFelhasznalo"]); eredeti végpont mely megfelel a szabványoknak
 
 Route::get("/ertekelesek", [ ErtekelesekController::class, "getErtekelesek"]); //web
 

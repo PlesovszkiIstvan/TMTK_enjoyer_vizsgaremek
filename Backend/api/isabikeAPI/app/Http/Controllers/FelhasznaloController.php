@@ -108,8 +108,8 @@ class FelhasznaloController extends FelhasznalokResponseController
     }
 
     public function getOneFelhasznalo(Request $req){
-        $token = $req->bearerToken();
-        $this->bearerToken()->hasBearer($token);
+        $body = json_decode($req->getContent());
+        $token = $body->token;
         $DBresponse = DB::select("call get_one_felhasznalo_procedure('".$token."');");
         if ($DBresponse[0]->result == 0) {
             return $this->sendError($DBresponse, "ilyen felhasználo nincs");
@@ -118,6 +118,18 @@ class FelhasznaloController extends FelhasznalokResponseController
         }
         return $token;
     }
+
+    // public function getOneFelhasznalo(Request $req){                               {-------------eredeti szabványnak megfelelö function }
+    //     $token = $req->bearerToken();
+    //     $this->bearerToken()->hasBearer($token);
+    //     $DBresponse = DB::select("call get_one_felhasznalo_procedure('".$token."');");
+    //     if ($DBresponse[0]->result == 0) {
+    //         return $this->sendError($DBresponse, "ilyen felhasználo nincs");
+    //     } else {
+    //         return $this->sendResponse($DBresponse, "Felhasznalo adatok sikeresen listázva");
+    //     }
+    //     return $token;
+    // }
 
     private function genToken(){
         return Random::generate(60, "0-9a-zA-Z");
