@@ -77,6 +77,7 @@ create table Rendelesek(
     szalito_id tinyint,
     fizetes_opcio_id TINYINT,
     kedvezmeny_id tinyint,
+	constraint fk_in_felhasznalok_felhasznalo_id foreign key(felhasznalo_id) REFERENCES Felhasznalok(felhasznalo_id) ON delete restrict,
     constraint fk_in_rendelesek_kedvezmeny_id foreign key(kedvezmeny_id) REFERENCES Kedvezmenyek(kedvezmeny_id) ON delete restrict,
     constraint fk_in_rendelesek_szalito_id foreign key(szalito_id) REFERENCES Szalitok(szalito_id) ON delete restrict,
     constraint fk_in_rendelesek_fizetes_opcio_id foreign key(fizetes_opcio_id) REFERENCES Fizetes_opciok(fizetes_opcio_id) ON delete restrict

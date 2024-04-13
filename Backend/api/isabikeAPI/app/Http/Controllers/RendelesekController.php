@@ -30,9 +30,8 @@ class RendelesekController extends RendelesekResponseController
     }
 
     public function getOneRendeles(Request $req){
-        $token = $req->bearerToken();
         $body = json_decode($req->getContent());
-        $this->bearerToken()->hasBearer($token);
+        $token = $body->token;
         $DBresponse1 = DB::select("CALL get_one_rendeles_procedure('".$token."');");
         if (empty($DBresponse1)) {
             return $this->sendError($body, "Nincs még rendelésed");
@@ -47,6 +46,25 @@ class RendelesekController extends RendelesekResponseController
         }
 
     }
+
+    // public function getOneRendeles(Request $req){                        {-------eredeti fuction megfelelö biztonsági szabványok szerint}
+    //     $token = $req->bearerToken();
+    //     $body = json_decode($req->getContent());
+    //     $this->bearerToken()->hasBearer($token);
+    //     $DBresponse1 = DB::select("CALL get_one_rendeles_procedure('".$token."');");
+    //     if (empty($DBresponse1)) {
+    //         return $this->sendError($body, "Nincs még rendelésed");
+    //     } else {
+    //         if ($DBresponse1[0]->result == 0) {
+    //             return $this->sendError($body, "Hibás token ilyen felhasználo nem létezik");
+    //         } else {
+    //             $DBresponse2 = DB::select("CALL get_one_rendeles_termekek_procedure(".$DBresponse1[0]->rendeles_id.");");
+    //             $DBresponse1["rendelt_termekek"] = $DBresponse2;
+    //             return $this->sendResponse($DBresponse1, "Felhasznalo rendelései sikeresen kilistázva");
+    //         }
+    //     }
+
+    // }
 
     public function getAllRendeles(Request $req){
         $token = $req->bearerToken();

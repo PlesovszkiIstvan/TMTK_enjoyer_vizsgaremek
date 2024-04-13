@@ -71,7 +71,8 @@ Route::delete("/deletekosar/{id}", [ KosarazotTermekekController::class, "delete
 
 Route::post("/addrendeles", [RendelesekController::class, "addRendeles"]); //web 
 Route::get("/getallrendeles", [RendelesekController::class, "getAllRendeles"]);
-Route::get("/getonerendeles", [RendelesekController::class, "getOneRendeles"]); //web
+Route::post("/getonerendeles", [RendelesekController::class, "getOneRendeles"]); //web
+//Route::get("/getonerendeles", [RendelesekController::class, "getOneRendeles"]); eredeti végpont mely megfelel a szabványoknak
 Route::get("/getallrendelttermek", [RendelesekController::class, "getAllRendeltTermek"]); 
 Route::get("/getonerendelestermekek/{id}", [RendelesekController::class, "getOneRendelesTermekek"]); 
 Route::patch("/updaterendelttermek/{id}", [RendelesekController::class, "updateRendeltTermek"]); 
