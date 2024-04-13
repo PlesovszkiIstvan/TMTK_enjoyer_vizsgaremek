@@ -122,7 +122,7 @@ create table Termekek(
 create table termek_kepek(
 	termek_kep_id mediumint primary key auto_increment,
     termek_id mediumint not null,
-    kep_helye text unique,
+    kep_helye MEDIUMTEXT ,
     constraint fk_in_termekek_kep_id foreign key(termek_id) references Termekek(termek_id)
 );
 
@@ -145,6 +145,7 @@ create table Kosarazot_termekek(
 );
 
 create table Rendelt_termekek(
+	rendelt_termek_id mediumint primary key auto_increment,
 	rendeles_id mediumint not null,
     termek_id mediumint not null,
     darabszam tinyint not null,
@@ -822,7 +823,7 @@ END $$
 DELIMITER ;
 
 DElIMITER $$
-create procedure add_termek_kep_procedure(IN Token_p varchar(100), IN termek_id_p mediumint, IN kep_helye_p varchar(100))
+create procedure add_termek_kep_procedure(IN Token_p varchar(100), IN termek_id_p mediumint, IN kep_helye_p MEDIUMTEXT)
 BEGIN
 	declare felhasznalo_id_var int;
 	
@@ -914,7 +915,9 @@ BEGIN
 		then
 			select false as result;
 		else
-			SELECT *, true as result FROM Kosarazot_termekek
+			SELECT *, true as result FROM Kosarazot_termekek 
+            left join termekek
+			on termekek.termek_id = Kosarazot_termekek.termekek_id
             where kosarazot_termekek.felhasznalo_id = felhasznalo_id_var;
 		end if;
 END $$
@@ -1047,7 +1050,13 @@ BEGIN
 		then
 			select false as result;
 		else
-			SELECT *, true as result FROM rendelesek;
+			SELECT rendeles_id, rendeles_ideje, megjegyzes, szalito_nev, fizetes_modja, kedvezmeny_id, felhasznalo_nev, vasarlo_telefonszama, email, szalitasi_cime, true as result FROM rendelesek 
+		left join felhasznalok
+        on rendelesek.felhasznalo_id = felhasznalok.felhasznalo_id
+		left join Szalitok
+        on rendelesek.szalito_id = Szalitok.szalito_id
+		left join Fizetes_opciok
+        on rendelesek.fizetes_opcio_id = Fizetes_opciok.fizetes_opcio_id;
 		end if;
 END $$
 DELIMITER ;
@@ -1075,10 +1084,34 @@ DELIMITER ;
 DElIMITER $$
 create procedure get_one_rendeles_termekek_procedure(IN rendeles_id mediumint)
 BEGIN
-	select termek_nev, darabszam, egyseg_ar from rendelt_termekek left join termekek
+	select rendeles_id, termek_nev, darabszam, egyseg_ar, kezbesitve from rendelt_termekek left join termekek
         on rendelt_termekek.termek_id = termekek.termek_id where rendelt_termekek.rendeles_id = rendeles_id;
 END $$
 DELIMITER ;
+
+DElIMITER $$
+create procedure update_rendelt_termek(IN Token_p varchar(100), IN rendelt_termek_id_p mediumint)
+BEGIN
+	declare felhasznalo_id_var int;
+		
+		SELECT tokenek.felhasznalo_id
+		INTO felhasznalo_id_var
+		FROM tokenek
+		inner join felhasznalok on tokenek.felhasznalo_id = felhasznalok.felhasznalo_id
+		where tokenek.token = token_p and felhasznalok.jogosultsag = 3;
+		
+		if felhasznalo_id_var is null
+		then
+			select false as result;
+		else
+			UPDATE rendelt_termekek
+			SET rendelt_termekek.kezbesitve = true
+			WHERE rendelt_termekek.rendelt_termek_id = rendelt_termek_id_p;
+			select true as result;
+		end if;
+END $$
+DELIMITER ;
+
 
 DElIMITER $$
 create procedure get_kategoriak_procedure()

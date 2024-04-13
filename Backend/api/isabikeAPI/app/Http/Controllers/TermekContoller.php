@@ -36,7 +36,6 @@ class TermekContoller extends TermekekResponseController
         $szine = $body->szine;
         $leiras = $body->leiras;
         $egyseg_ar = $body->egyseg_ar;
-        $elerheto = $body->elerheto;
         $response = DB::select('call add_termek_procedure("'
         .$token.'","'
         .$termek_kateg.'","'
@@ -70,7 +69,6 @@ class TermekContoller extends TermekekResponseController
         $szine = $body->szine;
         $leiras = $body->leiras;
         $egyseg_ar = $body->egyseg_ar;
-        $elerheto = $body->elerheto;
         $response = DB::select('call update_termek_procedure("'
         .$token.'",'
         .$termek_id.',"'

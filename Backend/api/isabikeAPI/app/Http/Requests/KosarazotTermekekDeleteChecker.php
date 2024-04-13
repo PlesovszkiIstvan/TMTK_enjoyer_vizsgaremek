@@ -24,7 +24,7 @@ class KosarazotTermekekDeleteChecker extends FormRequest
     public function rules(): array
     {
         return [
-            'termek_id' => 'required|integer',
+            //'termek_id' => 'required|integer',
         ];
     }
     

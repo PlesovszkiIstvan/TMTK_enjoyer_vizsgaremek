@@ -35,7 +35,6 @@ class TermekekUpdateChecker extends FormRequest
             'szine' => 'required',
             'leiras' => 'required',
             'egyseg_ar' => 'required|numeric',
-            'elerheto' => 'required|numeric',
         ];
     }
 

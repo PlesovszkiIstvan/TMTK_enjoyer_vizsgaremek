@@ -80,4 +80,20 @@ class RendelesekController extends RendelesekResponseController
         }
         return $DBresponse;
     }
+
+    public function getOneRendelesTermekek($id){
+        $DBresponse = DB::select("CALL get_one_rendeles_termekek_procedure(".$id.");");
+        return $this->sendResponse($DBresponse, "A rendelés termékei sikeresen kilistázva");
+    }
+
+    public function updateRendeltTermek($id, Request $req){
+        $token = $req->bearerToken();
+        $this->bearerToken()->hasBearer($token);
+        $DBresponse = DB::select("CALL update_rendelt_termek('".$token."',".$id.");");
+        if ($DBresponse[0]->result == 0) {
+            return $this->sendError($body, "Hibás token ilyen admin nem létezik");
+        } else {
+        return $this->sendResponse($DBresponse, "A termék kézbesitési álapota sikeresen modositva");
+        } 
+    }
 }

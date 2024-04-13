@@ -61,12 +61,17 @@ Route::post("/addtermekkep", [ TermekKepController::class, "addTermekKep"]);
 Route::delete("/deletetermekkep", [ TermekKepController::class, "deleteTermekKep"]);
 Route::get("/onetermekkepek/{termekid}", [ TermekKepController::class, "getOneTermekKepek"]); //web 
 
-Route::get("/getonekosar", [ KosarazotTermekekController::class, "getOneKosar"]); //web 
+Route::post("/getonekosar", [ KosarazotTermekekController::class, "getOneKosar"]); //web
+//Route::get("/getonekosar", [ KosarazotTermekekController::class, "getOneKosar"]); eredeti végpont
+
 Route::post("/addkosar", [ KosarazotTermekekController::class, "addToKosar"]); //web 
 Route::put("/updatekosar", [ KosarazotTermekekController::class, "updateKosar"]); //web 
-Route::delete("/deletekosar", [ KosarazotTermekekController::class, "deleteKosar"]); //web
+Route::delete("/deletekosar/{id}", [ KosarazotTermekekController::class, "deleteKosar"]); //web
+//Route::delete("/deletekosar", [ KosarazotTermekekController::class, "deleteKosar"]); eredeti végpont, meg felel az adatok szabályos titkositásának
 
 Route::post("/addrendeles", [RendelesekController::class, "addRendeles"]); //web 
 Route::get("/getallrendeles", [RendelesekController::class, "getAllRendeles"]);
 Route::get("/getonerendeles", [RendelesekController::class, "getOneRendeles"]); //web
 Route::get("/getallrendelttermek", [RendelesekController::class, "getAllRendeltTermek"]); 
+Route::get("/getonerendelestermekek/{id}", [RendelesekController::class, "getOneRendelesTermekek"]); 
+Route::patch("/updaterendelttermek/{id}", [RendelesekController::class, "updateRendeltTermek"]); 
