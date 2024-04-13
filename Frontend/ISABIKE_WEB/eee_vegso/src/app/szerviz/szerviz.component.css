@@ -1,0 +1,34 @@
+.outer-container {
+    background-color: #f0f0f0;
+    padding: 20px; 
+    min-height: 100vh;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+h1, p {
+  text-align: center;
+}
+.service-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: antiquewhite;
+}
+.service-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.service-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+.service-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+}

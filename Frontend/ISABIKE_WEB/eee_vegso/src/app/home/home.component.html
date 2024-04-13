@@ -1,0 +1,30 @@
+<div class="outer-container">
+  <div class="container">
+    <div class="brand-container">
+      <div class="row justify-content-center">
+        <div class="col-6 col-md-2 mb-2" *ngFor="let brand of markak">
+          <img [src]="brand" class="img-fluid brand-logo" alt="Brand logo">
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-md-4 mb-4" *ngFor="let product of products.slice(0, 6); let i = index">
+        <div class="card">
+          <img [src]="product.kep_helye" class="card-img-top img-fluid product-image-home" [alt]="product.termek_nev + ' image'">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.termek_nev }}</h5>
+            <p class="card-text">{{ product.leiras }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="card-text"><strong>Ár:</strong> {{ product.egyseg_ar }} Ft</p>
+              <button (click)="showProductDetails(product.termek_id)">Részletek</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2024 ISABIKE Kerékpárüzlet. Minden jog fenntartva.</p>
+</footer>

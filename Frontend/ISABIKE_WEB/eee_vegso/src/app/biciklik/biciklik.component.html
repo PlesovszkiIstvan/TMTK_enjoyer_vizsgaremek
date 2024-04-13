@@ -1,0 +1,29 @@
+<div class="outer-container">
+  <div class="container mt-3">
+    <div class="row mt-4">
+      <div class="col-md-3 mb-4" *ngFor="let termek of products.slice((page - 1) * pageSize, page * pageSize)">
+        <div class="card">
+          <img *ngIf="termek.kep_helye" [src]="termek.kep_helye" class="card-img-top img-fluid termek-image" alt="Termék Kép">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a>{{ termek.termek_nev }}</a>
+            </h5>          
+            <p class="card-text"><strong>Gyártó:</strong> {{ termek.gyarto_neve }}</p>
+            <p class="card-text"><strong>Leírás:</strong> {{ termek.leiras }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <p class="card-text"><strong>Ár:</strong> {{ termek.egyseg_ar }} Ft</p>
+              <button  (click)="showProductDetails(termek.termek_id)">Részletek</button>
+            </div>          
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button (click)="onPageChange(page - 1)" [disabled]="page === 1">Előző</button>
+      <button (click)="onPageChange(page + 1)" [disabled]="page * pageSize >= totalItems">Következő</button>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2024 ISABIKE Kerékpárüzlet. Minden jog fenntartva.</p>
+</footer>

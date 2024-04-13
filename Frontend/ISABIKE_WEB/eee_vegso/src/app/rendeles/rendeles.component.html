@@ -1,0 +1,45 @@
+<div class="container">
+    <form *ngIf="orderForm" [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="vasarlo_telefonszama">Vásárló telefonszáma</label>
+            <input type="text" class="form-control" id="vasarlo_telefonszama" formControlName="vasarlo_telefonszama"
+                required>
+            <div *ngIf="orderForm.get('vasarlo_telefonszama')?.invalid && orderForm.get('vasarlo_telefonszama')?.touched"
+                class="text-danger">
+                Vásárló telefonszáma kötelező
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="szalitasi_cime">Szállítási címe</label>
+            <input type="text" class="form-control" id="szalitasi_cime" formControlName="szalitasi_cime" required>
+            <div *ngIf="orderForm.get('szalitasi_cime')?.invalid && orderForm.get('szalitasi_cime')?.touched"
+                class="text-danger">
+                Szállítási cím kötelező
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="megjegyzes">Megjegyzés</label>
+            <textarea class="form-control" id="megjegyzes" formControlName="megjegyzes"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="szalito_id">Szállító</label>
+            <input type="text" class="form-control" id="szalito_id" [value]="szalitoText" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="fizetes_opcio_id">Fizetési opció</label>
+            <input type="text" class="form-control" id="fizetes_opcio_id" [value]="fizetesText" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="kedvezmeny_id">Kedvezmény</label>
+            <input type="text" class="form-control" id="kedvezmeny_id" [value]="kedvezmenyText" readonly>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Küldés</button>
+    </form>
+
+</div>  

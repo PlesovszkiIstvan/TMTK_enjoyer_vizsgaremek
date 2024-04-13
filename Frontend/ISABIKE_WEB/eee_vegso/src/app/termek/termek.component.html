@@ -1,0 +1,56 @@
+<div class="outer-container" *ngIf="termek && termek.length > 0">
+  <div class="container">
+    <div class="image-container">
+      <img *ngIf="termek[0].kep_helye" [src]="termek[0].kep_helye" class="product-image" alt="Product Image">
+    </div>
+    <div class="second">
+    <h2>{{ termek[0].termek_nev }}</h2>
+      <table>
+        <tr>
+          <th>Kategória: </th>
+          <td>{{ termek[0].kategoria_neve }}</td>
+        </tr>
+        <tr>
+          <th>Gyártó: </th>
+          <td>{{ termek[0].gyarto_neve }}</td>
+        </tr>
+        <tr>
+          <th>Mennyiség rakáron:</th>
+          <td>{{ termek[0].raktarondb }} db</td>
+        </tr>
+        <tr>
+          <th>Súly: </th>
+          <td>{{ termek[0].tomeg_erteke }} {{ termek[0].mertek_egysege }}</td>
+        </tr>
+        <tr>
+          <th>Szín: </th>
+          <td>{{ termek[0].szine }}</td>
+        </tr>
+        <tr>
+          <th>Leírás: </th>
+          <td>{{ termek[0].leiras }}</td>
+        </tr>
+        <tr>
+          <th>Ár: </th>
+          <td>{{ termek[0].egyseg_ar }}</td>
+        </tr>
+        <tr>
+          <th>Elérhetőség: </th>
+          <td>{{ termek[0].elerheto ? 'Elérhető' : 'Nem Elérhető' }}</td>
+        </tr>
+        <div class="row">
+          <div class="col">
+            <button (click)="goBack()">Másik termék megtekintése</button>
+          </div>
+          <div class="col">
+            <button (click)="addCart()">Hozzáadás a kosárhoz</button>
+          </div>
+        </div>
+      </table>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>&copy; 2024 Rólunk Kerékpárüzlet. Minden jog fenntartva.</p>
+</footer>
+
