@@ -42,7 +42,6 @@ namespace Isabike
         private void Main_Load(object sender, EventArgs e)
         {
             connectToDB(gridState);
-
             if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
             {
                 viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
@@ -67,19 +66,7 @@ namespace Isabike
 
         private void ReviewsBtn_Click(object sender, EventArgs e)
         {
-            connectToDB(gridState);
-            if (gridState)
-            {
-                ReviewsBtn.BackColor = Color.Red;
-                gridState = false;
-                connectToDB(gridState);
-            }
-            else
-            {
-                ReviewsBtn.BackColor = Color.Green;
-                gridState = true;
-                connectToDB(gridState);
-            }
+            MessageBox.Show("No");
 
         }
 
@@ -105,67 +92,43 @@ namespace Isabike
         private void refreshBtn_Click(object sender, EventArgs e)
         {
 
-            if (!gridState)
+            viewGridRefresh();
+            if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
             {
-                gridState = true;
+                viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
+                viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
+
             }
-            else
-            {
-                gridState = false;
-                if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
-                {
-                    viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
-                    viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
-                }
-            }
-            connectToDB(gridState);
-            
+
         }
 
         private void connectToDB(bool isSales)
         {
-            manufactererBox.DataSource = DbConnect.getData("http://127.0.0.1:8000/api/gyartok");
-            manufactererBox.ValueMember = "gyarto_id";
-            manufactererBox.DisplayMember = "gyarto_neve";
-            categoryBox.DataSource = DbConnect.getData("http://127.0.0.1:8000/api/kategoria");
-            categoryBox.ValueMember = "kategoria_id";
-            categoryBox.DisplayMember = "kategoria_neve";
 
             if (viewGrid.Rows.Count > 0) {
                 viewGrid.Rows.Clear();
                 viewGrid.Columns.Clear();
             }
-            if (!isSales) {
-                GetRESTData("http://127.0.0.1:8000/api/termekek/100");
-            }
-            else
-            {
-                GetRESTData("http://127.0.0.1:8000/api/getvelemenyek");
-            }
-
-            
+            GetRESTData("http://127.0.0.1:8000/api/termekek/100");      
         }
 
         private void filterBtn_Click(object sender, EventArgs e)
         {
             viewGrid.Rows.Clear();
             viewGrid.Columns.Clear();
-            viewGrid.DataSource = DbConnect.getFilteredData("http://127.0.0.1:8000/api/termekek/100", termeknevTextbox.Text,Convert.ToDouble(suly_textbox.Text), manufactererBox.Text);
-            if (!gridState)
+            viewGrid.DataSource = DbConnect.getFilteredData("http://127.0.0.1:8000/api/termekek/100", termeknevTextbox.Text);
+            if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
             {
-                if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
-                {
                      viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
                      viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
 
-                }
             }
             
         }
 
         private void viewGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == viewGrid.Columns["delete_column"].Index)
+            if (e.ColumnIndex == 1)
             {
                 try
                 {
@@ -177,6 +140,7 @@ namespace Isabike
                     string jsonString = JsonConvert.SerializeObject(json);
                     DbOperations dbOperations = new DbOperations();
                     dbOperations.deleteProduct(jsonString, "http://127.0.0.1:8000/api/deletetermek");
+                    viewGridRefresh();
                 }
                 catch (Exception ex)
                 {
@@ -185,28 +149,26 @@ namespace Isabike
                 }
                 
             }
-            if (e.ColumnIndex == viewGrid.Columns["update_column"].Index)
+            if (e.ColumnIndex == 0)
             {
                 try
                 {
-                    var jsonString = new
-                    {
-                        token = Login.getToken(),
-                        termek_id = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[2].Value),
-                        termek_kateg = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[3].Value),
-                        termek_nev = viewGrid.Rows[e.RowIndex].Cells[5].Value,
-                        gyarto_id = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[6].Value),
-                        raktarondb = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[10].Value),
-                        tomeg_tulajdonsaga_id = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[11].Value),
-                        tomeg_erteke = Convert.ToDouble(viewGrid.Rows[e.RowIndex].Cells[13].Value),
-                        szine = viewGrid.Rows[e.RowIndex].Cells[14].Value,
-                        leiras = viewGrid.Rows[e.RowIndex].Cells[15].Value,
-                        egyseg_ar = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[16].Value),
-                        elerheto = viewGrid.Rows[e.RowIndex].Cells[17].Value
-                    };
-                    string json = JsonConvert.SerializeObject(jsonString);
-                    DbOperations dbOperations = new DbOperations();
-                    dbOperations.updateProduct(json, "http://127.0.0.1:8000/api/updatetermek");
+
+                    int termekId = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[2].Value);
+                    int termekKateg = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[3].Value);
+                    string termekNev = viewGrid.Rows[e.RowIndex].Cells[5].Value.ToString();
+                    int gyartoId = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[6].Value);
+                    int raktarondb = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[10].Value);
+                    int tomegTulajdonsagaId = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[11].Value);
+                    double tomegErteke = Convert.ToDouble(viewGrid.Rows[e.RowIndex].Cells[13].Value);
+                    string szine = viewGrid.Rows[e.RowIndex].Cells[14].Value.ToString();
+                    string leiras = viewGrid.Rows[e.RowIndex].Cells[15].Value.ToString();
+                    int egysegAr = Convert.ToInt32(viewGrid.Rows[e.RowIndex].Cells[16].Value);
+
+                    ProductOperationsForm form = new ProductOperationsForm(
+                        termekId, termekNev, raktarondb,
+                        tomegErteke, szine, leiras, egysegAr);
+                    form.ShowDialog();
                 }
                 catch (Exception ex)
                 {
@@ -221,6 +183,36 @@ namespace Isabike
         {
             UserForm frm = new UserForm();
             frm.ShowDialog();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.MaximizeBox = false;
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            this.Width = 602;
+            this.Height = 651;
+        }
+
+        private void viewGridRefresh()
+        {
+            connectToDB(gridState);
+            if (viewGrid.Columns["delete_column"] == null && viewGrid.Columns["update_column"] == null)
+            {
+                viewGrid.Columns.Insert(ColumnIndex[0], updateButtonColumn);
+                viewGrid.Columns.Insert(ColumnIndex[1], deleteButtonColumn);
+            }
+            
+        }
+
+        private void ordersBtn_Click(object sender, EventArgs e)
+        {
+            OrdersForm ordersForm = new OrdersForm();
+            ordersForm.ShowDialog();
         }
     }
 }

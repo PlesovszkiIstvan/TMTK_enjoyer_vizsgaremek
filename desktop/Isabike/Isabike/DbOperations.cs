@@ -30,8 +30,6 @@ namespace Isabike
 
             string[] keyLocation = splitedRes[1].Split(':');
 
-            MessageBox.Show(keyLocation[1]);
-
             return keyLocation[1];
         }
 
@@ -49,7 +47,7 @@ namespace Isabike
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
-                MessageBox.Show(result);
+                MessageBox.Show("Sikeres termék hozzáadás!");
             }
 
         }
@@ -78,7 +76,7 @@ namespace Isabike
                     else
                     {
                         MessageBox.Show($"Failed to delete item. Status code: {response.StatusCode}");
-                        // Optionally, you can read the response content for more details
+                        
                         string responseBody = await response.Content.ReadAsStringAsync();
                         MessageBox.Show($"Response body: {responseBody}");
                     }
@@ -117,7 +115,7 @@ namespace Isabike
                     else
                     {
                         MessageBox.Show($"Failed to updated item. Status code: {response.StatusCode}");
-                        // Optionally, you can read the response content for more details
+                        
                         string responseBody = await response.Content.ReadAsStringAsync();
                         MessageBox.Show($"Response body: {responseBody}");
                     }
@@ -151,11 +149,48 @@ namespace Isabike
                 else
                 {
                     MessageBox.Show($"Failed to updated user. Status code: {response.StatusCode}");
-                    // Optionally, you can read the response content for more details
+                    
                     string responseBody = await response.Content.ReadAsStringAsync();
                     MessageBox.Show($"Response body: {responseBody}");
                 }
             }
+        }
+
+        public async void updateOrder(string url)
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Login.getToken());
+                    HttpRequestMessage request = new HttpRequestMessage
+                    {
+                       Content = new StringContent("", Encoding.UTF8, "application/json"),
+                        Method = new HttpMethod("PATCH"),
+                        RequestUri = new Uri(url)
+                    };
+                    HttpResponseMessage response = await client.SendAsync(request);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Item updated successfully.");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Failed to updated item. Status code: {response.StatusCode}");
+                        
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        MessageBox.Show($"Response body: {responseBody}");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

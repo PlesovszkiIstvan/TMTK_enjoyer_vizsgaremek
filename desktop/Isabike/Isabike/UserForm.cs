@@ -29,6 +29,7 @@ namespace Isabike
         {
             GetRESTData("http://127.0.0.1:8000/api/getfelhasznalok");
             adminButtonCreate();
+            populatePrivilege();
         }
 
         private void GetRESTData(string uri)
@@ -59,18 +60,53 @@ namespace Isabike
                     vasarlo_telefonszama = userDataGridView.Rows[e.RowIndex].Cells[5].Value,
                     email = userDataGridView.Rows[e.RowIndex].Cells[6].Value,
                     szalitasi_cime = userDataGridView.Rows[e.RowIndex].Cells[8].Value,
-                    jogosultsag = 3
+                    jogosultsag = Convert.ToInt32(privilageComboBox.SelectedValue)
                 };
                 string json = JsonConvert.SerializeObject(jsonString);
                 DbOperations dbOperations = new DbOperations();
                 dbOperations.updateUser(json, "http://127.0.0.1:8000/api/updatefelhasznalo");
+                RefreshUsers();
             }
         }
 
         private void refreshBtn_Click(object sender, EventArgs e)
         {
+            RefreshUsers();
+        }
+
+        public void populatePrivilege()
+        {
+            List<Privilege> privileges = new List<Privilege> {
+                new Privilege(1,"Felhasználó"),
+                new Privilege(2,"Eladó"),
+                new Privilege(3,"Admin")
+            };
+            privilageComboBox.DataSource = privileges;
+            privilageComboBox.DisplayMember = "Name";
+            privilageComboBox.ValueMember = "Id";
+
+        }
+
+        private void RefreshUsers()
+        {
+            userDataGridView.Rows.Clear();
+            userDataGridView.Columns.Clear();
             GetRESTData("http://127.0.0.1:8000/api/getfelhasznalok");
             adminButtonCreate();
+            populatePrivilege();
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.MaximizeBox = false;
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            this.MaximumSize = this.Size;
+            this.MinimumSize = this.Size;
         }
     }
 }

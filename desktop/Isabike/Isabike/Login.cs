@@ -44,7 +44,6 @@ namespace Isabike
         {
             if (DbConnect.loginToProg(EmailTextfield.Text, PasswordTextfield.Text, "http://127.0.0.1:8000/api/login"))
             {
-                MessageBox.Show("Sikeres bejelentkezés!");
                 MainForm main = new MainForm();
                 this.Visible = false;
                 main.ShowDialog();
@@ -58,6 +57,23 @@ namespace Isabike
             this.Close();
         }
 
-        
+        private void Login_Resize(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.MaximizeBox = false;
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            this.Width = 450;
+            this.Height = 170;
+        }
+
     }
 }
