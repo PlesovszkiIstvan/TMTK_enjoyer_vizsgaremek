@@ -1085,7 +1085,7 @@ DELIMITER ;
 DElIMITER $$
 create procedure get_one_rendeles_termekek_procedure(IN rendeles_id mediumint)
 BEGIN
-	select rendeles_id, termek_nev, darabszam, egyseg_ar, kezbesitve from rendelt_termekek left join termekek
+	select rendelt_termek_id, rendeles_id, termek_nev, darabszam, egyseg_ar, kezbesitve from rendelt_termekek left join termekek
         on rendelt_termekek.termek_id = termekek.termek_id where rendelt_termekek.rendeles_id = rendeles_id;
 END $$
 DELIMITER ;
