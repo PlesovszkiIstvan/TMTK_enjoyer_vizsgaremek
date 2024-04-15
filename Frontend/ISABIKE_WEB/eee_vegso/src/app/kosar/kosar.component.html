@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4" *ngFor="let item of shoppingCartData" style="min-height: 150px;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Termék neve: {{ item.termek_nev }}</h5>
+                    <p class="card-text">Mennyiség: {{ item.darabszam }}</p>
+                    <p class="card-text">Kosárhoz adva: {{ item.kosarazas_ideje }}</p>
+                    <button class="btn btn-danger" (click)="deleteItem(item.termek_id)">Törlés</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-success" routerLink="/rendeles">Megrendelés</button>
+</div>

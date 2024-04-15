@@ -1,0 +1,55 @@
+.product-image-home {
+  height: 200px; 
+  object-fit: cover;
+}
+
+.brand-logo {
+  max-width: 120px;
+  max-height: 120px;
+  margin-top: 5px;
+  margin-left: 40px;
+}
+
+.brand-container {
+  background-color: #747488;
+}
+
+.container {
+  background-color: #f0f0f0;
+}
+
+.outer-container {
+  background-color: #f0f0f0;
+  padding: 20px; 
+  min-height: 100vh;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+button {
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s; 
+}
+button:hover {
+  background-color: #fd7e14;
+  color: black; 
+}
+
+@media (max-width: 767px) {
+  .brand-logo {
+      max-width: 100px;
+      max-height: 100px; 
+  }
+  .outer-container {
+      padding-top: 15px; 
+  }
+  .brand-container {
+      display: grid;
+      justify-content: space-evenly;
+      background-color: #747488;
+  }
+}

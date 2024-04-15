@@ -25,7 +25,7 @@ class FelhasznalokLogInChecker extends FormRequest
     {
         return [
             "email"=>"required|email",
-            "password"=>"required|min:3|max:10"
+            "password"=>"required|min:3|max:30"
         ];
     }
 

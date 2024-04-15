@@ -1,0 +1,40 @@
+<div class="outer-container">
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-4">
+        <div class="card m-3"> 
+            <div class="card-body">
+                <h5 class="card-title mb-4">Regisztráció</h5>
+                <form [formGroup]="registerForm">
+                    <div class="mb-3">
+                        <label for="felhasznalo_nev" class="form-label">Név</label>
+                        <input type="text" class="form-control" id="felhasznalo_nev" name="felhasznalo_nev" formControlName="felhasznalo_nev" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="kereszt_nev" class="form-label">Keresztnév</label>
+                        <input type="text" class="form-control" id="kereszt_nev" name="kereszt_nev" formControlName="kereszt_nev" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="vezetek_nev" class="form-label">Vezetéknév</label>
+                        <input type="text" class="form-control" id="vezetek_nev" name="vezetek_nev" formControlName="vezetek_nev" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail cím</label>
+                        <input type="email" class="form-control" id="email" name="email" required formControlName="email" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Jelszó</label>
+                        <input type="password" class="form-control" id="password" name="password" required formControlName="password" />
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button (click)="registerAction()" type="submit" class="btn btn-warning btn-block orange-bg">Regisztráció</button>
+                        <p class="text-center">Már van fiókja? <a routerLink="/login" class="orange-text">Jelentkezzen be itt</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<footer>
+    <p>&copy; 2024 ISABIKE Kerékpárüzlet. Minden jog fenntartva.</p>
+</footer>

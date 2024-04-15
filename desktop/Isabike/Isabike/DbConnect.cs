@@ -57,6 +57,7 @@ namespace Isabike
             try
             {
                 var webRequest = (HttpWebRequest)WebRequest.Create(uri);
+                
                 webRequest.Headers.Add(HttpRequestHeader.Authorization, "Bearer " + Login.getToken());
                 var webResponse = (HttpWebResponse)webRequest.GetResponse();
                 var reader = new StreamReader(webResponse.GetResponseStream());
@@ -72,7 +73,7 @@ namespace Isabike
             }
         }
 
-        public static JArray getFilteredData(string uri, string termeknev, double suly, string gyarto)
+        public static JArray getFilteredData(string uri, string termeknev)
         {
 
             try
@@ -84,9 +85,7 @@ namespace Isabike
                 if ((webResponse.StatusCode == HttpStatusCode.OK) && (s.Length > 0))
                 {
                     List<Termekek> termekekFiltered = JsonConvert.DeserializeObject<List<Termekek>>(s);
-                    var filtered = termekekFiltered.Where(termek => termek.gyarto_neve == gyarto)
-                        .Where(termek => termek.termek_nev == termeknev)
-                        .Where(termek => termek.tomeg_erteke == suly);
+                    var filtered = termekekFiltered.Where(termek => termek.termek_nev == termeknev);
                     return JArray.FromObject(filtered);
                 }
                 else
@@ -102,6 +101,41 @@ namespace Isabike
             }
         }
 
+        public static bool checkPrivilege(string token)
+        {
+            try
+            {
+                var webRequest = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:8000/api/getonefelhasznalo");
+                webRequest.ContentType = "application/json";
+                webRequest.Method = "POST";
+
+                using (var streamWriter = new StreamWriter(webRequest.GetRequestStream()))
+                {
+                    string json = "{\"token\":\"" + token + "\"}";
+                    streamWriter.Write(json);
+                }
+                var webResponse = (HttpWebResponse)webRequest.GetResponse();
+                var reader = new StreamReader(webResponse.GetResponseStream());
+                string jsonResponse = reader.ReadToEnd();
+                JObject responseObject = JObject.Parse(jsonResponse);
+                JArray data = (JArray)responseObject["data"];
+                var adat = data[0];
+                if (adat["jogosultsag"].Value<int>() > 1)
+                {
+                    return true;
+                }
+                else {
+                    MessageBox.Show("Hiba!","Az alkalmazás használatához nincs jogosultságot");
+                    return false; 
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public static bool loginToProg( string email, string password, string url) {
             try
             {
@@ -110,21 +144,29 @@ namespace Isabike
                 httpWebRequest.Method = "POST";
     
                 using(var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-{
+                {
                  string json = "{\"password\":\"" + password +"\"," +
                               "\"email\":\""+ email +"\"}";
                 streamWriter.Write(json);
-            }
+                }
 
                 var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
                 using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
                 {
                     var result = streamReader.ReadToEnd();
-                    MessageBox.Show(result);
                     string token = DbOperations.getKey(result);
                     Login.setToken(token);
+                    if (checkPrivilege(token))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        logOut(token, "http://127.0.0.1:8000/api/logout");
+                        return false;
+                    }
                 }
-                return true;
+                
             }
             catch (Exception)
             {
@@ -152,9 +194,50 @@ namespace Isabike
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
-                MessageBox.Show(result);
             }
         }
+
+        public static JArray getOrderData(string token, string uri) 
+        {
+            try
+            {
+                var webRequest = (HttpWebRequest)WebRequest.Create(uri);
+                
+                webRequest.Headers.Add(HttpRequestHeader.Authorization, "Bearer " + Login.getToken());
+                var webResponse = (HttpWebResponse)webRequest.GetResponse();
+                var reader = new StreamReader(webResponse.GetResponseStream());
+                string jsonResponse = reader.ReadToEnd();
+                JObject responseObject = JObject.Parse(jsonResponse);
+                JArray data = (JArray)responseObject["data"];
+                return data;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+        public static JArray getOrderData( string uri)
+        {
+            try
+            {
+                var webRequest = (HttpWebRequest)WebRequest.Create(uri);
+                var webResponse = (HttpWebResponse)webRequest.GetResponse();
+                var reader = new StreamReader(webResponse.GetResponseStream());
+                string s = reader.ReadToEnd();
+                JObject responseObject = JObject.Parse(s);
+                JArray data = (JArray)responseObject["data"];
+                return data;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+
     }
 }
 

@@ -1,0 +1,26 @@
+<div class="outer-container">
+    <div *ngIf="verificationSuccess">
+        Az ellenőrzés sikeres volt! Most már továbbléphetsz a
+    </div>
+<div class="row justify-content-md-center mt-5">
+    <div class="col-md-4">
+        <div class="card m-3">
+            <div class="card-body">
+                <h5 class="card-title mb-4">Fiók megerősitése</h5>
+                <form>
+                    <div class="mb-3">
+                        <label for="code" class="form-label">Adja meg az 5 számtagú megerősítő kódot.</label>
+                        <input type="text" class="form-control" id="code" name="code" required [(ngModel)]="code" />
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button [disabled]="isSubmitting || code.length <= 0" (click)="verifyAccount()" type="button" class="btn btn-warning btn-block orange-bg">Megerősités</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<footer>
+    <p>&copy; 2024 ISABIKE Kerékpárüzlet. Minden jog fenntartva.</p>
+  </footer>

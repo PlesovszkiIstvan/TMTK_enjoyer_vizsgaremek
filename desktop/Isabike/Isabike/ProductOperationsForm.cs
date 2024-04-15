@@ -19,6 +19,9 @@ namespace Isabike
 
     public partial class ProductOperationsForm : Form
     {
+        int ProductId;
+
+        bool isUpdate = false;
 
         public void populateTomeg(string uri)
         {
@@ -45,6 +48,21 @@ namespace Isabike
             InitializeComponent();
         }
 
+        public ProductOperationsForm(int termekId, string termekNev,
+                                 int raktarondb, double tomegErteke,
+                                 string szine, string leiras, int egysegAr)
+        {
+            InitializeComponent();
+            productNameText.Text = termekNev;
+            productCountText.Text = raktarondb.ToString();
+            productWeightText.Text = tomegErteke.ToString();
+            productColorText.Text = szine;
+            productDescText.Text = leiras;
+            productPriceText.Text = egysegAr.ToString();
+            ProductId = termekId;
+            isUpdate = true;
+        }
+
         private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -52,30 +70,63 @@ namespace Isabike
 
         private void okBtn_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var jsonString = new
-                 {
-                    token = Login.getToken(),
-                    termek_kateg = Convert.ToInt32(productCategoryBox.SelectedValue),
-                    termek_nev = productNameText.Text,
-                    gyarto_id = Convert.ToInt32(productManufactererBox.SelectedValue),
-                    raktarondb = Convert.ToInt32(productCountText.Text),
-                    tomeg_tulajdonsaga_id = Convert.ToInt32(productWeightclassBox.SelectedValue),
-                    tomeg_erteke = Convert.ToDouble(productWeightText.Text),
-                    szine = productColorText.Text,
-                    leiras = productDescText.Text,
-                    egyseg_ar = Convert.ToInt32(productPriceText.Text),
-                    elerheto = productAvelableBox.Checked
-                  };
-                  string json = JsonConvert.SerializeObject(jsonString);
-                  DbOperations.addProduct(json, "http://127.0.0.1:8000/api/addtermek");
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show(exp.ToString());
-                throw;
-            }
+                if (!isUpdate) {
+                    try
+                    {
+
+                        var jsonString = new
+                        {
+                            token = Login.getToken(),
+                            termek_kateg = Convert.ToInt32(productCategoryBox.SelectedValue),
+                            termek_nev = productNameText.Text,
+                            gyarto_id = Convert.ToInt32(productManufactererBox.SelectedValue),
+                            raktarondb = Convert.ToInt32(productCountText.Text),
+                            tomeg_tulajdonsaga_id = Convert.ToInt32(productWeightclassBox.SelectedValue),
+                            tomeg_erteke = Convert.ToDouble(productWeightText.Text),
+                            szine = productColorText.Text,
+                            leiras = productDescText.Text,
+                            egyseg_ar = Convert.ToInt32(productPriceText.Text)
+                        };
+                        string json = JsonConvert.SerializeObject(jsonString);
+                        DbOperations.addProduct(json, "http://127.0.0.1:8000/api/addtermek");
+                    }
+                    catch (Exception exp)
+                    {
+                        MessageBox.Show(exp.ToString());
+                        throw;
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        var jsonString = new
+                        {
+                            token = Login.getToken(),
+                            termek_id = ProductId,
+                            termek_kateg = Convert.ToInt32(productCategoryBox.SelectedValue),
+                            termek_nev = productNameText.Text,
+                            gyarto_id = Convert.ToInt32(productManufactererBox.SelectedValue),
+                            raktarondb = Convert.ToInt32(productCountText.Text),
+                            tomeg_tulajdonsaga_id = Convert.ToInt32(productWeightclassBox.SelectedValue),
+                            tomeg_erteke = Convert.ToDouble(productWeightText.Text),
+                            szine = productColorText.Text,
+                            leiras = productDescText.Text,
+                            egyseg_ar = Convert.ToInt32(productPriceText.Text)
+                        };
+                        string json = JsonConvert.SerializeObject(jsonString);
+                        DbOperations db = new DbOperations();
+                        db.updateProduct(json, "http://127.0.0.1:8000/api/updatetermek");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error: {ex.Message}");
+                        throw;
+                    }
+                
+                }
+                
+            
         }
 
         private void ProductOperationsForm_Load(object sender, EventArgs e)
@@ -85,5 +136,43 @@ namespace Isabike
             populateTomeg("http://127.0.0.1:8000/api/tomegtulajdonsagok");
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            this.MaximizeBox = false;
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            this.MaximumSize = this.Size;
+            this.MinimumSize = this.Size;
+        }
+
+        private void productCountText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void productPriceText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void productWeightText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
     }
+
+
 }
