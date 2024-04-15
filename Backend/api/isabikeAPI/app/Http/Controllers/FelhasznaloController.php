@@ -119,7 +119,7 @@ class FelhasznaloController extends FelhasznalokResponseController
         return $token;
     }
 
-    // public function getOneFelhasznalo(Request $req){                               {-------------eredeti szabványnak megfelelö function }
+    // public function getOneFelhasznaloOriginal(Request $req){                               {-------------eredeti szabványnak megfelelö function }
     //     $token = $req->bearerToken();
     //     $this->bearerToken()->hasBearer($token);
     //     $DBresponse = DB::select("call get_one_felhasznalo_procedure('".$token."');");

@@ -45,7 +45,7 @@ class RendelesekController extends RendelesekResponseController
 
     }
 
-    // public function getOneRendeles(Request $req){                        {-------eredeti fuction megfelelö biztonsági szabványok szerint}
+    // public function getOneRendelesOriginal(Request $req){                        {-------eredeti fuction megfelelö biztonsági szabványok szerint}
     //     $token = $req->bearerToken();
     //     $body = json_decode($req->getContent());
     //     $this->bearerToken()->hasBearer($token);

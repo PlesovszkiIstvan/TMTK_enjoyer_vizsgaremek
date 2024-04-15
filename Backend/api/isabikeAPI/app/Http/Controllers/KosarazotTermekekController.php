@@ -28,7 +28,7 @@ class KosarazotTermekekController extends KosarazotTermekekResponseController
         }
     }
 
-    // public function getOneKosar(Request $req){                              {--- Ez az eredeti fuction ami az elvárt titkositási szabványoknak meg felel ---}
+    // public function getOneKosarOriginal(Request $req){                              {--- Ez az eredeti fuction ami az elvárt titkositási szabványoknak meg felel ---}
     //     $token = $req->bearerToken();
     //     $this->bearerToken()->hasBearer($token);
     //     $DBresponse = DB::select("CALL get_one_kosarazot_termek_procedure('".$token."');");
@@ -79,7 +79,7 @@ class KosarazotTermekekController extends KosarazotTermekekResponseController
         }
     }
 
-    // public function deleteKosar(KosarazotTermekekDeleteChecker $req){                {--- Ez az eredeti fuction ami az elvárt titkositási szabványoknak meg felel ---}
+    // public function deleteKosarOriginal(KosarazotTermekekDeleteChecker $req){                {--- Ez az eredeti fuction ami az elvárt titkositási szabványoknak meg felel ---}
     //     $token = $req->bearerToken();
     //     $this->bearerToken()->hasBearer($token);
     //     $body = json_decode($req->getContent());
