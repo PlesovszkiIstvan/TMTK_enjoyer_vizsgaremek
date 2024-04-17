@@ -1,0 +1,8 @@
+1. navigáljon erre az útvonalra \TMTK_enjoyer_vizsgaremek\Backend\api\isabikeAPI
+2. nyisson meg egy parancssort ezen az útvonalon
+3. adja ki a "composer install" parancsot várjon a sikeres telepitésre (ez eltarthat néhány percig)
+4. adja ki a "cd . >.env" parancsot és az újonnan generált ".env" fájlba másolja át a .env.example tartalmát
+5. adja ki a "php artisan key:generate" parancsot
+6. a xampp phpmyadmin felületén importálja be a "ISABIKEDB1.0.sql" fájlt amit ezen az útvonalon talál meg \TMTK_enjoyer_vizsgaremek\Backend\SQLScript
+7. az adatbázis sikeres legenerálása után a következő útvonalban "\TMTK_enjoyer_vizsgaremek\Backend\api\isabikeAPI" 
+   adja ki a "php artisan serve" parancsot ezt követően az api elindul "http://127.0.0.1:8000/api" local host ponton
