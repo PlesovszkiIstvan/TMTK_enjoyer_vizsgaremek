@@ -169,10 +169,7 @@ GRANT EXECUTE ON isabike.* TO browserUser@'%';
 USE isabike;
 
 INSERT INTO Felhasznalok (felhasznalo_nev, vezetek_nev, kereszt_nev, email, jelszo, jogosultsag, viszaigazolas_statusz, aktiv)
-VALUES ('admin','admin','admin','admin@super.lan','admin','3',true,true);
-
-INSERT INTO Tokenek(felhasznalo_id, token)
-VALUES (1, 'admin');
+VALUES ('admin','admin','admin','admin@super.lan','43cb3359b91ae5a21abd6ad70673a0b7ca1ead79599d69feaf9dde0b3d95179e','3',true,false);
 
 INSERT INTO ertekelesek (ertekeles_id,ertekeles)
 VALUES ('1','Szuper volt');
