@@ -1,1 +1,8 @@
 Desktop folder
+
+Ezzel a email + jelszó kombinációval lehet az asztali alkalmazásba előszór belépni:
+  email: admin@super.lan
+  jelszo: Admin123!
+
+(Az email lejárat miatt módosítsára került, ezért volt szükséges ebben az időpontban módosítani az repositroy-t)
+[2021.04.21 23:40]
